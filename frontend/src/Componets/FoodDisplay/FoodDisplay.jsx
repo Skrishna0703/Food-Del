@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./FoodDisplay.css";
-import { useContext } from "react";
 import { StoreContext } from "../../Context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
 
 const FoodDisplay = ({ category }) => {
   const context = useContext(StoreContext);
 
- 
+  if (!context) {
+    console.error("StoreContext is null. Ensure StoreContextProvider wraps the component tree.");
+    return null;
+  }
 
   const { food_list } = context;
+
+  const filteredFoodList = food_list.filter(
+    (item) => category === "All" || category === item.category
+  );
 
   return (
     <div className="food-display" id="food-display">
       <h2>Top Dishes Near You</h2>
       <div className="food-display-list">
-        {food_list.map((item, index) => (
+        {filteredFoodList.map((item, index) => (
           <FoodItem 
             key={index} 
             id={item._id} 
@@ -31,4 +37,3 @@ const FoodDisplay = ({ category }) => {
 };
 
 export default FoodDisplay;
-
