@@ -4,6 +4,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: outfit;
+  scroll-behavior: smooth;
 }
 body{
   min-height: 100vh;

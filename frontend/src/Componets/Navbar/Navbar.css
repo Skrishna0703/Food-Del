@@ -88,6 +88,17 @@
     }
     .navbar-right button{
         padding: 7px 20px;
+        font-size: 15px;
     }
+    
+  }
+
+
+  @media (max-width:750px) {
+   
+    .navbar-menu{
+        display: none;
+    }
+    
     
   }
