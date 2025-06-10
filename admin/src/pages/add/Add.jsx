@@ -4,7 +4,12 @@ import { assets } from '../../assets/assets';
 
 const Add = () => {
   const [image, setImage] = useState(false);
-
+  const [Data, setData] = useState({
+    name: '',
+    description: '',
+    category: 'Salad',
+    price: ''
+  });
   return (
     <div className='add'>
       <form className='flex-col'>
@@ -41,15 +46,15 @@ const Add = () => {
           <div className="add-category flex-col">
             <p>Product Category</p>
             <select name="category" required>
-              <option value="">-- Select --</option>
+             
               <option value="Salad">Salad</option>
               <option value="Roll">Rolls</option>
-              <option value="Sandwich">Sandwich</option> {/* ✅ Spelling Fix */}
+              <option value="Sandwich">Sandwich</option> 
               <option value="Dessert">Dessert</option>
               <option value="Cake">Cake</option>
               <option value="Pure Veg">Pure Veg</option>
               <option value="Pasta">Pasta</option>
-              <option value="Noodles">Noodles</option> {/* ✅ Spelling Fix */}
+              <option value="Noodles">Noodles</option> 
             </select>
           </div>
           <div className="add-price flex-col">
