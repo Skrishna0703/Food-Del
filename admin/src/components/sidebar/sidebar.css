@@ -3,6 +3,7 @@
     min-height: 100vh;
     border: 1.5px solid #a9a9a9;
     border-top: 0;
+    font-size: (1vw,10px);
 }
 .sidebar-options{
     padding-top: 50px;
@@ -20,5 +21,17 @@
    padding: 8px 10px;
     border-radius:3px 0px 0px 3px;
     cursor: pointer;
+   
     transition: background-color 0.3s ease;
+}
+.sidebar-option.active{
+    background-color: #fff0ed;
+    border-color: tomato;
+}
+@media(max-width:900px){
+   
+    .sidebar-options p{
+      display: none;
+    }
+   
 }
