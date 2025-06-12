@@ -8,7 +8,26 @@ import dotenv from "dotenv";
 
 //login User
 const loginuser = async (req, res) => {
-
+    const { email, password } = req.body;
+    try {
+        // Check if user exists
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ sucess:"false", message: "User not found" });
+        }
+        // Check if password matches
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ sucess:"false", message: "Invalid credentials" });
+        }
+        // Generate a token
+        const token = createToken(user._id);
+        res.status(200).json({ sucess:"true", user: { name: user.name, email: user.email, token } });
+    }
+    catch (error) {
+        console.error("Error finding user:", error);
+        return res.status(500).json({ sucess:"false", message: "Internal server error" });
+    }
 
 }
 const createToken = (id) => {
