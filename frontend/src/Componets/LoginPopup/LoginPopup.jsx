@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 const LoginPopup = ({ setShowLogin }) => {
-  const {url,setToken}=useContext(StoreContext);
+  const {url,token,setToken}=useContext(StoreContext);
   const [current, setCurrentState] = useState("Login");
   const [data, setData] = useState({
     name: "",   
@@ -23,23 +23,25 @@ const LoginPopup = ({ setShowLogin }) => {
   
 const onLogin = async (event) => {
   event.preventDefault();
-  let newUrl =url;
-  if (current === "Login") {
-    newUrl += "api/user/login";
-  } else {
-    newUrl += "api/user/signup";
-  }
-  const responce = await axios.post(newUrl, data);
-  if (responce.data.success) {
-   setToken(responce.data.token);
-    localStorage.setItem("token", responce.data.token);
-    setShowLogin(false);
-    
-  } else {
-    alert(responce.data.message || "Something went wrong");
-  }
-}
+  
+    let newUrl = url;
+    if (current === "Login") {
+      newUrl += "/api/users/login";
+    } else {
+      newUrl += "/api/users/register";
+    }
 
+    const response = await axios.post(newUrl, data);
+    
+    if (response.data.success) {
+      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      setShowLogin(false);
+    } else {
+      alert(response.data.message || "Something went wrong");
+    }
+  
+};
 
   return (
     <div className='login-popup'>
