@@ -3,9 +3,9 @@ import cors from 'cors';
 import  {connectDB}  from './config/db.js';
 import foodRouter from './routes/foodRoutes.js';
 import userRouter from './routes/userRoutes.js';
-import userController from './controllers/userController.js';
-import 'dotenv/config.js';
-import cartRouter from './routes/cartRoutes.js';
+import dotenv from 'dotenv';  
+dotenv.config();              
+import cartRouter from './routes/cartRoute.js'
 
 //app config
 const app = express();
@@ -31,7 +31,9 @@ app.use('/api/foods', foodRouter);
 app.use("/images", express.static("uploads"));
 //import user routes
 app.use('/api/users', userRouter);
-app.use('/api/cart', cartRouter);
+app.use('/api/carts', userRouter);
+
+
 
 //start server
 app.listen(PORT, () => {
