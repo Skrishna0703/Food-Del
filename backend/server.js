@@ -33,7 +33,7 @@ app.use('/api/foods', foodRouter);
 app.use("/images", express.static("uploads"));
 //import user routes
 app.use('/api/users', userRouter);
-app.use('/api', cartRouter);
+app.use('/api/carts', cartRouter);
 
 
 
