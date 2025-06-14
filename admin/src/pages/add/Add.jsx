@@ -94,9 +94,9 @@ const Add = ({url}) => {
             <p>Product Category</p>
             <select onChange={onChangeHandler} value={data.category} name="category" required>
               <option value="Salad">Salad</option>
-              <option value="Roll">Rolls</option>
-              <option value="Sandwich">Sandwich</option> 
-              <option value="Dessert">Dessert</option>
+              <option value="Rolls">Rolls</option>
+              <option value="Desert">Desert</option>
+              <option value="Sandwich">Sandwich</option>  
               <option value="Cake">Cake</option>
               <option value="Pure Veg">Pure Veg</option>
               <option value="Pasta">Pasta</option>

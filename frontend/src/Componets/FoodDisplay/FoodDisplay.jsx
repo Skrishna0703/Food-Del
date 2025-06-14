@@ -20,7 +20,9 @@ const FoodDisplay = ({ category }) => {
   }
 
   const filteredFoodList = food_list.filter(
-    (item) => category === "All" || category === item.category
+    (item) =>
+      category === "All" ||
+      item.category?.toLowerCase().trim() === category.toLowerCase().trim()
   );
 
   return (

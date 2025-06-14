@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { food_list } from "../assets/assets";
+
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
@@ -9,7 +9,6 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const url = "http://localhost:4000";
 
-  // ✅ Add item to cart
   const addToCart = (itemId) => {
     setCartItems((prev) => ({
       ...prev,
@@ -17,21 +16,24 @@ const StoreContextProvider = (props) => {
     }));
   };
 
-  // ✅ Remove item from cart
   const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({
-      ...prev,
-      [itemId]: prev[itemId] > 1 ? prev[itemId] - 1 : 0,
-    }));
+    setCartItems((prev) => {
+      const newCart = { ...prev };
+      if (newCart[itemId] > 1) {
+        newCart[itemId] -= 1;
+      } else {
+        delete newCart[itemId];
+      }
+      return newCart;
+    });
   };
 
-  // ✅ Calculate total cart amount
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItem) {
       if (cartItem[item] > 0) {
         const foodItem = food_list.find((food) => food._id === item);
-        if (foodItem) {
+        if (foodItem && typeof foodItem.price === "number") {
           totalAmount += foodItem.price * cartItem[item];
         }
       }
@@ -39,37 +41,41 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-  // ✅ Fetch food list from server
-const fetchFoodList = async () => {
-  try {
-    const response = await axios.get(`${url}/api/foods/list`);
-    if (Array.isArray(response.data.foods)) {
-      setFoodList(response.data.foods); // ✅ correct extraction
-    } else {
-      console.error("Expected 'foods' to be an array, got:", response.data);
+  const getTotalCartCount = () => {
+    return Object.values(cartItem).reduce((sum, qty) => sum + qty, 0);
+  };
+
+  const fetchFoodList = async () => {
+    try {
+      const response = await axios.get(`${url}/api/foods/list`);
+      if (Array.isArray(response.data.foods)) {
+        setFoodList(response.data.foods);
+      } else {
+        console.error("Expected 'foods' to be an array:", response.data);
+        setFoodList([]);
+      }
+    } catch (error) {
+      console.error("Failed to fetch food list", error);
       setFoodList([]);
     }
-  } catch (error) {
-    console.error("Failed to fetch food list", error);
-    setFoodList([]);
-  }
-};
+  };
 
-
-  // ✅ Load data on mount
   useEffect(() => {
     const loadData = async () => {
       await fetchFoodList();
-
-      // Get token from localStorage
       const storedToken = localStorage.getItem("token");
       if (storedToken) {
         setToken(storedToken);
       }
     };
-
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+    }
+  }, [token]);
 
   const contextValue = {
     food_list,
@@ -78,9 +84,11 @@ const fetchFoodList = async () => {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
+    getTotalCartCount,
     url,
     token,
     setToken,
+    fetchFoodList,
   };
 
   return (
