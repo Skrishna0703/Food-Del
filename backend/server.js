@@ -5,7 +5,8 @@ import foodRouter from './routes/foodRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import dotenv from 'dotenv';  
 dotenv.config();              
-import cartRouter from './routes/cartRoute.js'
+
+import cartRouter from './routes/cartRoutes.js';
 
 //app config
 const app = express();
@@ -14,7 +15,8 @@ const PORT = process.env.PORT || 4000;
 //middleware
 app.use(cors());    
 app.use(express.json());
-//routes
+//routes.
+
 app.get('/', (req, res) => {
     res.send('Welcome to the backend server!');
 }
@@ -31,7 +33,7 @@ app.use('/api/foods', foodRouter);
 app.use("/images", express.static("uploads"));
 //import user routes
 app.use('/api/users', userRouter);
-app.use('/api/carts', userRouter);
+app.use('/api', cartRouter);
 
 
 
