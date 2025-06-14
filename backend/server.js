@@ -6,6 +6,7 @@ import userRouter from './routes/userRoutes.js';
 import userController from './controllers/userController.js';
 import 'dotenv/config.js';
 import cartRouter from './routes/cartRoutes.js';
+
 //app config
 const app = express();
 const PORT = process.env.PORT || 4000;

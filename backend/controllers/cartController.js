@@ -17,4 +17,4 @@ const removeFromCart = async (req, res) => {
 }
 
 
-export default { addToCart, getCart, removeFromCart };
+export  { addToCart, getCart, removeFromCart };
