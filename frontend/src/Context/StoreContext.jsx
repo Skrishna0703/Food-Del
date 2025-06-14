@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
+
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
@@ -10,11 +11,12 @@ const StoreContextProvider = (props) => {
   const url = "http://localhost:4000";
 
   // 🛒 Add to Cart
- const addToCart = useCallback(async (itemId) => {
-  setCartItems((prev) => ({
-    ...prev,
-    [itemId]: prev[itemId] ? prev[itemId] + 1 : 1,
-  }));
+const addToCart = useCallback(async (itemId) => {
+  if (!cartItem[itemId]) {
+    setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
+  } else {
+    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  }
 
   try {
     if (token) {
@@ -28,7 +30,8 @@ const StoreContextProvider = (props) => {
   } catch (err) {
     console.error("❌ Error adding to cart:", err?.response?.data || err.message || err);
   }
-}, [token]);
+}, [token, cartItem]);
+
 
 
   // ❌ Remove from Cart
@@ -107,6 +110,8 @@ const StoreContextProvider = (props) => {
     }
   };
 
+
+
   // 📦 On First Load
   useEffect(() => {
     const loadData = async () => {
@@ -114,6 +119,7 @@ const StoreContextProvider = (props) => {
       const storedToken = localStorage.getItem("token");
       if (storedToken) {
         setToken(storedToken);
+        await fetchCartData(localStorage.getItem("token"));
       }
     };
     loadData();
