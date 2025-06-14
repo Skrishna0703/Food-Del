@@ -5,7 +5,7 @@ import foodRouter from './routes/foodRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import userController from './controllers/userController.js';
 import 'dotenv/config.js';
-
+import cartRouter from './routes/cartRoutes.js';
 //app config
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -30,6 +30,7 @@ app.use('/api/foods', foodRouter);
 app.use("/images", express.static("uploads"));
 //import user routes
 app.use('/api/users', userRouter);
+app.use('/api/cart', cartRouter);
 
 //start server
 app.listen(PORT, () => {
