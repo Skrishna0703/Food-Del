@@ -82,3 +82,21 @@
 .swiper-pagination-bullet-active {
   background: #3498db;
 }
+.more-reviews-btn-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.more-reviews-btn {
+  padding: 10px 24px;
+  background-color: #f97316;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.more-reviews-btn:hover {
+  background-color: #ea580c;
+}

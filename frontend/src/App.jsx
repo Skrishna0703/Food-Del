@@ -5,6 +5,7 @@ import LoginPopup from './Componets/LoginPopup/LoginPopup';
 import Home from './Pages/Home/Home';
 import Cart from './Pages/Cart/Cart';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
+import Review from './Pages/Review/Review'
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -26,6 +27,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/order' element={<PlaceOrder />} />
+          <Route path='/review' element={<Review />} />
         </Routes>
 
         {/* ✅ Add ToastContainer here */}
