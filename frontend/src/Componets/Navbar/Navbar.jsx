@@ -30,7 +30,12 @@ export const Navbar = ({ setShowLogin }) => {
 
       <div className="navbar-right">
         <img src={assets.search_icon} alt="search" />
-        <Link to='/cart'><img src={assets.basket_icon} alt="cart" /></Link>
+        {/* <Link to='/cart'><img src={assets.basket_icon} alt="cart" /></Link> */}
+        <Link to='/cart' className="cart-icon-wrapper">
+  <img src={assets.basket_icon} alt="cart" />
+  {getTotalCartAmount() !== 0 && <span className="cart-dot"></span>}
+</Link>
+
 
         <div className="navbar-search-icon">
           {getTotalCartAmount() !== 0 && <div className="dot"></div>}
