@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './PlaceOrder.css';
 import { useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../Context/StoreContext';
 
 export const PlaceOrder = () => {
   const navigate = useNavigate();
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount,token,food_list,cartItems,url } = useContext(StoreContext);
+  const [data,setData]=useState({
+    
+  })
 
   const totalAmount = getTotalCartAmount();       // e.g. ₹500
   const deliveryCharge = totalAmount > 0 ? 20 : 0; // flat rate or conditional
