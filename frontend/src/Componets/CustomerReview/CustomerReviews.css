@@ -1,0 +1,84 @@
+.testimonial-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.testimonial-section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.testimonial-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  max-width: 350px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  opacity: 0.6;
+  transition: 0.3s ease;
+}
+
+.swiper-slide-active .testimonial-card {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.quote-icon {
+  font-size: 3rem;
+  color: #3498db;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.review-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.testimonial-card p {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 10px 0 15px;
+}
+
+.stars span {
+  color: #f1c40f;
+  font-size: 1.2rem;
+  margin: 0 1px;
+}
+
+.testimonial-card h3 {
+  font-size: 1.1rem;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.testimonial-card .role {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Navigation arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #a3d3f6;
+  font-weight: bold;
+}
+
+/* Pagination dots */
+.swiper-pagination-bullet {
+  background: #ccc;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #3498db;
+}
