@@ -4,6 +4,8 @@ import './PlaceOrder.css';
 import { StoreContext } from '../../Context/StoreContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const PlaceOrder = () => {
   const navigate = useNavigate();
@@ -39,10 +41,9 @@ export const PlaceOrder = () => {
   const handlePlaceOrder = async (event) => {
     event.preventDefault();
 
-    // ✅ Create order items list based on cart
     const orderItems = [];
     food_list.forEach((item) => {
-      const id = String(item._id || item.id); // Ensure key is string
+      const id = String(item._id || item.id);
       if (id && cartItem?.[id] > 0) {
         orderItems.push({
           _id: id,
@@ -54,7 +55,7 @@ export const PlaceOrder = () => {
     });
 
     if (orderItems.length === 0) {
-      alert("Cart is empty");
+      toast.warn("Your cart is empty!");
       return;
     }
 
@@ -73,7 +74,7 @@ export const PlaceOrder = () => {
 
       const success = await loadRazorpayScript();
       if (!success) {
-        alert("Failed to load Razorpay SDK");
+        toast.error("Failed to load Razorpay SDK");
         return;
       }
 
@@ -83,12 +84,12 @@ export const PlaceOrder = () => {
         key: key_id,
         amount: amount,
         currency: "INR",
-        name: "MyFoodApp",
+        name: "Tomato Food ",
         description: "Food Order Payment",
         image: "/logo.png",
         order_id: order_id,
         handler: function (response) {
-          alert("Payment successful!");
+          toast.success("Payment successful!");
           console.log("Razorpay response:", response);
           navigate("/order-success");
         },
@@ -101,7 +102,7 @@ export const PlaceOrder = () => {
           address: `${data.street}, ${data.city}, ${data.state}`
         },
         theme: {
-          color: "#3399cc"
+          color: "Tomato"
         }
       };
 
@@ -110,7 +111,7 @@ export const PlaceOrder = () => {
 
     } catch (err) {
       console.error("Order error", err?.response?.data || err.message);
-      alert("Something went wrong while placing the order.");
+      toast.error("Something went wrong while placing the order.");
     }
   };
 
