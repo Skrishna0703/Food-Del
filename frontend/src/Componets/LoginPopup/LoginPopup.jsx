@@ -1,47 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './LoginPopup.css';
 import { assets } from '../../assets/assets';
-import { useContext } from 'react';
 import { StoreContext } from '../../Context/StoreContext';
 import axios from 'axios';
 
-
 const LoginPopup = ({ setShowLogin }) => {
-  const {url,token,setToken}=useContext(StoreContext);
+  const { url, token, setToken } = useContext(StoreContext);
   const [current, setCurrentState] = useState("Login");
   const [data, setData] = useState({
-    name: "",   
+    name: "",
     email: "",
     password: ""
-
   });
-  const onChangehandler =(event)=>{
-    const name= event.target.name;
-    const value= event.target.value;
-    setData({...data, [name]: value});
-  }
-  
-const onLogin = async (event) => {
-  event.preventDefault();
-  
+
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setData(prevData => ({ ...prevData, [name]: value }));
+  };
+
+  const onLogin = async (event) => {
+    event.preventDefault();
+
     let newUrl = url;
+    let payload = {};
+
     if (current === "Login") {
       newUrl += "/api/users/login";
+      payload = {
+        email: data.email,
+        password: data.password
+      };
     } else {
       newUrl += "/api/users/register";
+      payload = {
+        name: data.name,
+        email: data.email,
+        password: data.password
+      };
     }
 
-    const response = await axios.post(newUrl, data);
-    
-    if (response.data.success) {
-      setToken(response.data.token);
-      localStorage.setItem("token", response.data.token);
-      setShowLogin(false);
-    } else {
-      alert(response.data.message || "Something went wrong");
+    try {
+      const response = await axios.post(newUrl, payload);
+
+      if (response.data.success) {
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        setShowLogin(false);
+      } else {
+        alert(response.data.message || "Something went wrong");
+      }
+    } catch (err) {
+      console.error("❌ Login/Register failed:", err);
+      alert(err.response?.data?.message || "Server error");
     }
-  
-};
+  };
 
   return (
     <div className='login-popup'>
@@ -56,11 +68,32 @@ const onLogin = async (event) => {
         </div>
 
         <div className="login-popup-inputs">
-          {current === "Login" ? null : (
-            <input type="text" name='name' onChange={onChangehandler} value={data.name} placeholder="Enter your name" required />
+          {current === "Sign Up" && (
+            <input
+              type="text"
+              name="name"
+              value={data.name}
+              onChange={onChangeHandler}
+              placeholder="Enter your name"
+              required
+            />
           )}
-          <input type="email" name='email' onChange={onChangehandler} value={data.email} placeholder="Enter your email" required />
-          <input type="password" name='password' onChange={onChangehandler} value={data.password} placeholder="Enter your password" required />
+          <input
+            type="email"
+            name="email"
+            value={data.email}
+            onChange={onChangeHandler}
+            placeholder="Enter your email"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            value={data.password}
+            onChange={onChangeHandler}
+            placeholder="Enter your password"
+            required
+          />
         </div>
 
         <button type="submit">
@@ -68,10 +101,9 @@ const onLogin = async (event) => {
         </button>
 
         <div className="login-popup-condition">
-          <input type="checkbox" />
+          <input type="checkbox" required />
           <p>
-            I agree to the Terms & Conditions and{" "}
-            Privacy Policy
+            I agree to the Terms & Conditions and Privacy Policy
           </p>
         </div>
 
@@ -92,4 +124,3 @@ const onLogin = async (event) => {
 };
 
 export default LoginPopup;
- 

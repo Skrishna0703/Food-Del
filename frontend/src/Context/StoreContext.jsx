@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
-
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
@@ -11,53 +10,65 @@ const StoreContextProvider = (props) => {
   const url = "http://localhost:4000";
 
   // 🛒 Add to Cart
-const addToCart = useCallback(async (itemId) => {
-  if (!cartItem[itemId]) {
-    setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-  } else {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-  }
+  const addToCart = useCallback(
+    async (itemId) => {
+      if (!cartItem[itemId]) {
+        setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
+      } else {
+        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+      }
 
-  try {
-    if (token) {
-      const response = await axios.post(`${url}/api/carts/add`, { itemId }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log("✅ Item added to cart:", response.data);
-    }
-  } catch (err) {
-    console.error("❌ Error adding to cart:", err?.response?.data || err.message || err);
-  }
-}, [token, cartItem]);
-
-
+      try {
+        if (token) {
+          const response = await axios.post(
+            `${url}/api/carts/add`,
+            { itemId },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log("✅ Item added to cart:", response.data);
+        }
+      } catch (err) {
+        console.error("❌ Error adding to cart:", err?.response?.data || err.message || err);
+      }
+    },
+    [token, cartItem]
+  );
 
   // ❌ Remove from Cart
-  const removeFromCart = useCallback(async (itemId) => {
-    setCartItems((prev) => {
-      const newCart = { ...prev };
-      if (newCart[itemId] > 1) {
-        newCart[itemId] -= 1;
-      } else {
-        delete newCart[itemId];
-      }
-      return newCart;
-    });
+  const removeFromCart = useCallback(
+    async (itemId) => {
+      setCartItems((prev) => {
+        const newCart = { ...prev };
+        if (newCart[itemId] > 1) {
+          newCart[itemId] -= 1;
+        } else {
+          delete newCart[itemId];
+        }
+        return newCart;
+      });
 
-    try {
-      if (token) {
-        await axios.post(`${url}/api/carts/remove`, { itemId }, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      try {
+        if (token) {
+          await axios.post(
+            `${url}/api/carts/remove`,
+            { itemId },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+        }
+      } catch (err) {
+        console.error("❌ Error removing from cart:", err);
       }
-    } catch (err) {
-      console.error("❌ Error removing from cart:", err);
-    }
-  }, [token]);
+    },
+    [token]
+  );
 
   // 💰 Total Cart Amount
   const getTotalCartAmount = () => {
@@ -94,42 +105,41 @@ const addToCart = useCallback(async (itemId) => {
     }
   };
 
-  // 🔄 Fetch Cart from Backend
-  const fetchCartData = async () => {
-    try {
-      const response = await axios.post(`${url}/api/carts/get`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.data.success) {
-        setCartItems(response.data.cartData || {});
-      }
-    } catch (error) {
-      console.error("Failed to fetch cart data", error);
-    }
-  };
-
-
-
   // 📦 On First Load
   useEffect(() => {
     const loadData = async () => {
       await fetchFoodList();
+
       const storedToken = localStorage.getItem("token");
       if (storedToken) {
         setToken(storedToken);
-        await fetchCartData(localStorage.getItem("token"));
+
+        try {
+          const response = await axios.post(
+            `${url}/api/carts/get`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${storedToken}`,
+              },
+            }
+          );
+
+          if (response.data.success) {
+            setCartItems(response.data.cartData || {});
+          }
+        } catch (error) {
+          console.error("Failed to fetch cart data", error);
+        }
       }
     };
     loadData();
   }, []);
 
-  // 🔐 Fetch Cart whenever token updates
+  // 💾 Save token to localStorage on update
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);
-      fetchCartData();
     }
   }, [token]);
 

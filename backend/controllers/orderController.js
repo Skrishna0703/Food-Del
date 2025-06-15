@@ -10,8 +10,6 @@ const razorpay = new Razorpay({
 });
 
 const placeOrder = async (req, res) => {
-  const frontend_url = "http://localhost:5173";
-
   try {
     const { userId, items, amount, address } = req.body;
 
@@ -21,33 +19,41 @@ const placeOrder = async (req, res) => {
       items,
       amount,
       address,
+      paymentStatus: "pending", // optional field for tracking
     });
 
     await newOrder.save();
+
+    // Clear user cart
     await userModel.findByIdAndUpdate(userId, { cartData: {} });
 
     // Create Razorpay order
     const razorpayOrder = await razorpay.orders.create({
-      amount: amount * 100, // in paise
+      amount: amount * 100, // Razorpay expects amount in paise
       currency: "INR",
-      receipt: `order_rcptid_${newOrder._id}`,
+      receipt: `receipt_order_${newOrder._id}`,
       notes: {
         userId: userId,
         orderId: newOrder._id.toString(),
       },
     });
 
+    // Send Razorpay order details to frontend
     res.status(200).json({
       success: true,
-      razorpayOrderId: razorpayOrder.id,
-      amount: razorpayOrder.amount,
-      currency: razorpayOrder.currency,
-      orderId: newOrder._id,
+      order_id: razorpayOrder.id,       // Required by frontend
+      amount: razorpayOrder.amount,     // Required by frontend
+      currency: razorpayOrder.currency, // Optional
+      key_id: process.env.RAZORPAY_KEY_ID, // Required for Razorpay checkout.js
+      orderId: newOrder._id,            // Optional: For internal tracking
     });
 
   } catch (error) {
     console.error("Error placing order:", error);
-    res.status(500).json({ success: false, message: "Order placement failed" });
+    res.status(500).json({
+      success: false,
+      message: "Order placement failed",
+    });
   }
 };
 
