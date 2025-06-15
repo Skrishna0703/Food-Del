@@ -1,0 +1,61 @@
+/* CustomerReviews.css */
+
+.reviews-section {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.reviews-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.reviews-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.review-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.review-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.review-card h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #222;
+}
+
+.review-comment {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 10px 0;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.review-rating {
+  font-size: 1.2rem;
+  color: #ffc107; /* Gold star color */
+}
