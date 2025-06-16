@@ -1,56 +1,104 @@
-.header{
+.header {
     height: 34vw;
     margin: 30px auto;
-    background: url('/header_img.png') no-repeat;
-
+    background: url('/header_img.png') no-repeat center center;
     background-size: contain;
     position: relative;
 }
-.header-contents{
+
+.header-contents {
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     gap: 1.5vw;
     max-width: 50%;
     bottom: 10%;
     left: 6vw;
     animation: fadeIn 3s;
 }
-.header-contents h2{
+
+.header-contents h2 {
     font-weight: 500;
     color: white;
-    font-size: max(4.5vw);
+    font-size: max(4.5vw, 24px);
+    line-height: 1.2;
 }
-.header-contents p{
+
+.header-contents p {
     color: white;
     font-size: 1vw;
+    max-width: 90%;
 }
-.header-contents button{
-    border:none;
+
+.header-contents button {
+    border: none;
     color: #747474;
     font-weight: 500;
     padding: 1vw 2.3vw;
     background-color: white;
-    font-size: max(1vw);
+    font-size: max(1vw, 14px);
     border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-@media (max-width:1050px) {
 
-    .header-contents{
+.header-contents button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Tablet View */
+@media (max-width: 1050px) {
+    .header-contents {
         max-width: 45%;
     }
-    
 }
-@media (max-width:750px) {
-  
-    .header-contents{
-        max-width: 65%;
+
+/* Mobile View */
+@media (max-width: 750px) {
+    .header {
+        height: 55vw;
+        background-size: cover;
+        margin: 20px auto;
     }
-    .header-contents p{
+
+    .header-contents {
+        max-width: 70%;
+        left: 5vw;
+        gap: 12px;
+    }
+
+    .header-contents h2 {
+        font-size: 6vw;
+    }
+
+    .header-contents p {
         display: none;
     }
-    .header-contents button{
-        padding: 2vw 4vw;
+
+    .header-contents button {
+        padding: 2vw 5vw;
+        font-size: 3.5vw;
+    }
+}
+
+/* Small Mobile View */
+@media (max-width: 480px) {
+    .header {
+        height: 65vw;
+    }
+
+    .header-contents {
+        max-width: 90%;
+        left: 5vw;
+    }
+
+    .header-contents h2 {
+        font-size: 7vw;
+    }
+
+    .header-contents button {
+        padding: 3vw 6vw;
+        font-size: 4vw;
     }
 }

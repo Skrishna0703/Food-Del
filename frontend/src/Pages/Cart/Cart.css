@@ -1,17 +1,16 @@
 .cart {
     margin-top: 100px;
-    padding: 0 20px; /* optional: spacing from left/right */
+    padding: 0 20px;
 }
 
 .cart-items-title {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
     align-items: center;
-   
     font-size: max(1vw, 12px);
     font-weight: bold;
     padding: 10px 0;
-
+    color: #333;
 }
 
 .cart-items-item {
@@ -21,41 +20,94 @@
     margin: 10px 0;
     padding: 10px 0;
     border-bottom: 1px solid #eee;
+    font-size: 14px;
 }
 
 .cart-items-item img {
     width: 50px;
     border-radius: 4px;
 }
-.cart-items-item .cross{
+
+.cart-items-item .cross {
     cursor: pointer;
+    font-size: 18px;
 }
+
 .cart-bottom {
     display: flex;
     justify-content: space-between;
-   margin-top: 80px;
-    gap: max(12vw, 20px);    
+    margin-top: 80px;
+    gap: max(12vw, 20px);
+    flex-wrap: wrap;
 }
-.cart-total{
+
+.cart-total {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    min-width: 250px;
 }
+
 .cart-total-details {
     display: flex;
     justify-content: space-between;
     color: #555;
+    font-size: 15px;
 }
-.cart-total hr{
+
+.cart-total hr {
     margin: 10px 0px;
 }
-.cart-checkout{
-    border: none ;
+
+.cart-checkout {
+    border: none;
     color: white;
     background-color: tomato;
     width: max(15vw, 150px);
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: 500;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .cart-items-title {
+        display: none; /* Hide headings on small screens */
+    }
+
+    .cart-items-item {
+        grid-template-columns: 60px auto;
+        grid-template-rows: auto auto auto;
+        grid-row-gap: 8px;
+        align-items: center;
+        padding: 15px 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .cart-items-item img {
+        grid-row: span 3;
+        width: 60px;
+    }
+
+    .cart-items-item div {
+        font-size: 14px;
+    }
+
+    .cart-items-item .cross {
+        justify-self: end;
+        font-size: 20px;
+    }
+
+    .cart-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    .cart-checkout {
+        width: 100%;
+        font-size: 16px;
+    }
 }

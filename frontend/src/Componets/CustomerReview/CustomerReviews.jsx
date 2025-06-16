@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom';
 
 const reviews = [
   {
-    name: "Aarav Mehta",
+    name: "Swati Pepati",
     role: "Marketing Manager",
-    comment: "Amazing food and super fast delivery. Never been disappointed!",
+    comment: "The site looks awesome Login, creating account, seeing options and adding to cart, payment and all the processes are easy to use",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
+
   },
   {
     name: "Neha Kapoor",
@@ -67,7 +67,7 @@ const CustomerReviews = () => {
           <SwiperSlide key={index}>
             <div className="testimonial-card">
               <span className="quote-icon">❝</span>
-              <img src={review.image} alt={review.name} className="review-img" />
+              {/* <img src={review.image} alt={review.name} className="review-img" /> */}
               <p>{review.comment}</p>
               <div className="stars">
                 {Array.from({ length: 5 }).map((_, i) => (

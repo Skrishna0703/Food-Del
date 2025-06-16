@@ -1,0 +1,144 @@
+.feedback-container {
+  max-width: 550px;
+  margin: 40px auto;
+  padding: 35px 25px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feedback-container:hover {
+  transform: translateY(-4px);
+}
+
+.feedback-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 26px;
+  color: #333;
+  font-weight: 600;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.feedback-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-form label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  border-color: tomato;
+}
+
+.feedback-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.feedback-form input[type="file"] {
+  padding: 12px;
+  background-color: #fdfdfd;
+  border: 1px dashed #aaa;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.star-rating {
+  display: flex;
+  gap: 8px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.star-rating span {
+  transition: color 0.2s, transform 0.2s;
+}
+
+.star-rating span:hover {
+  transform: scale(1.2);
+}
+
+.feedback-button {
+  padding: 14px;
+  background-color: tomato;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.feedback-button:hover {
+  background-color: #e74c3c;
+  transform: scale(1.03);
+}
+
+.photo-preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.photo-preview img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+}
+
+/* ✅ Mobile Responsiveness */
+@media (max-width: 600px) {
+  .feedback-container {
+    padding: 20px;
+    margin: 20px 12px;
+  }
+
+  .feedback-container h2 {
+    font-size: 22px;
+  }
+
+  .feedback-form input,
+  .feedback-form textarea {
+    font-size: 14px;
+  }
+
+  .star-rating {
+    font-size: 22px;
+  }
+
+  .feedback-button {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .photo-preview img {
+    max-width: 100%;
+  }
+}
