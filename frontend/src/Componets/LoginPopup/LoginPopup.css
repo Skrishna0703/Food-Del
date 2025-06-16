@@ -1,6 +1,8 @@
 .login-popup {
-    position: absolute;
-    z-index: 1;
+    position: fixed; /* ✅ Better for full screen overlay */
+    top: 0;
+    left: 0;
+    z-index: 1000;
     width: 100%;
     height: 100%;
     background-color: #00000090; /* semi-transparent black */
@@ -10,58 +12,97 @@
 .login-popup-container {
     place-self: center;
     width: max(23vw, 330px);
+    max-width: 90vw; /* ✅ Ensures it doesn’t overflow on small screens */
     color: #808080;
     background-color: white;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    padding: 25px 30px; /* ✅ Fixed padding syntax */
+    padding: 25px 30px;
     border-radius: 8px;
     font-size: 14px;
     animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-.login-popup-title{
+
+.login-popup-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: black;
-
+    font-size: 18px;
 }
+
 .login-popup-title img {
     width: 16px;
     cursor: pointer;
 }
-.login-popup-inputs{
+
+.login-popup-inputs {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
+
 .login-popup-inputs input {
     outline: none;
     border: 1px solid #c9c9c9;
     padding: 10px;
     border-radius: 4px;
+    font-size: 15px;
 }
+
 .login-popup-container button {
-   border: none;
-   padding: 10px;
+    border: none;
+    padding: 12px;
     border-radius: 4px;
     color: white;
     background-color: tomato;
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s;
 }
+
+.login-popup-container button:hover {
+    background-color: #e0482c;
+}
+
 .login-popup-condition {
-   display: flex;
-  align-items: start;
-   gap: 8px;
-   margin-top: -15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: -10px;
+    font-size: 13px;
 }
+
 .login-popup-condition input {
-    margin-top: 5px;
+    margin-top: 4px;
 }
-.login-popup p span{
+
+.login-popup p span {
     color: tomato;
     cursor: pointer;
     font-weight: 500;
+}
+
+/* ✅ Responsive design for mobile */
+@media (max-width: 500px) {
+    .login-popup-container {
+        width: 90%;
+        padding: 20px;
+        font-size: 13px;
+        gap: 20px;
+    }
+
+    .login-popup-container button {
+        font-size: 15px;
+    }
+
+    .login-popup-title {
+        font-size: 16px;
+    }
+
+    .login-popup-inputs input {
+        font-size: 14px;
+    }
 }
