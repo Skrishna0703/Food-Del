@@ -32,7 +32,7 @@ const StoreContextProvider = (props) => {
           toast.success(" Item added to cart");
           console.log("Item added:", response.data);
         } else {
-          toast.warn("⚠️ Please login to add items to cart");
+          toast.warn(" Please login to add items to cart");
         }
       } catch (err) {
         console.error("Error adding to cart:", err);
@@ -68,11 +68,11 @@ const StoreContextProvider = (props) => {
           );
           toast.info(" Item removed from cart");
         } else if (!token) {
-          toast.warn("⚠️ Please login to remove items");
+          toast.warn(" Please login to remove items");
         }
       } catch (err) {
         console.error("Error removing from cart:", err);
-        toast.error("❌ Failed to remove item");
+        toast.error(" Failed to remove item");
       }
     },
     [token, cartItem]

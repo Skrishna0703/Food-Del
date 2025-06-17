@@ -16,32 +16,32 @@ const reviews = [
 
   },
   {
-    name: "Neha Kapoor",
-    role: "UI/UX Designer",
-    comment: "The app is intuitive and the food options are great!",
+    name: "Ansh Mahajan",
+    role: "MERN Stack Developer",
+    comment: " Great App ! Smooth performance and Works Perfectly. Well Done",
     rating: 4,
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+ 
   },
   {
-    name: "Rahul Singh",
-    role: "Tech Lead",
-    comment: "Love the convenience and the quality. My go-to food app!",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/men/76.jpg",
+    name: "Arti Giram",
+    role: "Full-Stack Developer",
+    comment: "The UI of Tomato is responsive and visually appealing. I love how clean the design is, and the food listing feels smooth and interactive.",
+    rating: 4,
+   
   },
   {
-    name: "Pooja Sharma",
+    name: "Paranv Nalawade",
     role: "Freelancer",
-    comment: "Highly impressed with the service and taste. Recommended!",
+    comment: "Highly impressive UI UX & Responsive Design . Recommended!",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/women/66.jpg",
+   
   },
   {
-    name: "Ishan Verma",
+    name: "Pranav Patil",
     role: "Content Creator",
-    comment: "Fresh meals, great UI, and on-time delivery. 10/10!",
-    rating: 5,
-    image: "https://randomuser.me/api/portraits/men/85.jpg",
+    comment: "The site feels smooth and perfectly optimized for mobile. Everything works great on my phone!",
+    rating: 3,
+  
   }
 ];
 

@@ -28,7 +28,7 @@ export const Navbar = ({ setShowLogin }) => {
       </ul>
 
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="search" />
+        
 
         <Link to='/cart' className="cart-icon">
           <img src={assets.basket_icon} alt="cart" />

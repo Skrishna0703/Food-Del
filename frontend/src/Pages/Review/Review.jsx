@@ -1,22 +1,67 @@
 import React from 'react';
 import './Review.css';
 
+// Cartoon avatar URLs
+const femaleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png';   // Cartoon boy
+const maleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png'; // Cartoon girl
+
 const reviews = [
-  { name: 'Ananya Sharma', rating: 5, comment: 'Delicious food and quick delivery. Highly recommended!', image: 'https://randomuser.me/api/portraits/women/65.jpg' },
-  { name: 'Raj Malhotra', rating: 4, comment: 'Loved the variety and taste. Will order again!', image: 'https://randomuser.me/api/portraits/men/43.jpg' },
-  { name: 'Sneha Patel', rating: 5, comment: 'The app is super easy to use and the food is fresh!', image: 'https://randomuser.me/api/portraits/women/44.jpg' },
-  { name: 'Aman Verma', rating: 5, comment: 'Great service and amazing quality food.', image: 'https://randomuser.me/api/portraits/men/51.jpg' },
-  { name: 'Priya Desai', rating: 4, comment: 'Impressed with packaging and taste.', image: 'https://randomuser.me/api/portraits/women/32.jpg' },
-  { name: 'Kunal Shah', rating: 5, comment: 'Easy to order, fast delivery. Superb!', image: 'https://randomuser.me/api/portraits/men/76.jpg' },
-  { name: 'Meera Joshi', rating: 4, comment: 'Tasty meals and user-friendly interface.', image: 'https://randomuser.me/api/portraits/women/53.jpg' },
-  { name: 'Nikhil Rao', rating: 5, comment: 'Healthy options and good pricing.', image: 'https://randomuser.me/api/portraits/men/66.jpg' },
-  { name: 'Divya Kapoor', rating: 5, comment: 'Never disappointed with the quality.', image: 'https://randomuser.me/api/portraits/women/27.jpg' },
-  { name: 'Rohit Mehra', rating: 4, comment: 'Good portion sizes and fresh food.', image: 'https://randomuser.me/api/portraits/men/36.jpg' },
-  { name: 'Simran Kaur', rating: 5, comment: 'Best food delivery app I have used!', image: 'https://randomuser.me/api/portraits/women/22.jpg' },
-  { name: 'Aditya Bansal', rating: 4, comment: 'Love the customization options.', image: 'https://randomuser.me/api/portraits/men/19.jpg' },
-  { name: 'Tanya Reddy', rating: 5, comment: 'Food always arrives hot and tasty.', image: 'https://randomuser.me/api/portraits/women/78.jpg' },
-  { name: 'Vikram Iyer', rating: 4, comment: 'Very prompt service and courteous delivery staff.', image: 'https://randomuser.me/api/portraits/men/85.jpg' },
-  { name: 'Riya Sen', rating: 5, comment: 'Top-notch experience every time.', image: 'https://randomuser.me/api/portraits/women/10.jpg' }
+  {
+    name: "Swati Pepati",
+    role: "Marketing Manager",
+    gender: "female",
+    comment: "The site looks awesome. Login, creating account, seeing options and adding to cart, payment and all the processes are easy to use.",
+    rating: 5,
+  },
+  {
+    name: "Ansh Mahajan",
+    role: "MERN Stack Developer",
+    gender: "male",
+    comment: "Great App! Smooth performance and works perfectly. Well done!",
+    rating: 4,
+  },
+  {
+    name: "Arti Giram",
+    role: "Full-Stack Developer",
+    gender: "female",
+    comment: "The UI of Tomato is responsive and visually appealing. I love how clean the design is, and the food listing feels smooth and interactive.",
+    rating: 4,
+  },
+  {
+    name: "Paranv Nalawade",
+    role: "Freelancer",
+    gender: "male",
+    comment: "Highly impressive UI/UX & responsive design. Recommended!",
+    rating: 5,
+  },
+  {
+    name: "Pranav Patil",
+    role: "Content Creator",
+    gender: "male",
+    comment: "The site feels smooth and perfectly optimized for mobile. Everything works great on my phone!",
+    rating: 3,
+  },
+  {
+    name: "Vishakha Mane",
+    role: "Software Engginer",
+    gender: "female",
+    comment: "Tomato makes ordering food so convenient. Love the clean UI and quick delivery. Super easy to use , I found all my favorite food in just a few clicks.",
+    rating: 4,
+  },
+  {
+    name: "Omkar Tagade",
+    role: "Backend Developer",
+    gender: "male",
+    comment: "Super easy to use and looks great! Ordering food is quick and smooth—really impressed with how well it works on mobile too.",
+    rating: 5,
+  },
+    {
+    name: "Siddhi Kengar",
+    role: "Business analyst",
+    gender: "female",
+    comment: "Really impressed with Tomato! 🍅 Everything feels smooth, modern, and easy to use. Loved the overall experience.",
+    rating: 5,
+  },
 ];
 
 const Reviews = () => {
@@ -26,12 +71,15 @@ const Reviews = () => {
       <div className="reviews-container">
         {reviews.map((review, index) => (
           <div className="review-card" key={index}>
-            <img src={review.image} alt={review.name} className="review-avatar" />
+            <img
+              src={review.gender === 'male' ? maleAvatar : femaleAvatar}
+              alt={review.name}
+              className="review-avatar"
+            />
             <h3>{review.name}</h3>
+            <p className="review-role">{review.role}</p>
             <p className="review-comment">“{review.comment}”</p>
-            <div className="review-rating">
-              {'⭐'.repeat(review.rating)}
-            </div>
+            <div className="review-rating">{'⭐'.repeat(review.rating)}</div>
           </div>
         ))}
       </div>
