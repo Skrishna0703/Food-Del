@@ -83,20 +83,7 @@ export default function Feedback() {
           </div>
         </div>
 
-        <div className="feedback-form-group">
-          <label>Upload Photo (optional):</label>
-          <input
-            type="file"
-            name="photo"
-            accept="image/*"
-            onChange={handlePhotoChange}
-          />
-          {preview && (
-            <div className="photo-preview">
-              <img src={preview} alt="Preview" />
-            </div>
-          )}
-        </div>
+      
 
         <button type="submit" className="feedback-button">
           Submit Feedback
