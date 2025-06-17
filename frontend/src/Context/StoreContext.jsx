@@ -101,7 +101,7 @@ const StoreContextProvider = (props) => {
       const res = await axios.get(`${url}/api/foods/list`);
       if (Array.isArray(res.data.foods)) {
         setFoodList(res.data.foods);
-        toast.success(" Food list loaded");
+        toast.success(" WelCome To Tomato");
       } else {
         throw new Error("Invalid data format");
       }
