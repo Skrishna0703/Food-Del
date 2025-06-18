@@ -59,7 +59,7 @@ const reviews = [
     name: "Siddhi Kengar",
     role: "Business analyst",
     gender: "female",
-    comment: "Really impressed with Tomato! 🍅 Everything feels smooth, modern, and easy to use. Loved the overall experience.",
+    comment: "Really impressed with Tomato!  Everything feels smooth, modern, and easy to use. Loved the overall experience.",
     rating: 5,
   },
 ];
