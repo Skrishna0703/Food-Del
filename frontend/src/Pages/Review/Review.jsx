@@ -34,6 +34,13 @@ const reviews = [
     comment: "Highly impressive UI/UX & responsive design. Recommended!",
     rating: 5,
   },
+    {
+    name: "Aditi Kuhar",
+    role: "Web Developer",
+    gender: "female",
+    comment: "Your food website looks fantastic! The frontend is super eye-catching — the visuals are vibrant, the layout is clean, and everything feels really engaging. Great job on making it so appealing and user-friendly!",
+    rating: 5,
+  },
   {
     name: "Pranav Patil",
     role: "Content Creator",
