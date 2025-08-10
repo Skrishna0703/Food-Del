@@ -8,10 +8,22 @@
     background-color: #fff;
 }
 
+.food-item {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
 .food-item-image {
     width: 100%;
     border-radius: 15px 15px 0 0;
     object-fit: cover;
+}
+
+.food-item:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(255, 165, 0, 0.7); 
 }
 
 .food-item-info {
