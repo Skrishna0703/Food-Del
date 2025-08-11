@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import About from './Pages/About/About';
 
 // ✅ Inline arrow styles
 const arrowStyle = {
@@ -54,6 +55,9 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/review" element={<Review />} />
+          <Route path="/about" element={<About/>} />
+          
+
         </Routes>
 
         <ToastContainer position="top-right" autoClose={3000} />
