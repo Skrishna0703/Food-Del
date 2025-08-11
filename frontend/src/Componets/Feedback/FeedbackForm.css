@@ -3,15 +3,67 @@
   margin: 40px auto;
   padding: 35px 25px;
   border: 1px solid #ddd;
-  border-radius: 12px;
-  background-color: #fff;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fff, #f8f9fa);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Epic background animation */
+.feedback-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 99, 71, 0.05), transparent);
+  transition: left 1.2s ease;
+  pointer-events: none;
+}
+
+.feedback-container:hover::before {
+  left: 100%;
+}
+
+/* Floating particles for feedback form */
+.feedback-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 15% 25%, rgba(255, 99, 71, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 85% 75%, rgba(255, 99, 71, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(255, 99, 71, 0.12) 1.5px, transparent 1.5px);
+  background-size: 80px 80px, 120px 120px, 60px 60px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  animation: feedbackFloat 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.feedback-container:hover::after {
+  opacity: 1;
 }
 
 .feedback-container:hover {
-  transform: translateY(-4px);
+  transform: 
+    translateY(-8px) 
+    translateZ(30px) 
+    rotateX(-3deg) 
+    scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 15px 30px rgba(255, 99, 71, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 99, 71, 0.3);
 }
 
 .feedback-container h2 {
@@ -20,39 +72,106 @@
   font-size: 26px;
   color: #333;
   font-weight: 600;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  cursor: default;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Epic title hover effects */
+.feedback-container h2::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff6347, #e74c3c, #f39c12);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+.feedback-container h2:hover::before {
+  width: 80%;
+}
+
+.feedback-container h2:hover {
+  transform: translateY(-5px) scale(1.05);
+  color: #2c3e50;
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
 }
 
 .feedback-form {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  position: relative;
+  z-index: 1;
 }
 
 .feedback-form-group {
   display: flex;
   flex-direction: column;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.feedback-form-group:hover {
+  transform: translateX(5px);
 }
 
 .feedback-form label {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 500;
   color: #555;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  cursor: default;
+}
+
+.feedback-form-group:hover label {
+  color: #333;
+  transform: translateY(-2px);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .feedback-form input,
 .feedback-form textarea {
   padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
   font-size: 16px;
   width: 100%;
   outline: none;
-  transition: border 0.3s;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  background: linear-gradient(135deg, #fff, #f9f9f9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Epic input hover and focus effects */
+.feedback-form input:hover,
+.feedback-form textarea:hover {
+  border-color: #ff6347;
+  transform: translateY(-3px) scale(1.02);
+  background: linear-gradient(135deg, #fff, #fef9f9);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(255, 99, 71, 0.2);
 }
 
 .feedback-form input:focus,
 .feedback-form textarea:focus {
-  border-color: tomato;
+  border-color: #ff6347;
+  transform: translateY(-5px) scale(1.03);
+  background: #fff;
+  box-shadow: 
+    0 12px 25px rgba(0, 0, 0, 0.15),
+    0 6px 15px rgba(255, 99, 71, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  animation: inputGlow 2s ease-in-out infinite alternate;
 }
 
 .feedback-form textarea {
@@ -61,63 +180,234 @@
 }
 
 .feedback-form input[type="file"] {
-  padding: 12px;
-  background-color: #fdfdfd;
-  border: 1px dashed #aaa;
+  padding: 15px;
+  background: linear-gradient(135deg, #fdfdfd, #f5f5f5);
+  border: 2px dashed #aaa;
   cursor: pointer;
   font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Epic file input hover effects */
+.feedback-form input[type="file"]:hover {
+  border-color: #ff6347;
+  background: linear-gradient(135deg, #fff, #fef9f9);
+  transform: translateY(-3px) scale(1.02);
+  border-style: solid;
+}
+
+.feedback-form input[type="file"]::before {
+  content: '📎 Drag & drop or click to upload';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #777;
+  font-weight: 500;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.feedback-form input[type="file"]:hover::before {
+  color: #ff6347;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .star-rating {
   display: flex;
-  gap: 8px;
-  font-size: 26px;
+  gap: 10px;
+  font-size: 28px;
   cursor: pointer;
+  justify-content: center;
+  margin: 10px 0;
 }
 
 .star-rating span {
-  transition: color 0.2s, transform 0.2s;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  display: inline-block;
 }
 
+/* Mind-blowing star hover effects */
 .star-rating span:hover {
-  transform: scale(1.2);
+  transform: scale(1.4) rotateZ(360deg) translateZ(15px);
+  text-shadow: 
+    0 0 15px rgba(255, 215, 0, 0.8),
+    2px 2px 6px rgba(0, 0, 0, 0.3);
+  animation: starPulse 1s ease-in-out infinite alternate;
+}
+
+/* Hover effect for all previous stars */
+.star-rating:hover span:hover ~ span {
+  transform: scale(1.2) rotateZ(180deg);
+  opacity: 0.6;
+}
+
+.star-rating span:hover,
+.star-rating span.active {
+  color: #ffd700;
 }
 
 .feedback-button {
-  padding: 14px;
-  background-color: tomato;
+  padding: 16px;
+  background: linear-gradient(135deg, #ff6347, #e74c3c);
   color: #fff;
   font-size: 16px;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(255, 99, 71, 0.3);
+  transform-style: preserve-3d;
 }
 
-.feedback-button:hover {
-  background-color: #e74c3c;
-  transform: scale(1.03);
+/* Epic button hover effects */
+.feedback-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.feedback-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  transform: translate(-50%, -50%);
+}
+
+.feedback-button:hover{
+  background: linear-gradient(135deg, #ea580c, #f97316);
+  color: #fff;
+  transform: translateY(-5px) translateZ(10px) rotateX(-3deg) scale(1.05);
+  box-shadow: 
+    0 12px 30px rgba(249, 115, 22, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.feedback-button:active {
+  transform: 
+    translateY(-5px) 
+    translateZ(15px) 
+    rotateX(-3deg) 
+    scale(1.05);
+  transition: all 0.1s ease;
 }
 
 .photo-preview {
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: center;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.photo-preview:hover {
+  transform: translateY(-5px);
 }
 
 .photo-preview img {
   width: 100%;
   max-width: 200px;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   object-fit: cover;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  border: 3px solid transparent;
+}
+
+/* Epic image hover effects */
+.photo-preview img:hover {
+  transform: scale(1.1) rotateZ(2deg) translateZ(20px);
+  border: 3px solid #ff6347;
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.2),
+    0 0 25px rgba(255, 99, 71, 0.4);
+  filter: brightness(1.1) contrast(1.1) saturate(1.2);
+}
+
+/* EPIC KEYFRAME ANIMATIONS */
+@keyframes feedbackFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+    opacity: 0.3;
+  }
+  33% { 
+    transform: translateY(-5px) rotate(1deg); 
+    opacity: 0.6;
+  }
+  66% { 
+    transform: translateY(-2px) rotate(-1deg); 
+    opacity: 0.4;
+  }
+}
+
+@keyframes inputGlow {
+  0% { 
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15), 0 6px 15px rgba(255, 99, 71, 0.3); 
+  }
+  100% { 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(255, 99, 71, 0.5); 
+  }
+}
+
+@keyframes starPulse {
+  0% { 
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); 
+  }
+  100% { 
+    text-shadow: 0 0 25px rgba(255, 215, 0, 1), 0 0 35px rgba(255, 215, 0, 0.6); 
+  }
+}
+
+@keyframes buttonMagnetic {
+  0%, 100% { 
+    transform: translateY(-8px) translateZ(25px) rotateX(-5deg) scale(1.08); 
+  }
+  50% { 
+    transform: translateY(-12px) translateZ(30px) rotateX(-7deg) scale(1.1); 
+  }
+}
+
+/* Enhanced label floating effect */
+.feedback-form-group:focus-within label {
+  color: #ff6347;
+  transform: translateY(-3px) scale(1.05);
+  font-weight: 600;
+}
+
+/* Form group glow on focus */
+.feedback-form-group:focus-within {
+  transform: translateX(8px);
+  background: radial-gradient(circle at center, rgba(255, 99, 71, 0.05), transparent);
+  border-radius: 12px;
+  padding: 8px;
+  margin: -8px;
 }
 
 /* ✅ Mobile Responsiveness */
 @media (max-width: 600px) {
   .feedback-container {
-    padding: 20px;
+    padding: 25px 20px;
     margin: 20px 12px;
+    border-radius: 15px;
+  }
+
+  .feedback-container:hover {
+    transform: translateY(-4px) scale(1.01);
   }
 
   .feedback-container h2 {
@@ -127,18 +417,77 @@
   .feedback-form input,
   .feedback-form textarea {
     font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .feedback-form input:hover,
+  .feedback-form textarea:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+
+  .feedback-form input:focus,
+  .feedback-form textarea:focus {
+    transform: translateY(-3px) scale(1.02);
+    animation: none;
   }
 
   .star-rating {
-    font-size: 22px;
+    font-size: 24px;
+    gap: 8px;
+  }
+
+  .star-rating span:hover {
+    transform: scale(1.2) rotateZ(180deg);
+    animation: none;
   }
 
   .feedback-button {
     font-size: 15px;
-    padding: 12px;
+    padding: 14px;
+  }
+
+  .feedback-button:hover {
+    transform: translateY(-4px) scale(1.05);
+    animation: none;
   }
 
   .photo-preview img {
     max-width: 100%;
+  }
+
+  .photo-preview img:hover {
+    transform: scale(1.05) rotateZ(1deg);
+  }
+
+  .feedback-container::after {
+    display: none;
+  }
+
+  .feedback-form-group:focus-within {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 400px) {
+  .feedback-container {
+    padding: 20px 15px;
+    margin: 15px 8px;
+  }
+
+  .feedback-container:hover {
+    transform: translateY(-2px);
+  }
+
+  .star-rating {
+    font-size: 20px;
+  }
+
+  .feedback-button:hover {
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  .feedback-form input:hover,
+  .feedback-form textarea:hover {
+    transform: translateY(-1px);
   }
 }
