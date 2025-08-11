@@ -30,6 +30,22 @@
     padding-bottom: 10px;
 }
 
+.explore-menu-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.explore-menu-list-item img {
+  transition: transform 0.3s ease;
+}
+
+.explore-menu-list-item:hover img {
+  transform: scale(1.05);
+}
+
+
 .explore-menu-list::-webkit-scrollbar {
     display: none;
 }
@@ -50,6 +66,28 @@
     cursor: pointer;
 }
 
+.explore-menu-list-item p {
+  position: relative;
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.explore-menu-list-item p::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: orange;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.explore-menu-list-item:hover p::after {
+  width: 50%;
+  left: 25%;
+}
 .explore-menu hr {
     margin: 10px 0px;
     height: 2px;

@@ -12,9 +12,26 @@ const Footer = () => {
             Tomato is your one-stop destination for fast, fresh, and flavorful meals. We’re committed to delivering your favorite dishes from top-rated kitchens right to your doorstep—hot and on time!
           </p>
           <div className="footer-social-icons">
+              <a href="https://github.com/Skrishna0703/Food-Del" target="_blank" rel="noopener noreferrer">
+    <img src={assets.github_icon} alt="GitHub" />
+  </a>
             <img src={assets.facebook_icon} alt="Facebook" />
-            <img src={assets.twitter_icon} alt="Twitter" />
-            <img src={assets.linkedin_icon} alt="LinkedIn" />
+            <a 
+  href="https://x.com/SkrishnaSutar73" 
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  <img src={assets.twitter_icon} alt="Twitter" />
+</a>
+
+            <a 
+  href="https://www.linkedin.com/in/shrikrishna-sutar-3b601524b/" 
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  <img src={assets.linkedin_icon} alt="LinkedIn" />
+</a>
+          
           </div>
         </div>
 
@@ -45,5 +62,6 @@ const Footer = () => {
     </div>
   );
 };
+
 
 export default Footer;

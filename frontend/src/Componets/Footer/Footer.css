@@ -68,6 +68,13 @@
   }
 }
 
+.footer-social-icons img {
+  background-color: white;
+  border-radius: 50%; 
+  padding: 4px;       
+}
+
+
 /* Mobile View */
 @media (max-width: 600px) {
   .footer-content {
