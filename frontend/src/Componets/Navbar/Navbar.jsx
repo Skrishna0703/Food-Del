@@ -30,10 +30,14 @@ export const Navbar = ({ setShowLogin }) => {
       <div className="navbar-right">
         
 
-        <Link to='/cart' className="cart-icon">
-          <img src={assets.basket_icon} alt="cart" />
-          {getTotalCartAmount() !== 0 && <span className="cart-dot"></span>}
-        </Link>
+       <Link to='/cart' className="cart-icon">
+  <div className="cart-wrapper">
+    <img src={assets.basket_icon} alt="cart" className="cart-img" />
+    <span className="cart-text">Cart</span>
+    {getTotalCartAmount() !== 0 && <span className="cart-dot"></span>}
+  </div>
+</Link>
+
 
         {!token ? (
           <button onClick={() => setShowLogin(true)}>Sign in</button>

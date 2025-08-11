@@ -59,6 +59,7 @@ import profile_icon from './profile_icon.png'
 import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
+import github_icon from './github_icon.png';
 
 export const assets = {
     logo,
@@ -74,6 +75,7 @@ export const assets = {
     linkedin_icon,
     facebook_icon,
     twitter_icon,
+      github_icon,
     cross_icon,
     selector_icon,
     profile_icon,
