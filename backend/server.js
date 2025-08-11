@@ -10,7 +10,7 @@ import orderRouter from './routes/orderRoute.js';
 
 //app config
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = https://tomato-backend-8sua.onrender.com || 4000;
 
 //middleware
 app.use(cors());    
