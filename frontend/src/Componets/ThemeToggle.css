@@ -1,0 +1,91 @@
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+}
+
+/* Light mode button (orange glow) */
+.light .theme-toggle-btn {
+  background: #ffffff;
+  color: #000000;
+  animation: pulseOrange 2s infinite ease-in-out;
+}
+
+/* Dark mode button (blue glow) */
+.dark .theme-toggle-btn {
+  background: #1e1e1e;
+  color: #facc15;
+  animation: pulseBlue 2s infinite ease-in-out;
+}
+
+/* Hover scale */
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Pulsing animations */
+@keyframes pulseOrange {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 165, 0, 1);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
+  }
+}
+
+@keyframes pulseBlue {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(0, 191, 255, 1);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.7);
+  }
+}
+/* Responsive adjustments */
+
+.dark .navbar-menu a,
+.dark .navbar-menu p,
+.dark .navbar-menu span {
+  color: #ffffff !important;
+}
+
+.dark .cart-wrapper .cart-text {
+  color: #ffffff !important;
+}
+
+.dark .navbar-right button {
+  color: #ffffff !important;
+  /* optional, gives a white outline */
+}
+
+.dark .food-display h2 {
+  color: #ffffff !important;
+}
+
+.dark .explore-menu h1,
+.dark .explore-menu p {
+  color: #ffffff !important;
+}
+
+.dark .testimonial-section h2 {
+  color: #000000 !important;
+}
+
+
+
+
+
+
