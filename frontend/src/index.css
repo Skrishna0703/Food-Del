@@ -25,3 +25,27 @@ a{
     opacity: 1;
   }
 }
+
+:root{
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --muted-color: #666666;
+  --accent-color: #ff6b00;
+}
+
+.dark {
+  --bg-color: #0f1115;
+  --text-color: #e6e6e6;
+  --muted-color: #b3b3b3;
+  --accent-color: #ff9a4d;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}

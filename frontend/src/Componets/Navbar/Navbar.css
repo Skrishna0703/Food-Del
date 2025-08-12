@@ -77,7 +77,7 @@
     position: relative;
 }
 
-/* .navbar-search-icon .dot {
+.navbar-search-icon .dot {
     position: absolute;
     min-width: 10px;
     min-height: 10px;
@@ -85,7 +85,7 @@
     border-radius: 50%;
     top: -6px;
     right: 135px;
-} */
+}
 
 .cart-icon {
   position: relative;

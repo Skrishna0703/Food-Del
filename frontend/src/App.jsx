@@ -10,6 +10,9 @@ import { Routes, Route } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ThemeToggle from "./Componets/ThemeToggle";
+
+
 
 // ✅ Inline arrow styles
 const arrowStyle = {
@@ -49,6 +52,11 @@ const App = () => {
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
 
+      <div style={{ position: "fixed", top: "10px", right: "10px", zIndex: 1000 }}>
+  <ThemeToggle />
+</div>
+
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
