@@ -55,7 +55,7 @@ const App = () => {
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
 
-      <div style={{ position: "fixed", top: "10px", right: "10px", zIndex: 1000 }}>
+      <div style={{ position: "absolute", top: "30px", right: "60px", zIndex: 1000 }}>
   <ThemeToggle />
 </div>
 
