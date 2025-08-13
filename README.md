@@ -7,8 +7,9 @@
 
 ## 📸 Preview
 
-> Live Demo → [https://lnkd.in/gMfKhaTp](https://lnkd.in/gMfKhaTp)  
-> GitHub → [https://lnkd.in/gGjaYtND](https://lnkd.in/gGjaYtND)
+> Live Demo → https://tomato-fda.netlify.app/
+> Admin Page - https://tomatofooddel-admin.netlify.app/
+> GitHub → https://github.com/Skrishna0703/Food-Del
 
 ---
 
