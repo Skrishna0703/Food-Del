@@ -6,6 +6,7 @@ import Home from './Pages/Home/Home';
 import Cart from './Pages/Cart/Cart';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Review from './Pages/Review/Review';
+import Privacy from './Pages/Privacy/Privacy';
 import { Routes, Route } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/review" element={<Review />} />
           <Route path="/about" element={<About/>} />
+          <Route path="/privacy" element={<Privacy/>} />
           
 
         </Routes>
