@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState,useEffect } from "react";
 import "./FoodDisplay.css";
 import { StoreContext } from "../../Context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
@@ -18,6 +18,23 @@ const FoodDisplay = ({ category }) => {
     console.warn("food_list is not an array. Got:", food_list);
     return <div>Loading food items...</div>;
   }
+
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+    const toggleFavorite = (id) => {
+    const updatedFavorites = favorites.includes(id)
+      ? favorites.filter(favId => favId !== id) // remove
+      : [...favorites, id]; // add
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
 
   const filteredFoodList = food_list.filter(
     (item) =>
@@ -40,6 +57,8 @@ const FoodDisplay = ({ category }) => {
               description={item.description} 
               price={item.price} 
               image={item.image} 
+              isFavorite={favorites.includes(item._id)}
+              toggleFavorite={toggleFavorite}
             />
           ))
         )}
