@@ -1,3 +1,7 @@
+:root{
+ --swiper-navigation-size: 24px !important;
+}
+
 .testimonial-section {
   padding: 60px 20px;
   text-align: center;
@@ -276,18 +280,26 @@
   color: #3498db;
   font-weight: bold;
   transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.9);
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.931);
   border-radius: 50%;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
 }
 
+.swiper-button-prev{
+  margin-left:-10px;
+}
+.swiper-button-next{
+  margin-right:-10px;
+}
+
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
   color: #e74c3c;
-  transform: scale(1.2) translateZ(20px);
+  transform: scale(1.1) translateZ(20px);
   background: rgba(255, 255, 255, 1);
   box-shadow: 
     0 8px 25px rgba(0, 0, 0, 0.2),
@@ -470,8 +482,8 @@
 
   .swiper-button-next,
   .swiper-button-prev {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
   }
 }
 
