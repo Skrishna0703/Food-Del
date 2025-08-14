@@ -68,7 +68,7 @@
 
 .dark .navbar-right button {
   color: #ffffff !important;
-  /* optional, gives a white outline */
+ 
 }
 
 .dark .food-display h2 {
@@ -83,6 +83,39 @@
 .dark .testimonial-section h2 {
   color: #000000 !important;
 }
+
+.dark .food-item-name-rating p {
+  color:black !important; 
+}
+/* heading */
+.dark .testimonial-section h2 {
+  color: white !important;       
+}
+
+.dark .testimonial-card p {
+  color: black !important;
+}
+
+.dark .testimonial-card h3 {
+  color: black !important;
+}
+
+.dark .testimonial-card .role {
+  color: black !important;
+}
+
+.dark .testimonial-card .stars span {
+  color: #ffd700 !important; 
+}
+
+.dark .quote-icon {
+  color: #4da3ff !important; 
+}
+
+.dark .testimonial-section {
+  background-color: #111111 !important;
+}
+
 
 
 
