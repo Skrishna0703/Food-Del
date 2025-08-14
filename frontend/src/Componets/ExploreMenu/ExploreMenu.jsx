@@ -50,10 +50,9 @@ export const ExploreMenu = ({ category, setCategory }) => {
               <div
                 key={index}
                 onClick={() => handleCategoryClick(item.menu_name)}
-                className="explore-menu-list-item"
+                className={`explore-menu-list-item ${isActive ? "active" : ""}`} 
               >
                 <img
-                  className={isActive ? "active" : ""}
                   src={item.menu_image}
                   alt={item.menu_name}
                 />
