@@ -1,8 +1,9 @@
+
 .login-popup {
-    position: fixed; /* ✅ Better for full screen overlay */
+    position:fixed; /* ✅ Better for full screen overlay */
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 20000;
     width: 100%;
     height: 100%;
     background-color: #00000090; /* semi-transparent black */
@@ -17,7 +18,7 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 40px;
     padding: 25px 30px;
     border-radius: 8px;
     font-size: 14px;
