@@ -1,17 +1,18 @@
+/* Header Container */
 .header {
     height: 34vw;
     margin: 30px auto;
     background: url('/header_img.png') no-repeat center center;
-    background-size: contain;
+    background-size: cover; /* changed from contain for full coverage */
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    transition: transform 0.6s cubic-bezier(0.23,1,0.32,1), box-shadow 0.6s ease, filter 0.6s ease;
     border-radius: 20px;
     transform-style: preserve-3d;
 }
 
-/* Epic 3D tilt and glow effect */
+/* Hover Tilt + Glow */
 .header:hover {
     transform: perspective(1000px) rotateX(5deg) rotateY(-2deg) scale(1.05);
     filter: contrast(1.1) saturate(1.2);
@@ -21,7 +22,7 @@
         inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* Animated gradient overlay */
+/* Animated Conic Gradient Overlay */
 .header::before {
     content: '';
     position: absolute;
@@ -32,15 +33,15 @@
     background: conic-gradient(
         from 0deg,
         transparent,
-        rgba(255,255,255,0.1),
+        rgba(255,255,255,0.08),
         transparent,
-        rgba(0,255,255,0.1),
+        rgba(0,255,255,0.08),
         transparent,
-        rgba(255,0,255,0.1),
+        rgba(255,0,255,0.08),
         transparent
     );
     opacity: 0;
-    transition: all 0.6s ease;
+    transition: opacity 0.6s ease;
     animation: rotate 8s linear infinite;
     pointer-events: none;
 }
@@ -49,7 +50,7 @@
     opacity: 1;
 }
 
-/* Floating particles effect */
+/* Floating Particles */
 .header::after {
     content: '';
     position: absolute;
@@ -64,7 +65,7 @@
         radial-gradient(circle at 30% 80%, rgba(255,255,255,0.25) 1px, transparent 1px);
     background-size: 100px 100px, 150px 150px, 80px 80px, 120px 120px;
     opacity: 0;
-    transition: all 0.6s ease;
+    transition: opacity 0.6s ease;
     animation: float 6s ease-in-out infinite;
     pointer-events: none;
 }
@@ -73,6 +74,7 @@
     opacity: 1;
 }
 
+/* Header Contents */
 .header-contents {
     position: absolute;
     display: flex;
@@ -82,211 +84,71 @@
     max-width: 50%;
     bottom: 10%;
     left: 6vw;
-    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.320, 1);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    animation: slideInUp 1.2s cubic-bezier(0.23,1,0.32,1);
+    transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
     transform-style: preserve-3d;
 }
 
-/* Epic content hover with 3D transform */
 .header:hover .header-contents {
     transform: translateZ(50px) translateY(-10px);
 }
 
+/* Heading */
 .header-contents h2 {
-    font-weight: 500;
+    font-weight: 600;
     color: white;
     font-size: max(4.5vw, 24px);
     line-height: 1.2;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
     cursor: default;
     position: relative;
-    overflow: hidden;
 }
 
-/* Text effects without glow */
-.header-contents h2::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0;
-    animation: gradientShift 3s ease infinite;
-    transition: opacity 0.6s ease;
-}
-
-.header-contents h2:hover::before {
-    opacity: 1;
-}
-
-.header-contents h2:hover {
-    transform: translateX(15px) rotateY(10deg) scale(1.05);
-    /* Removed text-shadow and filter glow effects */
-}
-
+/* Paragraph */
 .header-contents p {
     color: white;
     font-size: 1vw;
     max-width: 90%;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
     cursor: default;
     position: relative;
-}
-
-.header-contents p::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
-    transition: width 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    transition: transform 0.6s ease, color 0.6s ease;
 }
 
 .header-contents p:hover {
-    transform: translateX(10px) translateZ(20px);
+    transform: translateX(5px) translateZ(10px);
     color: #f0f0f0;
-    /* Removed text-shadow glow effect */
 }
 
-.header-contents p:hover::after {
-    width: 100%;
-}
-
-/* EPIC BUTTON EFFECTS */
+/* CTA Button */
 .header-contents button {
     border: none;
-    color: #747474;
+    color: #333;
     font-weight: 600;
     padding: 1vw 2.3vw;
     background: linear-gradient(45deg, #ffffff, #f8f9fa);
-    font-size: max(1vw, 14px);
+    font-size: max(1vw,14px);
     border-radius: 50px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-    box-shadow: 
-        0 4px 15px rgba(0,0,0,0.1),
-        inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
     transform-style: preserve-3d;
 }
 
-/* Multiple layered button effects */
-.header-contents button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-    transition: left 0.6s ease;
-}
-
-.header-contents button::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(116,116,116,0.1), transparent);
-    border-radius: 50%;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-    transform: translate(-50%, -50%);
-}
-
 .header-contents button:hover {
-    background: linear-gradient(45deg, #f0f0f0, #ffffff);
-    transform: 
-        translateY(-8px) 
-        translateZ(30px) 
-        rotateX(-10deg) 
-        scale(1.1);
+    transform: translateY(-6px) translateZ(20px) rotateX(-5deg) scale(1.08);
     box-shadow: 
-        0 15px 35px rgba(0,0,0,0.3),
-        0 5px 15px rgba(0,0,0,0.2),
-        inset 0 1px 0 rgba(255,255,255,0.9),
-        0 0 20px rgba(255,255,255,0.5);
-    color: #333;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        0 10px 25px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
-.header-contents button:hover::before {
-    left: 100%;
-}
-
-.header-contents button:hover::after {
-    width: 300px;
-    height: 300px;
-}
-
-/* Magnetic effect */
-.header-contents button:hover {
-    animation: magnetic 2s ease-in-out infinite;
-}
-
-/* Active state with bounce */
 .header-contents button:active {
-    transform: 
-        translateY(-5px) 
-        translateZ(20px) 
-        rotateX(-5deg) 
-        scale(1.05);
-    transition: all 0.1s ease;
+    transform: translateY(-2px) translateZ(10px) rotateX(-3deg) scale(1.05);
 }
 
-/* EPIC KEYFRAME ANIMATIONS */
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    33% { transform: translateY(-10px) rotate(1deg); }
-    66% { transform: translateY(-5px) rotate(-1deg); }
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px) translateZ(-100px) rotateX(20deg);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) translateZ(0) rotateX(0deg);
-    }
-}
-
-@keyframes magnetic {
-    0%, 100% { transform: translateY(-8px) translateZ(30px) rotateX(-10deg) scale(1.1); }
-    50% { transform: translateY(-10px) translateZ(35px) rotateX(-12deg) scale(1.12); }
-}
-
-/* Glowing border animation */
-@keyframes glowBorder {
-    0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.5); }
-    50% { box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6); }
-}
-
-.header:hover {
-    animation: glowBorder 2s ease-in-out infinite;
-}
+/* Keyframes */
+@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-8px) rotate(1deg); } 66% { transform: translateY(-4px) rotate(-1deg); } }
+@keyframes slideInUp { from { opacity:0; transform: translateY(50px) translateZ(-100px) rotateX(20deg); } to { opacity:1; transform: translateY(0) translateZ(0) rotateX(0deg); } }
 
 /* Tablet View */
 @media (max-width: 1050px) {
