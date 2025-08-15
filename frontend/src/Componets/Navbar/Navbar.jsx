@@ -30,7 +30,6 @@ export const Navbar = ({ setShowLogin }) => {
       </ul>
 
       <div className="navbar-right">
-        
         <ThemeToggle/>
         <Link to='/cart' className="cart-icon">
           <div className="cart-wrapper">
