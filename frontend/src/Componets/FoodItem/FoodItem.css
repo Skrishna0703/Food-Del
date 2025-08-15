@@ -20,6 +20,22 @@
     border-radius: 15px 15px 0 0;
     object-fit: cover;
 }
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  transition: all 0.2s ease;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #cccccc;
+  z-index: 2;
+}
+.favorite-btn.active {
+  color: gold;
+}
+
 
 .food-item:hover {
   transform: translateY(-6px) scale(1.03);

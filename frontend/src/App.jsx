@@ -6,6 +6,7 @@ import Home from './Pages/Home/Home';
 import Cart from './Pages/Cart/Cart';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Review from './Pages/Review/Review';
+import Privacy from './Pages/Privacy/Privacy';
 import { Routes, Route } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
@@ -55,33 +56,34 @@ const App = () => {
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
 
-      <div style={{ position: "absolute", top: "30px", right: "60px", zIndex: 1000 }}>
-  <ThemeToggle />
-</div>
-
-        
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<PlaceOrder />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/about" element={<About/>} />
-          
-
-        </Routes>
-
-        <ToastContainer position="top-right" autoClose={3000} />
-
-        {/* ✅ Scroll Arrow Button */}
-        <button onClick={handleArrowClick} style={arrowStyle}>
-          {atFooter ? '↑' : '↓'}
-        </button>
+        <div style={{ position: "absolute", top: "30px", right: "60px", zIndex: 1000 }}>
+  {/* <ThemeToggle />  */}
       </div>
 
-      {/* ✅ Footer with ref */}
-      <div ref={footerRef}>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<PlaceOrder />} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/privacy" element={<Privacy />} />
+
+
+      </Routes>
+
+      <ToastContainer position="top-right" autoClose={3000} />
+
+      {/* ✅ Scroll Arrow Button */}
+      <button onClick={handleArrowClick} style={arrowStyle}>
+        {atFooter ? '↑' : '↓'}
+      </button>
+    </div >
+
+      {/* ✅ Footer with ref */ }
+      < div ref = { footerRef } >
         <Footer />
-      </div>
+      </div >
     </>
   );
 };

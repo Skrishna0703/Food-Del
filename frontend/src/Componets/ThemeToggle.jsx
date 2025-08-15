@@ -11,12 +11,14 @@ const ThemeToggle = () => {
   }, [theme]);
 
   return (
-    <button
+    
+   <button
       className="theme-toggle-btn"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      style={{ color: theme === "light" ? "#fff" : "#FFD700", fontSize: "1.5rem" }}
     >
       {theme === "light" ? <FaMoon /> : <FaSun />}
-    </button>
+    </button> 
   );
 };
 

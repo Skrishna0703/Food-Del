@@ -3,7 +3,7 @@ import './FoodItem.css';
 import { assets } from '../../assets/assets';
 import { StoreContext } from '../../Context/StoreContext';
 
-const FoodItem = ({ id, name, price, description, image }) => {
+const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavorite }) => {
   const { cartItem, addToCart, removeFromCart, url } = useContext(StoreContext);
 
   return (
@@ -19,6 +19,12 @@ const FoodItem = ({ id, name, price, description, image }) => {
             e.target.src = assets.image_not_found; // fallback
           }}
         />
+        <button
+          className={`favorite-btn ${isFavorite ? 'active' : ''}`}
+          onClick={() => toggleFavorite(id)}
+        >
+          {isFavorite ? '★' : '☆'}
+        </button>
 
         {/* ✅ Add / Remove buttons */}
         {!cartItem[id] ? (

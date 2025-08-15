@@ -13,8 +13,8 @@
 
 /* Light mode button (orange glow) */
 .light .theme-toggle-btn {
-  background: #ffffff;
-  color: #000000;
+  background: #ffffff; 
+  color: #000000; 
   animation: pulseOrange 2s infinite ease-in-out;
 }
 
@@ -59,11 +59,11 @@
 .dark .navbar-menu a,
 .dark .navbar-menu p,
 .dark .navbar-menu span {
-  color: #ffffff !important;
+  color: #ffffff !important ;
 }
 
 .dark .cart-wrapper .cart-text {
-  color: #ffffff !important;
+  color: #ffffff!important ;
 }
 
 .dark .navbar-right button {
@@ -116,6 +116,20 @@
   background-color: #111111 !important;
 }
 
+.theme-toggle-btn svg {
+  color: white;
+  font-size: 1.4rem; 
+}
+
+
+.light .theme-toggle-btn svg {
+  color: #000000 !important;
+}
+
+
+.dark .theme-toggle-btn svg {
+  color: #facc15 !important;
+}
 
 
 
