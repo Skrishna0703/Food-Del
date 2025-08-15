@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState,useEffect } from "react";
 import "./FoodDisplay.css";
 import { StoreContext } from "../../Context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
@@ -19,15 +19,59 @@ const FoodDisplay = ({ category }) => {
     return <div>Loading food items...</div>;
   }
 
+  const [favorites, setFavorites] = useState([]);
+  const [sortOption, setSortOption] = useState("");
+
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+    const toggleFavorite = (id) => {
+    const updatedFavorites = favorites.includes(id)
+      ? favorites.filter(favId => favId !== id) // remove
+      : [...favorites, id]; // add
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
+
   const filteredFoodList = food_list.filter(
     (item) =>
       category === "All" ||
       item.category?.toLowerCase().trim() === category.toLowerCase().trim()
   );
 
+  if (sortOption === "alpha-asc") {
+  filteredFoodList.sort((a, b) => a.name.localeCompare(b.name));
+} else if (sortOption === "alpha-desc") {
+  filteredFoodList.sort((a, b) => b.name.localeCompare(a.name));
+} else if (sortOption === "price-asc") {
+  filteredFoodList.sort((a, b) => a.price - b.price);
+} else if (sortOption === "price-desc") {
+  filteredFoodList.sort((a, b) => b.price - a.price);
+}
+
+
   return (
     <div className="food-display" id="food-display">
       <h2>Top Dishes Near You</h2>
+      <div className="sort-container">
+        <label htmlFor="sort">Sort by: </label>
+        <select
+          id="sort"
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+        >
+          <option value="">None</option>
+          <option value="alpha-asc">Alphabet (A → Z)</option>
+          <option value="alpha-desc">Alphabet (Z → A)</option>
+          <option value="price-asc">Price (Low → High)</option>
+          <option value="price-desc">Price (High → Low)</option>
+        </select>
+      </div>
+
       <div className="food-display-list">
         {filteredFoodList.length === 0 ? (
           <p>No food items found.</p>
@@ -40,6 +84,8 @@ const FoodDisplay = ({ category }) => {
               description={item.description} 
               price={item.price} 
               image={item.image} 
+              isFavorite={favorites.includes(item._id)}
+              toggleFavorite={toggleFavorite}
             />
           ))
         )}

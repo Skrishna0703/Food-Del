@@ -3,6 +3,8 @@ import './Navbar.css';
 import { assets } from '../../assets/assets.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../Context/StoreContext';
+import ThemeToggle from '../ThemeToggle.jsx';
+
 
 export const Navbar = ({ setShowLogin }) => {
   const [Menu, setMenu] = useState("Menu");
@@ -29,14 +31,14 @@ export const Navbar = ({ setShowLogin }) => {
 
       <div className="navbar-right">
         
-
-       <Link to='/cart' className="cart-icon">
-  <div className="cart-wrapper">
-    <img src={assets.basket_icon} alt="cart" className="cart-img" />
-    <span className="cart-text">Cart</span>
-    {getTotalCartAmount() !== 0 && <span className="cart-dot"></span>}
-  </div>
-</Link>
+        <ThemeToggle/>
+        <Link to='/cart' className="cart-icon">
+          <div className="cart-wrapper">
+            <img src={assets.basket_icon} alt="cart" className="cart-img" />
+            <span className="cart-text">Cart</span>
+            {getTotalCartAmount() !== 0 && <span className="cart-dot"></span>}
+          </div>
+        </Link>
 
 
         {!token ? (

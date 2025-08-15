@@ -1,13 +1,20 @@
+
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--bg-color); 
     padding: 20px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.navbar__logo {
+ .navbar__logo {
     width: 150px;
-}
+} 
 
 .navbar-menu {
     display: flex;
@@ -57,7 +64,7 @@
     gap: 30px;
 }
 
-.navbar button {
+.navbar button:not(.theme-toggle-btn) {
     background: transparent;
     font-size: 16px;
     color: #49557e;
