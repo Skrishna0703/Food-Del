@@ -21,13 +21,25 @@ export const Navbar = ({ setShowLogin }) => {
     <div className='navbar'>
       <Link to='/'><img src={assets.logo} alt="logo" className="logo" /></Link>
 
-      <ul className="navbar-menu">
-        <Link to='/' onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</Link>
-        <a href='#explore-menu' onClick={() => setMenu("Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</a>
-        <a href='#app-download' onClick={() => setMenu("Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</a>
-        <a href='#customer-reviews' onClick={() => setMenu("Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</a>
-        <a href='#footer' onClick={() => setMenu("Contact")} className={Menu === "Contact" ? "active" : ""}>Contact</a>
-      </ul>
+     {/* Navbar links: ensure semantic hover/focus accessibility */}
+<ul className="navbar-menu">
+  <li>
+    <Link to='/' onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</Link>
+  </li>
+  <li>
+    <a href='#explore-menu' onClick={() => setMenu("Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</a>
+  </li>
+  <li>
+    <a href='#app-download' onClick={() => setMenu("Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</a>
+  </li>
+  <li>
+    <a href='#customer-reviews' onClick={() => setMenu("Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</a>
+  </li>
+  <li>
+    <a href='#footer' onClick={() => setMenu("Contact")} className={Menu === "Contact" ? "active" : ""}>Contact</a>
+  </li>
+</ul>
+
 
       <div className="navbar-right">
         
