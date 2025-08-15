@@ -264,3 +264,50 @@ body {
         display: none;
     }
 }
+
+/* Hamburger toggle icon */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Mobile menu styles */
+.navbar-menu.open {
+  display: flex !important;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background-color: #fff; 
+  color: #000; 
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+html.dark .navbar-menu.open {
+  background-color: rgba(30, 30, 30, 0.95);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 750px) {
+  .hamburger {
+    display: block;
+  }
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 18px;
+    background-color: #fff;
+  }
+  .navbar-right {
+    display: none;
+  }
+}
