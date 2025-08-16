@@ -1,7 +1,7 @@
 /* Header Container */
 .header {
     height: 34vw;
-    margin: 30px auto;
+    margin: 30px auto; 
     background: url('/header_img.png') no-repeat center center;
     background-size: cover; /* changed from contain for full coverage */
     position: relative;
@@ -10,6 +10,7 @@
     transition: transform 0.6s cubic-bezier(0.23,1,0.32,1), box-shadow 0.6s ease, filter 0.6s ease;
     border-radius: 20px;
     transform-style: preserve-3d;
+    padding-top: 80px;
 }
 
 /* Hover Tilt + Glow */
