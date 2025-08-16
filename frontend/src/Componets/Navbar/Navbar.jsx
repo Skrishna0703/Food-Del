@@ -4,12 +4,14 @@ import { assets } from '../../assets/assets.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../Context/StoreContext';
 import ThemeToggle from '../ThemeToggle.jsx';
+import { FaBars, FaTimes } from "react-icons/fa";
 
 
 export const Navbar = ({ setShowLogin }) => {
-  const [Menu, setMenu] = useState("Menu");
+  const [Menu, setMenu] = useState("");
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     setToken("");
@@ -20,6 +22,7 @@ export const Navbar = ({ setShowLogin }) => {
   return (
     <div className='navbar'>
       <Link to='/'><img src={assets.logo} alt="logo" className="logo" /></Link>
+
 
      {/* Navbar links: ensure semantic hover/focus accessibility */}
 <ul className="navbar-menu">
@@ -41,9 +44,9 @@ export const Navbar = ({ setShowLogin }) => {
 </ul>
 
 
+
       <div className="navbar-right">
-        
-        <ThemeToggle/>
+        <ThemeToggle />
         <Link to='/cart' className="cart-icon">
           <div className="cart-wrapper">
             <img src={assets.basket_icon} alt="cart" className="cart-img" />
@@ -67,6 +70,10 @@ export const Navbar = ({ setShowLogin }) => {
             </ul>
           </div>
         )}
+      </div>
+      {/* Mobile Hamburger */}
+      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <FaTimes /> : <FaBars />}
       </div>
     </div>
   );
