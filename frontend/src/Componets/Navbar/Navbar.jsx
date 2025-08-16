@@ -4,12 +4,14 @@ import { assets } from '../../assets/assets.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../Context/StoreContext';
 import ThemeToggle from '../ThemeToggle.jsx';
+import { FaBars, FaTimes } from "react-icons/fa";
 
 
 export const Navbar = ({ setShowLogin }) => {
-  const [Menu, setMenu] = useState("Menu");
+  const [Menu, setMenu] = useState("");
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     setToken("");
@@ -21,17 +23,16 @@ export const Navbar = ({ setShowLogin }) => {
     <div className='navbar'>
       <Link to='/'><img src={assets.logo} alt="logo" className="logo" /></Link>
 
-      <ul className="navbar-menu">
-        <Link to='/' onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</Link>
-        <a href='#explore-menu' onClick={() => setMenu("Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</a>
-        <a href='#app-download' onClick={() => setMenu("Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</a>
-        <a href='#customer-reviews' onClick={() => setMenu("Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</a>
-        <a href='#footer' onClick={() => setMenu("Contact")} className={Menu === "Contact" ? "active" : ""}>Contact</a>
+      <ul className={`navbar-menu ${menuOpen ? "open" : ""}`}>
+        <Link to='/' onClick={() => { setMenu("Home"); setMenuOpen(false) }} className={Menu === "Home" ? "active" : ""}>Home</Link>
+        <a href='#explore-menu' onClick={() => { setMenu("Menu"); setMenuOpen(false) }} className={Menu === "Menu" ? "active" : ""}>Menu</a>
+        <a href='#app-download' onClick={() => { setMenu("Mobile-App"); setMenuOpen(false) }} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</a>
+        <a href='#customer-reviews' onClick={() => { setMenu("Reviews"); setMenuOpen(false) }} className={Menu === "Reviews" ? "active" : ""}>Reviews</a>
+        <a href='#footer' onClick={() => { setMenu("Contact"); setMenuOpen(false) }} className={Menu === "Contact" ? "active" : ""}>Contact</a>
       </ul>
 
       <div className="navbar-right">
-        
-        <ThemeToggle/>
+        <ThemeToggle />
         <Link to='/cart' className="cart-icon">
           <div className="cart-wrapper">
             <img src={assets.basket_icon} alt="cart" className="cart-img" />
@@ -55,6 +56,10 @@ export const Navbar = ({ setShowLogin }) => {
             </ul>
           </div>
         )}
+      </div>
+      {/* Mobile Hamburger */}
+      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <FaTimes /> : <FaBars />}
       </div>
     </div>
   );
