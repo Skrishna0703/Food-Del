@@ -7,7 +7,9 @@ import Cart from './Pages/Cart/Cart';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Review from './Pages/Review/Review';
 import Privacy from './Pages/Privacy/Privacy';
+import CartSummaryBar from "./Componets/CartSummaryBar/CartSummaryBar";
 import { Routes, Route } from 'react-router-dom';
+import ScrollToTop from './Componets/ScrollToTop';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +23,7 @@ import About from './Pages/About/About';
 // ✅ Inline arrow styles
 const arrowStyle = {
   position: 'fixed',
-  bottom: '20px',
+  bottom: '60px',
   left: '20px',
   background: '#ea6208ff',
   color: '#fff',
@@ -54,34 +56,35 @@ const App = () => {
       {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
 
       <div className="app">
+        <ScrollToTop/>
         <Navbar setShowLogin={setShowLogin} />
 
         <div style={{ position: "absolute", top: "30px", right: "60px", zIndex: 1000 }}>
-  {/* <ThemeToggle />  */}
-      </div>
+          {/* <ThemeToggle />  */}
+        </div>
 
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/order" element={<PlaceOrder />} />
-        <Route path="/review" element={<Review />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/privacy" element={<Privacy />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/order" element={<PlaceOrder />} />
+          <Route path="/review" element={<Review />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/privacy" element={<Privacy />} />
 
 
-      </Routes>
+        </Routes>
+        <CartSummaryBar />
+        <ToastContainer position="top-right" autoClose={3000} />
 
-      <ToastContainer position="top-right" autoClose={3000} />
+        {/* ✅ Scroll Arrow Button */}
+        <button onClick={handleArrowClick} style={arrowStyle}>
+          {atFooter ? '↑' : '↓'}
+        </button>
+      </div >
 
-      {/* ✅ Scroll Arrow Button */}
-      <button onClick={handleArrowClick} style={arrowStyle}>
-        {atFooter ? '↑' : '↓'}
-      </button>
-    </div >
-
-      {/* ✅ Footer with ref */ }
-      < div ref = { footerRef } >
+      {/* ✅ Footer with ref */}
+      < div ref={footerRef} >
         <Footer />
       </div >
     </>
