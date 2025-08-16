@@ -1,6 +1,6 @@
 .header {
     height: 34vw;
-    margin: 30px auto;
+    margin: 30px auto; 
     background: url('/header_img.png') no-repeat center center;
     background-size: contain;
     position: relative;
@@ -9,6 +9,7 @@
     transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
     border-radius: 20px;
     transform-style: preserve-3d;
+    padding-top: 80px;
 }
 
 /* Epic 3D tilt and glow effect */

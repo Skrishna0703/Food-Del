@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+    padding-top: 70px;
+}
 
 .navbar {
     position: fixed;
@@ -5,16 +9,25 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: var(--bg-color); 
-    padding: 20px 0;
+    background-color: var(--bg-color);
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 12px 40px;
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
- .navbar__logo {
+.navbar_logo {
+    margin-right: 40px;
     width: 150px;
-} 
+}
 
 .navbar-menu {
     display: flex;
@@ -40,7 +53,8 @@
 .navbar-menu a::after {
     content: "";
     position: absolute;
-    bottom: -4px; /* small gap under text */
+    bottom: -4px;
+    /* small gap under text */
     left: 50%;
     width: 0;
     height: 2px;
@@ -60,8 +74,14 @@
 
 .navbar-right {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     align-items: center;
-    gap: 30px;
+    gap: 15px;
+}
+
+.navbar-right>* {
+    flex-shrink: 0;
 }
 
 .navbar button:not(.theme-toggle-btn) {
@@ -95,48 +115,49 @@
 }
 
 .cart-icon {
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
 }
 
 .cart-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  perspective: 800px; /* Enables 3D effect */
-  transition: transform 0.4s ease, box-shadow 0.3s ease;
-  padding: 5px;
-  border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 800px;
+    /* Enables 3D effect */
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+    padding: 5px;
+    border-radius: 8px;
 }
 
 /* 3D tilt + lift for the whole button */
 .cart-wrapper:hover {
-  transform: rotateY(10deg) rotateX(5deg) scale(1.08);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transform: rotateY(10deg) rotateX(5deg) scale(1.08);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .cart-img {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 .cart-text {
-  font-size: 12px;
-  color: #49557e;
-  margin-top: 4px;
-  font-weight: bold;
+    font-size: 12px;
+    color: #49557e;
+    margin-top: 4px;
+    font-weight: bold;
 }
 
 .cart-dot {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 10px;
-  height: 10px;
-  background-color: tomato;
-  border-radius: 50%;
-  border: 2px solid white;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: tomato;
+    border-radius: 50%;
+    border: 2px solid white;
 }
 
 /* Profile Wrapper: Hover fix applied here */
@@ -181,7 +202,7 @@
 }
 
 .nav-profile-dropdown li:hover {
-   
+
     color: tomato;
 }
 
@@ -195,16 +216,20 @@
     .navbar .logo {
         width: 140px;
     }
+
     .navbar-menu {
         gap: 20px;
         font-size: 17px;
     }
+
     .navbar-right {
         gap: 30px;
     }
+
     .navbar-right img {
         width: 22px;
     }
+
     .navbar-right button {
         padding: 8px 25px;
     }
@@ -214,16 +239,20 @@
     .navbar .logo {
         width: 120px;
     }
+
     .navbar-menu {
         gap: 15px;
         font-size: 15px;
     }
+
     .navbar-right {
         gap: 20px;
     }
+
     .navbar-right img {
         width: 20px;
     }
+
     .navbar-right button {
         padding: 7px 20px;
         font-size: 15px;
@@ -234,4 +263,51 @@
     .navbar-menu {
         display: none;
     }
+}
+
+/* Hamburger toggle icon */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Mobile menu styles */
+.navbar-menu.open {
+  display: flex !important;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background-color: #fff; 
+  color: #000; 
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+html.dark .navbar-menu.open {
+  background-color: rgba(30, 30, 30, 0.95);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 750px) {
+  .hamburger {
+    display: block;
+  }
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 18px;
+    background-color: #fff;
+  }
+  .navbar-right {
+    display: none;
+  }
 }
