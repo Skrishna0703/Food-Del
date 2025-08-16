@@ -2,92 +2,82 @@
     width: 100%;
     margin: auto;
     border-radius: 15px;
-    box-shadow: 0px 0px 10px #00000015;
-    transition: 0.3s;
-    animation: fadeIn 1s;
     background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
-.food-item {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-.food-item-image {
-    width: 100%;
-    border-radius: 15px 15px 0 0;
-    object-fit: cover;
-}
-.favorite-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: none;
-  border: none;
-  transition: all 0.2s ease;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: #cccccc;
-  z-index: 2;
-}
-.favorite-btn.active {
-  color: gold;
-}
-
-
+/* Hover Lift + Glow */
 .food-item:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 8px 30px rgba(255, 165, 0, 0.7); 
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(255,165,0,0.25);
 }
 
-.food-item-info {
-    padding: 20px;
-}
-
-.food-item-name-rating {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.food-item-name-rating p {
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.food-item-name-rating img {
-    width: 70px;
-}
-
-.food-item-desc {
-    color: #676767;
-    font-size: 12px;
-    margin-bottom: 10px;
-}
-
-.food-item-price {
-    color: tomato;
-    font-size: 22px;
-    font-weight: 500;
-    margin: 10px 0px;
-}
-
+/* Image Container */
 .food-item-img-container {
     position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
 }
 
+.food-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.4s ease;
+}
+
+.food-item-img-container:hover .food-item-image {
+    transform: scale(1.05);
+}
+
+/* Favorite Button */
+.favorite-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255,255,255,0.8);
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 2;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.favorite-btn.active {
+    color: gold;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.2);
+    background: rgba(255,255,255,1);
+}
+
+/* Add / Remove Buttons */
 .food-item-img-container .add {
     width: 35px;
+    height: 35px;
     position: absolute;
     bottom: 15px;
     right: 15px;
     cursor: pointer;
-    border-radius: 50px;
+    border-radius: 50%;
     background-color: white;
-    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.food-item-img-container .add:hover {
+    transform: scale(1.1);
 }
 
 .food-item-count {
@@ -97,15 +87,60 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 6px 10px;
+    padding: 6px 12px;
     border-radius: 50px;
     background-color: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
 .food-item-count img {
     width: 30px;
     cursor: pointer;
+    transition: transform 0.3s ease;
 }
+
+.food-item-count img:hover {
+    transform: scale(1.1);
+}
+
+/* Info Section */
+.food-item-info {
+    padding: 15px 20px;
+}
+
+.food-item-name-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.food-item-name-rating p {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.food-item-name-rating img {
+    width: 70px;
+}
+
+.food-item-desc {
+    font-size: 13px;
+    color: #676767;
+    margin-bottom: 8px;
+    line-height: 1.2;
+    height: 36px; /* consistent height for multiple cards */
+    overflow: hidden;
+}
+
+.food-item-price {
+    font-size: 20px;
+    font-weight: 600;
+    color: tomato;
+    margin-top: 5px;
+}
+
 
 /* Tablet */
 @media (max-width: 768px) {

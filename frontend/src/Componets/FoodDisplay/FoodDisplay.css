@@ -1,36 +1,70 @@
+/* ===============================
+    FoodDisplay Container
+=============================== */
+.food-display {
+    margin-top: 40px;
+    padding: 30px 20px;
+    background-color: #fefefe; /* slight off-white */
+    border-radius: 20px;
+}
+
+/* Heading */
+.food-display h2 {
+    font-size: max(2.5vw, 26px);
+    font-weight: 700;
+    color: #262626;
+    text-align: center;
+    margin-bottom: 25px; /* Space between heading and sort/cards */
+}
+
+/* ===============================
+    Sort Container
+=============================== */
 .sort-container {
-  margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px; /* Space before card grid */
+}
+
+.sort-container label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
 
 .sort-container select {
-  padding: 5px;
-  font-size: 14px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
 }
 
-.food-display {
-    margin-top: 30px;
-    padding: 0 20px;
+.sort-container select:hover {
+    border-color: tomato;
 }
 
-.food-display h2 {
-    font-size: max(2vw, 24px);
-    font-weight: 600;
-    color: #262626;
-    text-align: center;
-}
-
+/* ===============================
+    Food Cards Grid
+=============================== */
 .food-display-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    margin-top: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
     row-gap: 50px;
 }
+
+/* ===============================
+    Responsive Layout
+=============================== */
 
 /* Tablet View */
 @media (max-width: 768px) {
     .food-display h2 {
         font-size: 22px;
+        margin-bottom: 20px;
     }
 
     .food-display-list {
@@ -44,6 +78,7 @@
 @media (max-width: 480px) {
     .food-display h2 {
         font-size: 20px;
+        margin-bottom: 15px;
     }
 
     .food-display-list {
@@ -51,4 +86,29 @@
         gap: 20px;
         row-gap: 30px;
     }
+}
+
+/* ===============================
+    Optional: Food Card Hover Effects
+=============================== */
+.food-display-list .food-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.food-display-list .food-item:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 30px rgba(255, 165, 0, 0.7); 
+}
+
+/* Smooth fade-in for cards */
+.food-display-list .food-item {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
