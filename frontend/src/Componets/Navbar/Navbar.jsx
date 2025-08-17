@@ -19,6 +19,8 @@ export const Navbar = ({ setShowLogin }) => {
     navigate("/");
   };
 
+  const totalCartItems = Object.values(useContext(StoreContext).cartItem || {}).reduce((sum, qty) => sum + qty,0);
+
   return (
     <div className='navbar'>
       <Link to='/'><img src={assets.logo} alt="logo" className="logo" /></Link>
@@ -51,7 +53,9 @@ export const Navbar = ({ setShowLogin }) => {
           <div className="cart-wrapper">
             <img src={assets.basket_icon} alt="cart" className="cart-img" />
             <span className="cart-text">Cart</span>
-            {getTotalCartAmount() !== 0 && <span className="cart-dot"></span>}
+            {totalCartItems>0 &&(
+              <div className='cart-badge'>{totalCartItems} </div>
+            )}
           </div>
         </Link>
 
