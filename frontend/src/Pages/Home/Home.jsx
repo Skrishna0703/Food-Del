@@ -15,10 +15,9 @@ export const Home = () => {
       <Header />
       <ExploreMenu category={category} setCategory={setCategory} />
       <FoodDisplay category={category} />
-      <CustomerReviews />
+      <CustomerReviews  />
       <Feedback/>
       <AppDownload />
-      
     </div>
   );
 };

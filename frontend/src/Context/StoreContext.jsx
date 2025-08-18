@@ -11,6 +11,22 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const url = "https://tomato-backend-8sua.onrender.com";
 
+    // ✅ Load cart from localStorage (for guest users)
+  useEffect(() => {
+    const localCart = localStorage.getItem("cartItem");
+    if (localCart && !token) {
+      setCartItems(JSON.parse(localCart));
+    }
+  }, [token]);
+
+  // ✅ Save cart to localStorage whenever it changes (only if not logged in)
+  useEffect(() => {
+    if (!token) {
+      localStorage.setItem("cartItem", JSON.stringify(cartItem));
+    }
+  }, [cartItem, token]);
+
+
   // ✅ Add to Cart
   const addToCart = useCallback(
     async (itemId) => {
