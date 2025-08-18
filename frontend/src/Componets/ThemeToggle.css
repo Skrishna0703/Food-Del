@@ -135,4 +135,44 @@
 
 
 
+/* ===============================
+    FoodDisplay Container - Dark Mode
+=============================== */
+.dark .food-display {
+    background-color: #1a1a1a; /* dark background */
+    color: #f0f0f0;            /* light text */
+    margin-top: 40px;
+    padding: 30px 20px;
+    border-radius: 20px;
+}
+
+/* Heading */
+.dark .food-display h2 {
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* ===============================
+    Sort Container - Dark Mode
+=============================== */
+.dark .food-display .sort-container label {
+    color: #cccccc;
+}
+
+.dark .food-display .sort-container select {
+    background-color: #333333;
+    color: #f0f0f0;
+    border: 1px solid #555555;
+    transition: all 0.3s ease;
+}
+
+.dark .food-display .sort-container select:hover {
+    border-color: #1e90ff; /* subtle hover highlight */
+}
+
+.dark .food-display .sort-container select:focus {
+    outline: none;
+    border-color: #1e90ff;
+    box-shadow: 0 0 5px #1e90ff;
+}
 
