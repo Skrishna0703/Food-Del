@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../Context/StoreContext';
 import ThemeToggle from '../ThemeToggle.jsx';
 import { FaBars, FaTimes } from "react-icons/fa";
+import { HashLink } from "react-router-hash-link";
 
 
 export const Navbar = ({ setShowLogin }) => {
@@ -29,19 +30,32 @@ export const Navbar = ({ setShowLogin }) => {
      {/* Navbar links: ensure semantic hover/focus accessibility */}
 <ul className="navbar-menu">
   <li>
-    <Link to='/' onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</Link>
+    <HashLink smooth to='/' onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</HashLink >
   </li>
   <li>
-    <a href='#explore-menu' onClick={() => setMenu("Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</a>
+    <HashLink smooth to='/#explore-menu' onClick={() => setMenu("Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</HashLink >
   </li>
   <li>
-    <a href='#app-download' onClick={() => setMenu("Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</a>
+    <HashLink smooth to='/#app-download' onClick={() => setMenu("Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</HashLink>
   </li>
   <li>
-    <a href='#customer-reviews' onClick={() => setMenu("Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</a>
+    <HashLink smooth to='/#customer-reviews' onClick={() => setMenu("Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</HashLink>
   </li>
-  <li>
-    <a href='#footer' onClick={() => setMenu("Contact")} className={Menu === "Contact" ? "active" : ""}>Contact</a>
+  <li> 
+    <a
+    href="#footer"
+    onClick={(e) => {
+      e.preventDefault();
+      document.getElementById("footer")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+      setMenu("Contact");
+    }}
+    className={Menu === "Contact" ? "active" : ""}
+  >
+    Contact
+  </a>
   </li>
 </ul>
 
