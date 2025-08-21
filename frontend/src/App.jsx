@@ -84,7 +84,7 @@ const App = () => {
       </div >
 
       {/* ✅ Footer with ref */}
-      < div ref={footerRef} >
+      < div ref={footerRef} id='footer' >
         <Footer />
       </div >
     </>
