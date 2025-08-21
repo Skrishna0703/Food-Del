@@ -95,6 +95,10 @@
   transform-style: preserve-3d;
   overflow: hidden;
   border: 1px solid rgba(52, 152, 219, 0.1);
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Epic background glow for testimonial cards */
