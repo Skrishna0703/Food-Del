@@ -167,15 +167,22 @@ body {
     margin-top: 4px;
     font-weight: bold;
 }
-.cart-dot {
+.cart-badge{
     position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 10px;
-    height: 10px;
-    background-color: tomato;
+    top: 2px;
+    right: 2px;
+    background: #fc4b32;
+    columns: white;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
     border-radius: 50%;
-    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow:  0 2px 8px rgba(252, 75, 50, 0.2);
 }
 
 /* Profile Dropdown */
