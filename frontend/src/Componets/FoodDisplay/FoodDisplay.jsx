@@ -21,6 +21,7 @@ const FoodDisplay = ({ category }) => {
 
   const [favorites, setFavorites] = useState([]);
   const [sortOption, setSortOption] = useState("");
+  const [showFavorites, setshowFavorites] = useState(false);
 
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -37,11 +38,15 @@ const FoodDisplay = ({ category }) => {
   };
 
 
-  const filteredFoodList = food_list.filter(
+  let filteredFoodList = food_list.filter(
     (item) =>
       category === "All" ||
       item.category?.toLowerCase().trim() === category.toLowerCase().trim()
   );
+  if (showFavorites) {
+    filteredFoodList=filteredFoodList.filter((item)=>favorites.includes(item._id))
+    
+  }
 
   if (sortOption === "alpha-asc") {
   filteredFoodList.sort((a, b) => a.name.localeCompare(b.name));
@@ -57,7 +62,8 @@ const FoodDisplay = ({ category }) => {
   return (
     <div className="food-display" id="food-display">
       <h2>Top Dishes Near You</h2>
-      <div className="sort-container">
+      <div className="cont ">
+        <div className="sort-container">
         <label htmlFor="sort">Sort by: </label>
         <select
           id="sort"
@@ -71,10 +77,20 @@ const FoodDisplay = ({ category }) => {
           <option value="price-desc">Price (High → Low)</option>
         </select>
       </div>
+      <div className="fav-filter">
+        <label htmlFor="showFavourites" className="custom-checkbox">
+          <input type="checkbox" id="showFavourites" checked={showFavorites} onChange={(e)=>setshowFavorites(e.target.checked)} />
+           <span className="checkmark"></span>
+          Show Favorites
+        </label>
+      </div>
+      </div>
 
       <div className="food-display-list">
         {filteredFoodList.length === 0 ? (
+          showFavorites ? (<p>No favorites yet. ⭐ Add some dishes to your favorites!</p>):(
           <p>No food items found.</p>
+          )
         ) : (
           filteredFoodList.map((item) => (
             <FoodItem 
