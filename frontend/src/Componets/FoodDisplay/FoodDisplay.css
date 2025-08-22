@@ -12,6 +12,38 @@
     background-color: #fefefe; /* slight off-white */
     border-radius: 20px;
 }
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1rem 0;
+}
+
+.sort-container label {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.sort-container select {
+  background: #1f1f1f;
+  color: #fff;
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+/* Hover & focus */
+.sort-container select:hover,
+.sort-container select:focus {
+  border-color: #ff4d4d;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+  outline: none;
+}
+
 /* Hide default checkbox */
 .custom-checkbox input {
   position: absolute;
