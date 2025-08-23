@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './FoodItem.css';
 import { assets } from '../../assets/assets';
 import { StoreContext } from '../../Context/StoreContext';
 
 const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavorite }) => {
   const { cartItem, addToCart, removeFromCart, url } = useContext(StoreContext);
+
+  // ✅ New state for Read More / Read Less
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <div className='food-item'>
@@ -56,7 +59,20 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
           <p>{name}</p>
           <img src={assets.rating_starts} alt="rating" />
         </div>
-        <p className='food-item-desc'>{description}</p>
+
+        {/* ✅ Updated description with smooth expand/collapse */}
+        <p className={`food-item-desc ${expanded ? 'expanded' : ''}`}>
+          {expanded ? description : `${description.substring(0, 60)}...`}
+          {description.length > 60 && (
+            <button 
+              onClick={() => setExpanded(!expanded)} 
+              className="read-more-btn"
+            >
+              {expanded ? ' Read Less' : ' Read More'}
+            </button>
+          )}
+        </p>
+
         <p className="food-item-price">₹{price}</p>
       </div>
     </div>
