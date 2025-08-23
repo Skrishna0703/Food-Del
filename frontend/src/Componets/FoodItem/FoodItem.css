@@ -1,3 +1,4 @@
+/* Existing styles (kept as before) */
 .food-item {
     width: 100%;
     margin: auto;
@@ -10,13 +11,11 @@
     animation: fadeIn 0.8s ease-in-out;
 }
 
-/* Hover Lift + Glow */
 .food-item:hover {
     transform: translateY(-6px) scale(1.03);
     box-shadow: 0 8px 25px rgba(255,165,0,0.25);
 }
 
-/* Image Container */
 .food-item-img-container {
     position: relative;
     width: 100%;
@@ -125,13 +124,37 @@
     width: 70px;
 }
 
+/* ✅ Updated Description with smooth expand/collapse */
 .food-item-desc {
     font-size: 13px;
     color: #676767;
     margin-bottom: 8px;
-    line-height: 1.2;
-    height: 36px; /* consistent height for multiple cards */
+    line-height: 1.4;
     overflow: hidden;
+    max-height: 38px; /* collapsed height */
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
+    opacity: 0.9;
+}
+
+.food-item-desc.expanded {
+    max-height: 500px; /* enough for long text */
+    opacity: 1;
+}
+
+/* ✅ Read More button */
+.read-more-btn {
+    color: #2563eb; /* Tailwind blue-600 */
+    font-size: 12px;
+    margin-left: 4px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-weight: 500;
+}
+
+.read-more-btn:hover {
+    text-decoration: underline;
 }
 
 .food-item-price {
@@ -140,7 +163,6 @@
     color: tomato;
     margin-top: 5px;
 }
-
 
 /* Tablet */
 @media (max-width: 768px) {
