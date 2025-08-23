@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './Home.css';
-import Header from '../../Componets/Header/Header.jsx';
-import ExploreMenu from '../../Componets/ExploreMenu/ExploreMenu.jsx';
-import FoodDisplay from '../../Componets/FoodDisplay/FoodDisplay.jsx';
-import AppDownload from '../../Componets/AppDownload/AppDownload.jsx';
-import CustomerReviews from '../../Componets/CustomerReview/CustomerReviews.jsx'
-import Feedback from '../../Componets/Feedback/FeedbackForm.jsx';
+import Header from '../../Components/Header/Header.jsx';
+import ExploreMenu from '../../Components/ExploreMenu/ExploreMenu.jsx';
+import FoodDisplay from '../../Components/FoodDisplay/FoodDisplay.jsx';
+import AppDownload from '../../Components/AppDownload/AppDownload.jsx';
+import CustomerReviews from '../../Components/CustomerReview/CustomerReviews.jsx'
+import Feedback from '../../Components/Feedback/FeedbackForm.jsx';
 
 export const Home = () => {
   const [category, setCategory] = useState("All");

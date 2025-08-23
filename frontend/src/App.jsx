@@ -1,20 +1,20 @@
 import React, { useState, useRef } from 'react';
-import Navbar from './Componets/Navbar/Navbar';
-import Footer from './Componets/Footer/Footer';
-import LoginPopup from './Componets/LoginPopup/LoginPopup';
+import Navbar from './Components/Navbar/Navbar';
+import Footer from './Components/Footer/Footer';
+import LoginPopup from './Components/LoginPopup/LoginPopup';
 import Home from './Pages/Home/Home';
 import Cart from './Pages/Cart/Cart';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Review from './Pages/Review/Review';
 import Privacy from './Pages/Privacy/Privacy';
-import CartSummaryBar from "./Componets/CartSummaryBar/CartSummaryBar";
+import CartSummaryBar from "./Components/CartSummaryBar/CartSummaryBar";
 import { Routes, Route } from 'react-router-dom';
-import ScrollToTop from './Componets/ScrollToTop';
+import ScrollToTop from './Components/ScrollToTop';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import ThemeToggle from "./Componets/ThemeToggle";
+import ThemeToggle from "./Components/ThemeToggle";
 
 
 import About from './Pages/About/About';
