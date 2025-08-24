@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../Context/StoreContext';
 import ThemeToggle from '../ThemeToggle.jsx';
 import { FaBars, FaTimes } from "react-icons/fa";
+import { HashLink } from 'react-router-hash-link';
+
 
 export const Navbar = ({ setShowLogin }) => {
   const [Menu, setMenu] = useState("");
