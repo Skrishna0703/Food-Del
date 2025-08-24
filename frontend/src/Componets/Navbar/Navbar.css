@@ -142,8 +142,8 @@ body {
     perspective: 800px;
 
     /* Enables 3D effect */
-  height:35px;
-    transition: transform 0.4s ease, box-shadow 0.3s ease,height 0.4s ease-in-out;
+  height:40px;
+    transition: transform 0.4s ease-in-out, box-shadow 0.3s ease-in-out,height 0.4s ease-in-out;
     padding: 5px;
     border-radius: 8px;
 }
