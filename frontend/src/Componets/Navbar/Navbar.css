@@ -143,22 +143,36 @@ body {
     height:45px;
     /* Enables 3D effect */
 
+
     transition: transform 0.4s ease, box-shadow 0.3s ease,height 0.3s ease-in-out;
+
+  height:40px;
+    transition: transform 0.4s ease-in-out, box-shadow 0.3s ease-in-out,height 0.4s ease-in-out;
+
     padding: 5px;
     border-radius: 8px;
 }
 .cart-wrapper:hover {
     transform: rotateY(10deg) rotateX(5deg) scale(1.08);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+<<<<<<< HEAD
     height:48px;
+=======
+    height: 45px;
+>>>>>>> cc904c9940cdbd21d8140a4d746c02bf3d02d514
 }
 
 .cart-img { width: 40px; height: 40px; }
 
 
 .cart-img {
+<<<<<<< HEAD
     width: 24px;
     height: 23px;
+=======
+    width: 20px;
+    height: 28px;
+>>>>>>> cc904c9940cdbd21d8140a4d746c02bf3d02d514
 }
 
 
