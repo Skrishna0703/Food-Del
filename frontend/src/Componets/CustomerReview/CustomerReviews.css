@@ -95,6 +95,11 @@
   transform-style: preserve-3d;
   overflow: hidden;
   border: 1px solid rgba(52, 152, 219, 0.1);
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Epic background glow for testimonial cards */
@@ -154,7 +159,7 @@
   font-size: 3rem;
   color: #3498db;
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
   position: relative;
   z-index: 2;
@@ -176,7 +181,7 @@
   height: 70px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
   transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
   position: relative;
   border: 3px solid transparent;
@@ -187,7 +192,7 @@
 .testimonial-card:hover .review-img {
   transform: 
     scale(1.25) 
-    rotateZ(10deg) 
+    rotateZ(0deg) 
     translateZ(30px);
   border: 3px solid #3498db;
   box-shadow: 
@@ -214,7 +219,7 @@
 }
 
 .stars {
-  margin: 15px 0;
+  margin: 10px 0;
   transition: all 0.6s ease;
 }
 

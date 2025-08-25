@@ -7,10 +7,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Link } from 'react-router-dom';
 
+// Cartoon avatar URLs
+const femaleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png';   // Cartoon boy
+const maleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png'; // Cartoon girl
+
 const reviews = [
   {
     name: "Swati Pepati",
     role: "Marketing Manager",
+    gender: "female",
     comment: "The site looks awesome Login, creating account, seeing options and adding to cart, payment and all the processes are easy to use",
     rating: 5,
 
@@ -18,6 +23,7 @@ const reviews = [
   {
     name: "Ansh Mahajan",
     role: "MERN Stack Developer",
+    gender: "male",
     comment: " Great App ! Smooth performance and Works Perfectly. Well Done",
     rating: 4,
  
@@ -25,6 +31,7 @@ const reviews = [
   {
     name: "Arti Giram",
     role: "Full-Stack Developer",
+    gender: "female",
     comment: "The UI of Tomato is responsive and visually appealing. I love how clean the design is, and the food listing feels smooth and interactive.",
     rating: 4,
    
@@ -32,6 +39,7 @@ const reviews = [
   {
     name: "Paranv Nalawade",
     role: "Freelancer",
+    gender: "male",
     comment: "Highly impressive UI UX & Responsive Design . Recommended!",
     rating: 5,
    
@@ -39,6 +47,7 @@ const reviews = [
   {
     name: "Pranav Patil",
     role: "Content Creator",
+    gender: "male",
     comment: "The site feels smooth and perfectly optimized for mobile. Everything works great on my phone!",
     rating: 3,
   
@@ -67,7 +76,8 @@ const CustomerReviews = () => {
           <SwiperSlide key={index}>
             <div className="testimonial-card">
               <span className="quote-icon">❝</span>
-              {/* <img src={review.image} alt={review.name} className="review-img" /> */}
+
+              <img src={review.gender === "male" ? maleAvatar : femaleAvatar} alt={review.name} className="review-img" />
               <p>{review.comment}</p>
               <div className="stars">
                 {Array.from({ length: 5 }).map((_, i) => (
