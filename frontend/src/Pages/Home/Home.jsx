@@ -12,6 +12,7 @@ export const Home = () => {
 
   return (
     <div>
+      <div id="top"></div>  {/* Add this line */}
       <Header />
       <ExploreMenu category={category} setCategory={setCategory} />
       <FoodDisplay category={category} />
