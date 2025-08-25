@@ -353,8 +353,8 @@ html.dark .navbar-menu.open {
 
   /* Mobile menu styles */
   .mobile-menu {
-    position: absolute;
-    top: 60px; /* below navbar */
+    position: fixed;
+    top: 70px; /* below navbar */
     right: 10px;
     background: white;
     width: 200px;
@@ -364,7 +364,7 @@ html.dark .navbar-menu.open {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    z-index: 1000;
+    z-index: 9999;
   }
 
   .mobile-menu li {
@@ -386,5 +386,11 @@ html.dark .navbar-menu.open {
 
   .mobile-menu a.active {
     color: #ff4c24; /* highlight active */
+  }
+}
+
+@media (min-width: 751px) {
+  .mobile-menu {
+    display: none !important;
   }
 }
