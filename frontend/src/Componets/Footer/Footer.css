@@ -232,7 +232,9 @@
   text-align: center;
   z-index: 1;
 }
-
+.footer-content-left p{
+  text-align: left;
+}
 
 /* EPIC KEYFRAME ANIMATIONS */
 @keyframes footerFloat {

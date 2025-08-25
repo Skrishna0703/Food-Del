@@ -140,24 +140,30 @@ body {
     flex-direction: column;
     align-items: center;
     perspective: 800px;
-
+    height:45px;
     /* Enables 3D effect */
 
-    transition: transform 0.4s ease, box-shadow 0.3s ease;
+height: 45px;
+    transition: transform 0.4s ease, box-shadow 0.3s ease,height 0.3s ease-in-out;
     padding: 5px;
     border-radius: 8px;
 }
 .cart-wrapper:hover {
     transform: rotateY(10deg) rotateX(5deg) scale(1.08);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+
+    height: 45px;
+
 }
 
 .cart-img { width: 40px; height: 40px; }
 
 
 .cart-img {
-    width: 40px;
-    height: 40px;
+
+    width: 23px;
+    height: 23px;
+
 }
 
 
