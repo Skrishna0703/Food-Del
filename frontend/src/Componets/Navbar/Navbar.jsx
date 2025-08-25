@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets.js';
 import { Link, useNavigate } from 'react-router-dom';
@@ -30,6 +30,17 @@ export const Navbar = ({ setShowLogin }) => {
     }
   };
 
+   //Resize handler to close menu on large screens
+  useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth > 750 && menuOpen) {
+      setMenuOpen(false);
+    }
+  };
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, [menuOpen]);
+
   return (
     <div className='navbar'>
       <Link to='/'><img src={assets.logo} alt="logo" className="logo" /></Link>
@@ -38,7 +49,7 @@ export const Navbar = ({ setShowLogin }) => {
      {/* Navbar links: ensure semantic hover/focus accessibility */}
 <ul className="navbar-menu">
   <li>
-    <HashLink smooth to='/' onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</HashLink >
+    <HashLink smooth to='/#top' onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</HashLink >
   </li>
   <li>
     <HashLink smooth to='/#explore-menu' onClick={() => setMenu("Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</HashLink >
@@ -106,7 +117,7 @@ export const Navbar = ({ setShowLogin }) => {
       {menuOpen && (
         <ul className="mobile-menu">
           <li>
-            <HashLink smooth to='/' onClick={() => {setMenu("Home"); setMenuOpen(false)}} className={Menu === "Home" ? "active" : ""}>Home</HashLink >
+            <HashLink smooth to='/#top' onClick={() => {setMenu("Home"); setMenuOpen(false)}} className={Menu === "Home" ? "active" : ""}>Home</HashLink >
           </li>
           <li>
             <HashLink smooth to='/#explore-menu' onClick={() => {setMenu("Menu"); setMenuOpen(false)}} className={Menu === "Menu" ? "active" : ""}>Menu</HashLink >
