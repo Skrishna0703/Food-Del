@@ -1,3 +1,4 @@
+// frontend/src/Context/StoreContext.jsx
 import { createContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -11,23 +12,28 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const url = "https://tomato-backend-8sua.onrender.com";
 
-    // ✅ Load cart from localStorage (for guest users)
+  // ✅ Load cart from localStorage (guest users)
   useEffect(() => {
     const localCart = localStorage.getItem("cartItem");
     if (localCart && !token) {
       setCartItems(JSON.parse(localCart));
     }
-  }, [token]);
 
-  // ✅ Save cart to localStorage whenever it changes (only if not logged in)
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      console.log("Loaded token:", storedToken); // debug
+      setToken(storedToken);
+    }
+  }, []);
+
+  // ✅ Save cart to localStorage when not logged in
   useEffect(() => {
     if (!token) {
       localStorage.setItem("cartItem", JSON.stringify(cartItem));
     }
   }, [cartItem, token]);
 
-
-  // ✅ Add to Cart
+  // Add to Cart
   const addToCart = useCallback(
     async (itemId) => {
       if (!cartItem[itemId]) {
@@ -41,14 +47,12 @@ const StoreContextProvider = (props) => {
           const response = await axios.post(
             `${url}/api/carts/add`,
             { itemId },
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
+            { headers: { Authorization: `Bearer ${token}` } }
           );
-          toast.success(" Item added to cart");
+          toast.success("Item added to cart");
           console.log("Item added:", response.data);
         } else {
-          toast.warn(" Please login to add items to cart");
+          toast.warn("Please login to add items to cart");
         }
       } catch (err) {
         console.error("Error adding to cart:", err);
@@ -58,7 +62,7 @@ const StoreContextProvider = (props) => {
     [token, cartItem]
   );
 
-  // ❌ Remove from Cart
+  // Remove from Cart
   const removeFromCart = useCallback(
     async (itemId) => {
       const itemExists = cartItem[itemId];
@@ -78,23 +82,21 @@ const StoreContextProvider = (props) => {
           await axios.post(
             `${url}/api/carts/remove`,
             { itemId },
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
+            { headers: { Authorization: `Bearer ${token}` } }
           );
-          toast.info(" Item removed from cart");
+          toast.info("Item removed from cart");
         } else if (!token) {
-          toast.warn(" Please login to remove items");
+          toast.warn("Please login to remove items");
         }
       } catch (err) {
         console.error("Error removing from cart:", err);
-        toast.error(" Failed to remove item");
+        toast.error("❌ Failed to remove item");
       }
     },
     [token, cartItem]
   );
 
-  // 💰 Total Cart Amount
+  // Total Amount
   const getTotalCartAmount = () => {
     let total = 0;
     for (const id in cartItem) {
@@ -106,18 +108,18 @@ const StoreContextProvider = (props) => {
     return total;
   };
 
-  // 🧮 Total Cart Count
+  // Total Count
   const getTotalCartCount = () => {
     return Object.values(cartItem).reduce((a, b) => a + b, 0);
   };
 
-  // 🍽️ Fetch Food List
+  // Fetch Foods
   const fetchFoodList = async () => {
     try {
       const res = await axios.get(`${url}/api/foods/list`);
       if (Array.isArray(res.data.foods)) {
         setFoodList(res.data.foods);
-        toast.success(" WelCome To Tomato");
+        toast.success("Welcome to Tomato");
       } else {
         throw new Error("Invalid data format");
       }
@@ -128,23 +130,17 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  // 📦 Load Initial Data
+  // Load Data
   useEffect(() => {
     const loadData = async () => {
       await fetchFoodList();
 
-      const storedToken = localStorage.getItem("token");
-      if (storedToken) {
-        setToken(storedToken);
-        toast.info("🔐 Logged in");
-
+      if (token) {
         try {
           const res = await axios.post(
             `${url}/api/carts/get`,
             {},
-            {
-              headers: { Authorization: `Bearer ${storedToken}` },
-            }
+            { headers: { Authorization: `Bearer ${token}` } }
           );
 
           if (res.data.success) {
@@ -160,9 +156,9 @@ const StoreContextProvider = (props) => {
       }
     };
     loadData();
-  }, []);
+  }, [token]);
 
-  // 💾 Save token on update
+  // Save token when updated
   useEffect(() => {
     if (token) localStorage.setItem("token", token);
   }, [token]);
