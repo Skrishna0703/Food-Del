@@ -232,9 +232,7 @@
   text-align: center;
   z-index: 1;
 }
-.footer-content-left p{
-  text-align: left;
-}
+
 
 /* EPIC KEYFRAME ANIMATIONS */
 @keyframes footerFloat {
@@ -406,5 +404,138 @@
   
   .footer-social-icons img:hover {
     transform: translateY(-2px) scale(1.05);
+  }
+}
+
+/* Add these styles to your existing Footer.css */
+
+.footer-content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr; /* Added one more column for newsletter */
+  gap: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  padding: 20px;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-newsletter h2 {
+  color: white;
+  font-size: 18px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  cursor: default;
+}
+
+.footer-newsletter p {
+  font-size: 14px;
+  color: #d9d9d9;
+  margin-bottom: 10px;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.newsletter-form input {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  transition: all 0.4s ease;
+}
+
+.newsletter-form input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.newsletter-form input::placeholder {
+  color: #bbb;
+}
+
+.newsletter-form button {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff6b6b, #ff3838);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.newsletter-form button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff3838, #ff0000);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 56, 56, 0.4);
+}
+
+.newsletter-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.newsletter-message {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+/* Hover effects for newsletter section */
+.footer-newsletter:hover {
+  animation: sectionFloat 3s ease infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 950px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  .footer-newsletter {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-newsletter {
+    align-items: center;
+    width: 100%;
+  }
+  
+  .newsletter-form {
+    width: 100%;
+    max-width: 300px;
   }
 }
