@@ -46,7 +46,11 @@ const Footer = () => {
           <img src={assets.logo} alt="Tomato logo" />
           <p>
             Tomato is your one-stop destination for fast, fresh, and flavorful
+
             meals. We're committed to delivering your favorite dishes from
+
+            meals. We’re committed to delivering your favorite dishes from
+
             top-rated kitchens right to your doorstep—hot and on time!
           </p>
           <div className="footer-social-icons">
@@ -57,7 +61,18 @@ const Footer = () => {
             >
               <img src={assets.github_icon} alt="GitHub" />
             </a>
+
             <img src={assets.facebook_icon} alt="Facebook" />
+
+
+              <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={assets.facebook_icon} alt="Facebook" />
+            </a>
+
             <a
               href="https://x.com/SkrishnaSutar73"
               target="_blank"
@@ -65,6 +80,7 @@ const Footer = () => {
             >
               <img src={assets.twitter_icon} alt="Twitter" />
             </a>
+
             <a
               href="https://www.linkedin.com/in/shrikrishna-sutar-3b601524b/"
               target="_blank"
