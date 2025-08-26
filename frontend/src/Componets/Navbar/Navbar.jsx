@@ -5,18 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../Context/StoreContext';
 import ThemeToggle from '../ThemeToggle.jsx';
 import { FaBars, FaTimes } from "react-icons/fa";
+import AccountDropdown from '../AccountDropdown/AccountDropdown';
 
 export const Navbar = ({ setShowLogin }) => {
   const [Menu, setMenu] = useState("");
-  const { getTotalCartAmount, token, setToken, cartItem } = useContext(StoreContext);
+  const { getTotalCartAmount, token, cartItem } = useContext(StoreContext);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleLogout = () => {
-    setToken("");
-    localStorage.removeItem("token");
-    navigate("/");
-  };
 
   const totalCartItems = Object.values(cartItem || {}).reduce((sum, qty) => sum + qty, 0);
 
@@ -72,19 +67,11 @@ export const Navbar = ({ setShowLogin }) => {
           </div>
         </Link>
 
+        {/* Sign in button or AccountDropdown */}
         {!token ? (
           <button onClick={() => setShowLogin(true)}>Sign in</button>
         ) : (
-          <div className="navbar-profile">
-            <img src={assets.profile_icon} alt="profile" />
-            <ul className="nav-profile-dropdown">
-              <li><img src={assets.bag_icon} alt="orders" /><p>Orders</p></li>
-              <hr />
-              <li onClick={handleLogout}>
-                <img src={assets.logout_icon} alt="logout" /><p>LogOut</p>
-              </li>
-            </ul>
-          </div>
+          <AccountDropdown />
         )}
       </div>
 
