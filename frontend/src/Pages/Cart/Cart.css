@@ -73,33 +73,20 @@
 
 /* ✅ Responsive Design */
 @media (max-width: 768px) {
-    .cart-items-title {
-        display: none; /* Hide headings on small screens */
-    }
-
+     .cart-items-title,
     .cart-items-item {
-        grid-template-columns: 60px auto;
-        grid-template-rows: auto auto auto;
-        grid-row-gap: 8px;
-        align-items: center;
-        padding: 15px 10px;
-        border-bottom: 1px solid #eee;
+        grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr;
+        font-size: 10px;
+        gap: 10px;
     }
 
     .cart-items-item img {
-        grid-row: span 3;
-        width: 60px;
-    }
-
-    .cart-items-item div {
-        font-size: 14px;
+        width: 40px; 
     }
 
     .cart-items-item .cross {
-        justify-self: end;
-        font-size: 20px;
+        font-size: 16px;
     }
-
     .cart-bottom {
         flex-direction: column;
         align-items: flex-start;
