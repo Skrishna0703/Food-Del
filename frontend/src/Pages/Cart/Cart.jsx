@@ -32,13 +32,13 @@ const Cart = () => {
           return (
             <div className="cart-items-title cart-items-item" key={item._id}>
               <img src={`${url}/images/${item.image}`} alt={item.name} />
-
+             
               <p>{item.name}</p>
               <p>₹{item.price}</p>
               <p>{quantity}</p>
               <p>₹{item.price * quantity}</p>
               <p onClick={() => removeFromCart(item._id)} className="cross">X</p>
-            </div>
+              </div>
           );
         })}
 
