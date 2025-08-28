@@ -10,19 +10,35 @@ const StoreContextProvider = (props) => {
   const [cartItem, setCartItems] = useState({});
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState("");
+  const [viewHistory, setViewHistory] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const url = "https://tomato-backend-8sua.onrender.com";
 
-  // ✅ Load cart from localStorage (guest users)
+  // ✅ Load cart, view history, and favorites from localStorage
   useEffect(() => {
+    // Load cart
     const localCart = localStorage.getItem("cartItem");
     if (localCart && !token) {
       setCartItems(JSON.parse(localCart));
     }
 
+    // Load token
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       console.log("Loaded token:", storedToken); // debug
       setToken(storedToken);
+    }
+    
+    // Load view history
+    const storedViewHistory = localStorage.getItem("viewHistory");
+    if (storedViewHistory) {
+      setViewHistory(JSON.parse(storedViewHistory));
+    }
+    
+    // Load favorites
+    const storedFavorites = localStorage.getItem("favorites");
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
     }
   }, []);
 
@@ -32,6 +48,16 @@ const StoreContextProvider = (props) => {
       localStorage.setItem("cartItem", JSON.stringify(cartItem));
     }
   }, [cartItem, token]);
+  
+  // ✅ Save view history to localStorage
+  useEffect(() => {
+    localStorage.setItem("viewHistory", JSON.stringify(viewHistory));
+  }, [viewHistory]);
+  
+  // ✅ Save favorites to localStorage
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   // Add to Cart
   const addToCart = useCallback(
@@ -95,6 +121,33 @@ const StoreContextProvider = (props) => {
     },
     [token, cartItem]
   );
+
+  // Track viewed items
+  const trackViewedItem = useCallback((itemId) => {
+    setViewHistory(prev => {
+      // If item is already at the top of history, don't change anything
+      if (prev[0] === itemId) return prev;
+      
+      // Remove this item if it exists elsewhere in the history
+      const filteredHistory = prev.filter(id => id !== itemId);
+      
+      // Add to the beginning and limit to 10 items
+      return [itemId, ...filteredHistory].slice(0, 10);
+    });
+  }, []);
+  
+  // Toggle favorite status
+  const toggleFavorite = useCallback((itemId) => {
+    setFavorites(prev => {
+      if (prev.includes(itemId)) {
+        // Remove from favorites
+        return prev.filter(id => id !== itemId);
+      } else {
+        // Add to favorites
+        return [...prev, itemId];
+      }
+    });
+  }, []);
 
   // Total Amount
   const getTotalCartAmount = () => {
@@ -175,6 +228,10 @@ const StoreContextProvider = (props) => {
     token,
     setToken,
     fetchFoodList,
+    viewHistory,
+    trackViewedItem,
+    favorites,
+    toggleFavorite,
   };
 
   return (

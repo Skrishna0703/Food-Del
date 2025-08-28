@@ -1,0 +1,103 @@
+.food-recommendations {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.recommendations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.recommendations-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  position: relative;
+  display: inline-block;
+}
+
+.recommendations-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  border-radius: 2px;
+}
+
+.refresh-button {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255, 126, 95, 0.3);
+  transition: all 0.3s ease;
+}
+
+.refresh-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 126, 95, 0.4);
+}
+
+.refresh-button svg {
+  font-size: 20px;
+}
+
+.recommendations-container {
+  width: 100%;
+  min-height: 300px;
+}
+
+.recommendations-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 1024px) {
+  .recommendations-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .recommendations-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .recommendations-header h2 {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .recommendations-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .recommendations-header h2 {
+    font-size: 20px;
+  }
+  
+  .refresh-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .refresh-button svg {
+    font-size: 18px;
+  }
+}
