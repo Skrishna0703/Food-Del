@@ -394,3 +394,14 @@ html.dark .navbar-menu.open {
     display: none !important;
   }
 }
+.logo {
+  transition: all 0.3s ease-in-out;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0)); 
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)); 
+}
+
