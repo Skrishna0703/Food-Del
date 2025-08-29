@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './FoodItem.css';
 import { assets } from '../../assets/assets';
 import { StoreContext } from '../../Context/StoreContext';
@@ -8,6 +8,24 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
 
   // ✅ New state for Read More / Read Less
   const [expanded, setExpanded] = useState(false);
+
+  // Track viewed items for recommendations
+  useEffect(() => {
+    // Get current view history from localStorage
+    const viewHistory = JSON.parse(localStorage.getItem('viewHistory')) || [];
+    
+    // Add current item to history if not already at the top
+    if (viewHistory[0] !== id) {
+      // Remove this item if it exists elsewhere in the history
+      const filteredHistory = viewHistory.filter(itemId => itemId !== id);
+      
+      // Add to the beginning and limit to 10 items
+      const updatedHistory = [id, ...filteredHistory].slice(0, 10);
+      
+      // Save back to localStorage
+      localStorage.setItem('viewHistory', JSON.stringify(updatedHistory));
+    }
+  }, [id]);
 
   return (
     <div className='food-item'>
@@ -24,7 +42,10 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
         />
         <button
           className={`favorite-btn ${isFavorite ? 'active' : ''}`}
-          onClick={() => toggleFavorite(id)}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            toggleFavorite(id);
+          }}
         >
           {isFavorite ? '★' : '☆'}
         </button>
@@ -32,7 +53,10 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
         {/* ✅ Add / Remove buttons */}
         {!cartItem[id] ? (
           <img 
-            onClick={() => addToCart(id)} 
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent event bubbling
+              addToCart(id);
+            }} 
             src={assets.add_icon_white} 
             alt="add" 
             className="add" 
@@ -40,13 +64,19 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
         ) : (
           <div className="food-item-count">
             <img 
-              onClick={() => removeFromCart(id)} 
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                removeFromCart(id);
+              }} 
               src={assets.remove_icon_red} 
               alt="remove" 
             />
             <p>{cartItem[id]}</p>
             <img 
-              onClick={() => addToCart(id)} 
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                addToCart(id);
+              }} 
               src={assets.add_icon_green} 
               alt="add" 
             />
@@ -65,7 +95,10 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
           {expanded ? description : `${description.substring(0, 60)}...`}
           {description.length > 60 && (
             <button 
-              onClick={() => setExpanded(!expanded)} 
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                setExpanded(!expanded);
+              }} 
               className="read-more-btn"
             >
               {expanded ? ' Read Less' : ' Read More'}
