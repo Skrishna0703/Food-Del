@@ -3,9 +3,7 @@
     width: 100%;
     margin: auto;
     border-radius: 15px;
-    background-color: #fff;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     animation: fadeIn 0.8s ease-in-out;
@@ -88,7 +86,7 @@
     gap: 10px;
     padding: 6px 12px;
     border-radius: 50px;
-    background-color: white;
+    background-color: rgb(189, 55, 55);
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
@@ -143,7 +141,7 @@
 
 /* ✅ Read More button */
 .read-more-btn {
-    color: #2563eb; /* Tailwind blue-600 */
+    /*color: #2563eb;  Tailwind blue-600 */
     font-size: 12px;
     margin-left: 4px;
     cursor: pointer;
@@ -215,4 +213,25 @@
         gap: 8px;
         padding: 4px 8px;
     }
+}
+
+/* Theme-based background */
+html.light .food-item {
+  background-color: #fff;  
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  color: #000;
+}
+
+/* dark mode */
+html.dark .food-item {
+  background-color: #1e1e1e;  
+ box-shadow: 0 4px 12px rgba(82, 81, 81, 0.904);
+  color: #fff;
+}
+
+html.dark .read-more-btn {
+    color:white;
+}
+html.dark .food-title{
+    color:white;
 }
