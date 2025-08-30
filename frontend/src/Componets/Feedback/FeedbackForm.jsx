@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Feedback() {
   const [rating, setRating] = useState(0);
-  const [preview, setPreview] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = async (event) => {
@@ -16,6 +15,7 @@ export default function Feedback() {
     const formData = new FormData(event.target);
     formData.append("access_key", "ab531b62-ec52-4408-bd63-63db23fee063");
     formData.append("rating", rating);
+    formData.append("avatar", formData.get("avatar")); // add avatar selection
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -27,7 +27,6 @@ export default function Feedback() {
         toast.success("✅ Feedback Submitted Successfully!");
         event.target.reset();
         setRating(0);
-        setPreview(null);
       } else {
         toast.error(data.message || "❌ Something went wrong.");
       }
@@ -36,31 +35,6 @@ export default function Feedback() {
       console.error(error);
     } finally {
       setSubmitting(false);
-    }
-  };
-
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const isImage = file.type.startsWith("image/");
-      const isSizeValid = file.size <= 5 * 1024 * 1024; // 5MB
-      if (!isImage) {
-        toast.error("❌ Only images are allowed.");
-        e.target.value = null;
-        setPreview(null);
-        return;
-      }
-      if (!isSizeValid) {
-        toast.error("❌ Image must be <= 5MB.");
-        e.target.value = null;
-        setPreview(null);
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result);
-      reader.readAsDataURL(file);
-    } else {
-      setPreview(null);
     }
   };
 
@@ -119,20 +93,13 @@ export default function Feedback() {
           </div>
         </div>
         <div className="feedback-form-group">
-          <label htmlFor="photo">Upload Photo (optional):</label>
-          <input
-            id="photo"
-            name="photo"
-            type="file"
-            accept="image/*"
-            onChange={handlePhotoChange}
-          />
+          <label htmlFor="avatar">Choose Avatar:</label>
+          <select id="avatar" name="avatar" required>
+            <option value="male">👨 Male</option>
+            <option value="female">👩 Female</option>
+            <option value="neutral">👤 Neutral</option>
+          </select>
         </div>
-        {preview && (
-          <div className="photo-preview">
-            <img alt="Photo preview" src={preview} />
-          </div>
-        )}
         <button type="submit" className="feedback-button" disabled={submitting}>
           {submitting ? "Submitting..." : "Submit Feedback"}
         </button>
@@ -141,4 +108,3 @@ export default function Feedback() {
     </div>
   );
 }
-
