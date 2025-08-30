@@ -31,7 +31,7 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
 
   return (
     <div className={`food-item`}>
-      <div className={`food-item-img-container ${theme === "dark" ? "dark" : "light"}`} >
+      <div className={`food-item-img-container`} >
         {/* ✅ Correct image path */}
         <img 
           className='food-item-image' 
@@ -88,7 +88,7 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
 
       <div className="food-item-info">
         <div className="food-item-name-rating">
-          <p className='food-title'>{name}</p>
+          <p className="food-title"><p>{name}</p></p>
           <img src={assets.rating_starts} alt="rating" />
         </div>
 
