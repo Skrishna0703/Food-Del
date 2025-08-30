@@ -1,112 +1,152 @@
-import React, { useState, useContext } from 'react';
-import './LoginPopup.css';
-import { assets } from '../../assets/assets';
-import { StoreContext } from '../../Context/StoreContext';
-import axios from 'axios';
-import { toast } from 'react-toastify'; // ✅ only toast
+import React, { useState, useContext } from "react";
+import "./LoginPopup.css";
+import { assets } from "../../assets/assets";
+import { StoreContext } from "../../Context/StoreContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const LoginPopup = ({ setShowLogin }) => {
-  const { url, setToken } = useContext(StoreContext);
-  const [current, setCurrentState] = useState("Login");
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
+	const { url, setToken } = useContext(StoreContext);
+	const [current, setCurrentState] = useState("Login");
+	const [data, setData] = useState({
+		name: "",
+		email: "",
+		password: "",
+	});
 
-  const onChangeHandler = (event) => {
-    const { name, value } = event.target;
-    setData(prevData => ({ ...prevData, [name]: value }));
-  };
+	const onChangeHandler = (event) => {
+		const { name, value } = event.target;
+		setData((prevData) => ({ ...prevData, [name]: value }));
+	};
 
-  const onLogin = async (event) => {
-    event.preventDefault();
+	// ✅ password rules
+	const rules = {
+		length: data.password.length >= 8,
+		lowercase: /[a-z]/.test(data.password),
+		uppercase: /[A-Z]/.test(data.password),
+		number: /\d/.test(data.password),
+		specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(data.password),
+	};
 
-    let newUrl = current === "Login"
-      ? `${url}/api/users/login`
-      : `${url}/api/users/register`;
+	const onLogin = async (event) => {
+		event.preventDefault();
 
-    const payload = current === "Login"
-      ? { email: data.email, password: data.password }
-      : { name: data.name, email: data.email, password: data.password };
+		let newUrl =
+			current === "Login"
+				? `${url}/api/users/login`
+				: `${url}/api/users/register`;
 
-    try {
-      const response = await axios.post(newUrl, payload);
+		const payload =
+			current === "Login"
+				? { email: data.email, password: data.password }
+				: { name: data.name, email: data.email, password: data.password };
 
-      if (response.data.success) {
-        setToken(response.data.token);
-        localStorage.setItem("token", response.data.token);
-        toast.success(`${current} successful!`);
-        setShowLogin(false);
-      } else {
-        toast.error("Something went wrong");
-      }
-    } catch (err) {
-      console.error("❌ Login/Register failed:", err);
-      toast.error(err.response?.data?.message || "Server error");
-    }
-  };
+		try {
+			const response = await axios.post(newUrl, payload);
 
-  return (
-    <div className='login-popup'>
-      <form onSubmit={onLogin} className="login-popup-container">
-        <div className="login-popup-title">
-          <h2>{current}</h2>
-          <img
-            onClick={() => setShowLogin(false)}
-            src={assets.cross_icon}
-            alt="Close"
-          />
-        </div>
+			if (response.data.success) {
+				setToken(response.data.token);
+				localStorage.setItem("token", response.data.token);
+				toast.success(`${current} successful!`);
+				setShowLogin(false);
+			} else {
+				toast.error("Something went wrong");
+			}
+		} catch (err) {
+			console.error("❌ Login/Register failed:", err);
+			toast.error(err.response?.data?.message || "Server error");
+		}
+	};
 
-        <div className="login-popup-inputs">
-          {current === "Sign Up" && (
-            <input
-              type="text"
-              name="name"
-              value={data.name}
-              onChange={onChangeHandler}
-              placeholder="Enter your name"
-              required
-            />
-          )}
-          <input
-            type="email"
-            name="email"
-            value={data.email}
-            onChange={onChangeHandler}
-            placeholder="Enter your email"
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            value={data.password}
-            onChange={onChangeHandler}
-            placeholder="Enter your password"
-            required
-          />
-        </div>
+	return (
+		<div className="login-popup">
+			<form onSubmit={onLogin} className="login-popup-container">
+				<div className="login-popup-title">
+					<h2>{current}</h2>
+					<img
+						onClick={() => setShowLogin(false)}
+						src={assets.cross_icon}
+						alt="Close"
+					/>
+				</div>
 
-        <button type="submit">
-          {current === "Sign Up" ? "Create Account" : "Login"}
-        </button>
+				<div className="login-popup-inputs">
+					{current === "Sign Up" && (
+						<input
+							type="text"
+							name="name"
+							value={data.name}
+							onChange={onChangeHandler}
+							placeholder="Enter your name"
+							required
+						/>
+					)}
+					<input
+						type="email"
+						name="email"
+						value={data.email}
+						onChange={onChangeHandler}
+						placeholder="Enter your email"
+						required
+					/>
+					<input
+						type="password"
+						name="password"
+						value={data.password}
+						onChange={onChangeHandler}
+						placeholder="Enter your password"
+						required
+					/>
 
-        <div className="login-popup-condition">
-          <input type="checkbox" required />
-          <p>I agree to the Terms & Conditions and Privacy Policy</p>
-        </div>
+					{/* ✅ Password Checklist (only for Sign Up) */}
+					{current === "Sign Up" && data.password.length > 0 && (
+						<ul className="password-checklist">
+							<li className={rules.uppercase ? "valid" : "invalid"}>
+								• Contains uppercase
+							</li>
+							<li className={rules.lowercase ? "valid" : "invalid"}>
+								• Contains lowercase
+							</li>
+							<li className={rules.number ? "valid" : "invalid"}>
+								• Contains number
+							</li>
+							<li className={rules.specialChar ? "valid" : "invalid"}>
+								• Contains special character
+							</li>
+							<li className={rules.length ? "valid" : "invalid"}>
+								• Minimum 8 characters
+							</li>
+						</ul>
+					)}
+				</div>
 
-        <p>
-          {current === "Login" ? (
-            <>Create New Account? <span onClick={() => setCurrentState("Sign Up")}>Click here</span></>
-          ) : (
-            <>Already have an account? <span onClick={() => setCurrentState("Login")}>Click here</span></>
-          )}
-        </p>
-      </form>
-    </div>
-  );
+				<button type="submit">
+					{current === "Sign Up" ? "Create Account" : "Login"}
+				</button>
+
+				{current === "Sign Up" && (
+					<div className="login-popup-condition">
+						<input type="checkbox" required />
+						<p>I agree to the Terms & Conditions and Privacy Policy</p>
+					</div>
+				)}
+
+				<p>
+					{current === "Login" ? (
+						<>
+							Create New Account?{" "}
+							<span onClick={() => setCurrentState("Sign Up")}>Click here</span>
+						</>
+					) : (
+						<>
+							Already have an account?{" "}
+							<span onClick={() => setCurrentState("Login")}>Click here</span>
+						</>
+					)}
+				</p>
+			</form>
+		</div>
+	);
 };
 
 export default LoginPopup;
