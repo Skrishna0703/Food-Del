@@ -76,11 +76,6 @@ const App = () => {
         </Routes>
         <CartSummaryBar />
         <ToastContainer position="top-right" autoClose={3000} />
-
-        {/* ✅ Scroll Arrow Button */}
-        <button onClick={handleArrowClick} style={arrowStyle}>
-          {atFooter ? '↑' : '↓'}
-        </button>
       </div >
 
       {/* ✅ Footer with ref */}
