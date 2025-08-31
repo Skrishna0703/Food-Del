@@ -18,7 +18,7 @@ const LoginPopup = ({ setShowLogin }) => {
 		const { name, value } = event.target;
 		setData((prevData) => ({ ...prevData, [name]: value }));
 	};
-
+	const [showChecklist, setShowChecklist] = useState(false);
 	// ✅ password rules
 	const rules = {
 		length: data.password.length >= 8,
@@ -47,7 +47,7 @@ const LoginPopup = ({ setShowLogin }) => {
 			if (response.data.success) {
 				setToken(response.data.token);
 				localStorage.setItem("token", response.data.token);
-				toast.success(`${current} successful!`);
+				toast.success("Account created successfully!");
 				setShowLogin(false);
 			} else {
 				toast.error("Something went wrong");
@@ -93,31 +93,37 @@ const LoginPopup = ({ setShowLogin }) => {
 						type="password"
 						name="password"
 						value={data.password}
-						onChange={onChangeHandler}
+						onChange={(e) => {
+							onChangeHandler(e);
+							setShowChecklist(true); // show while typing
+						}}
+						onBlur={() => setShowChecklist(false)} // hide when finished
 						placeholder="Enter your password"
 						required
 					/>
 
 					{/* ✅ Password Checklist (only for Sign Up) */}
-					{current === "Sign Up" && data.password.length > 0 && (
-						<ul className="password-checklist">
-							<li className={rules.uppercase ? "valid" : "invalid"}>
-								• Contains uppercase
-							</li>
-							<li className={rules.lowercase ? "valid" : "invalid"}>
-								• Contains lowercase
-							</li>
-							<li className={rules.number ? "valid" : "invalid"}>
-								• Contains number
-							</li>
-							<li className={rules.specialChar ? "valid" : "invalid"}>
-								• Contains special character
-							</li>
-							<li className={rules.length ? "valid" : "invalid"}>
-								• Minimum 8 characters
-							</li>
-						</ul>
-					)}
+					{current === "Sign Up" &&
+						showChecklist &&
+						data.password.length > 0 && (
+							<ul className="password-checklist">
+								<li className={rules.uppercase ? "valid" : "invalid"}>
+									• Contains uppercase
+								</li>
+								<li className={rules.lowercase ? "valid" : "invalid"}>
+									• Contains lowercase
+								</li>
+								<li className={rules.number ? "valid" : "invalid"}>
+									• Contains number
+								</li>
+								<li className={rules.specialChar ? "valid" : "invalid"}>
+									• Contains special character
+								</li>
+								<li className={rules.length ? "valid" : "invalid"}>
+									• Minimum 8 characters
+								</li>
+							</ul>
+						)}
 				</div>
 
 				<button type="submit">
