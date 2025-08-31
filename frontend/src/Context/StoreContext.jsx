@@ -12,7 +12,11 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [viewHistory, setViewHistory] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const url = "https://tomato-backend-8sua.onrender.com";
+
+ const url = import.meta.env.MODE === "development"
+  ? import.meta.env.VITE_API_URL
+  : import.meta.env.VITE_API_URL_PROD;
+
 
   // ✅ Load cart, view history, and favorites from localStorage
   useEffect(() => {
