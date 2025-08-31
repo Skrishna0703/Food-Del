@@ -4,6 +4,8 @@ import { assets } from '../../assets/assets';
 import { StoreContext } from '../../Context/StoreContext';
 
 const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavorite }) => {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
   const { cartItem, addToCart, removeFromCart, url } = useContext(StoreContext);
 
   // ✅ New state for Read More / Read Less
@@ -28,8 +30,8 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
   }, [id]);
 
   return (
-    <div className='food-item'>
-      <div className="food-item-img-container">
+    <div className={`food-item`}>
+      <div className={`food-item-img-container`} >
         {/* ✅ Correct image path */}
         <img 
           className='food-item-image' 
@@ -86,7 +88,7 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
 
       <div className="food-item-info">
         <div className="food-item-name-rating">
-          <p>{name}</p>
+          <p className="food-title"><p>{name}</p></p>
           <img src={assets.rating_starts} alt="rating" />
         </div>
 
@@ -99,14 +101,14 @@ const FoodItem = ({ id, name, price, description, image, isFavorite, toggleFavor
                 e.stopPropagation(); // Prevent event bubbling
                 setExpanded(!expanded);
               }} 
-              className="read-more-btn"
+              className={`read-more-btn`}
             >
               {expanded ? ' Read Less' : ' Read More'}
             </button>
           )}
         </p>
 
-        <p className="food-item-price">₹{price}</p>
+        <p className={`food-item-price`}>₹{price}</p>
       </div>
     </div>
   );
