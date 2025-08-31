@@ -2,7 +2,8 @@ import userModel from '../models/userModel.js';
 
 const addToCart = async (req, res) => {
   try {
-    const { userId, itemId } = req.body;
+    const userId=req.userId;
+    const { itemId } = req.body;
 
     // Check if user exists
     const userData = await userModel.findById(userId);
@@ -27,7 +28,7 @@ const addToCart = async (req, res) => {
 
 const getCart = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const userId=req.userId;
 
     // Check if user exists
     const userData = await userModel.findById(userId);
@@ -46,7 +47,8 @@ const getCart = async (req, res) => {
 
 const removeFromCart = async (req, res) => {
   try {
-    const { userId, itemId } = req.body;
+    const userId=req.userId;
+    const { itemId } = req.body;
 
     // Check if user exists
     const userData = await userModel.findById(userId);
