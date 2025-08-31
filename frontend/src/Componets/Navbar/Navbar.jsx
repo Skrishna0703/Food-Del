@@ -6,11 +6,10 @@ import { StoreContext } from '../../Context/StoreContext';
 import ThemeToggle from '../ThemeToggle.jsx';
 import { FaBars, FaTimes } from "react-icons/fa";
 import AccountDropdown from '../AccountDropdown/AccountDropdown';
-import { HashLink } from 'react-router-hash-link';
 
 export const Navbar = ({ setShowLogin }) => {
   const [Menu, setMenu] = useState("");
-  const { getTotalCartAmount, token, cartItem } = useContext(StoreContext);
+  const { cartItem, token } = useContext(StoreContext);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -34,21 +33,36 @@ export const Navbar = ({ setShowLogin }) => {
           <Link to="/" onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</Link>
         </li>
         <li>
-          <HashLink smooth to="/#explore-menu" onClick={() => handleScroll("explore-menu", "Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</HashLink>
+          <a
+            href="#explore-menu"
+            onClick={(e) => { e.preventDefault(); handleScroll("explore-menu", "Menu"); }}
+            className={Menu === "Menu" ? "active" : ""}
+          >
+            Menu
+          </a>
         </li>
         <li>
-          <HashLink smooth to="/#app-download" onClick={() => handleScroll("app-download", "Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</HashLink>
+          <a
+            href="#app-download"
+            onClick={(e) => { e.preventDefault(); handleScroll("app-download", "Mobile-App"); }}
+            className={Menu === "Mobile-App" ? "active" : ""}
+          >
+            Mobile-App
+          </a>
         </li>
         <li>
-          <HashLink smooth to="/#customer-reviews" onClick={() => handleScroll("customer-reviews", "Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</HashLink>
+          <a
+            href="#customer-reviews"
+            onClick={(e) => { e.preventDefault(); handleScroll("customer-reviews", "Reviews"); }}
+            className={Menu === "Reviews" ? "active" : ""}
+          >
+            Reviews
+          </a>
         </li>
         <li>
           <a
             href="#footer"
-            onClick={(e) => {
-              e.preventDefault();
-              handleScroll("footer", "Contact");
-            }}
+            onClick={(e) => { e.preventDefault(); handleScroll("footer", "Contact"); }}
             className={Menu === "Contact" ? "active" : ""}
           >
             Contact
