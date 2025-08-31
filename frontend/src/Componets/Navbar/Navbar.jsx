@@ -6,6 +6,7 @@ import { StoreContext } from '../../Context/StoreContext';
 import ThemeToggle from '../ThemeToggle.jsx';
 import { FaBars, FaTimes } from "react-icons/fa";
 import AccountDropdown from '../AccountDropdown/AccountDropdown';
+import { HashLink } from 'react-router-hash-link';
 
 export const Navbar = ({ setShowLogin }) => {
   const [Menu, setMenu] = useState("");
@@ -33,13 +34,13 @@ export const Navbar = ({ setShowLogin }) => {
           <Link to="/" onClick={() => setMenu("Home")} className={Menu === "Home" ? "active" : ""}>Home</Link>
         </li>
         <li>
-          <Link to="/#explore-menu" onClick={() => handleScroll("explore-menu", "Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</Link>
+          <HashLink smooth to="/#explore-menu" onClick={() => handleScroll("explore-menu", "Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</HashLink>
         </li>
         <li>
-          <Link to="/#app-download" onClick={() => handleScroll("app-download", "Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</Link>
+          <HashLink smooth to="/#app-download" onClick={() => handleScroll("app-download", "Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</HashLink>
         </li>
         <li>
-          <Link to="/#customer-reviews" onClick={() => handleScroll("customer-reviews", "Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</Link>
+          <HashLink smooth to="/#customer-reviews" onClick={() => handleScroll("customer-reviews", "Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</HashLink>
         </li>
         <li>
           <a
