@@ -62,7 +62,7 @@ const Footer = () => {
               <img src={assets.github_icon} alt="GitHub" />
             </a>
 
-            <img src={assets.facebook_icon} alt="Facebook" />
+          
 
 
               <a
