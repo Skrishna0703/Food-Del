@@ -3,7 +3,9 @@ import './LoginPopup.css';
 import { assets } from '../../assets/assets';
 import { StoreContext } from '../../Context/StoreContext';
 import axios from 'axios';
-import { toast } from 'react-toastify'; // ✅ only toast
+import { toast } from 'react-toastify';
+import { motion } from "framer-motion";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPopup = ({ setShowLogin }) => {
   const { url, setToken } = useContext(StoreContext);
@@ -22,13 +24,15 @@ const LoginPopup = ({ setShowLogin }) => {
   const onLogin = async (event) => {
     event.preventDefault();
 
-    let newUrl = current === "Login"
-      ? `${url}/api/users/login`
-      : `${url}/api/users/register`;
+    let newUrl =
+      current === "Login"
+        ? `${url}/api/users/login`
+        : `${url}/api/users/register`;
 
-    const payload = current === "Login"
-      ? { email: data.email, password: data.password }
-      : { name: data.name, email: data.email, password: data.password };
+    const payload =
+      current === "Login"
+        ? { email: data.email, password: data.password }
+        : { name: data.name, email: data.email, password: data.password };
 
     try {
       const response = await axios.post(newUrl, payload);
@@ -45,6 +49,11 @@ const LoginPopup = ({ setShowLogin }) => {
       console.error("❌ Login/Register failed:", err);
       toast.error(err.response?.data?.message || "Server error");
     }
+  };
+
+  // ✅ fixed template literal
+  const googleLogin = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
   };
 
   return (
@@ -88,9 +97,22 @@ const LoginPopup = ({ setShowLogin }) => {
           />
         </div>
 
+        {/* Normal login button */}
         <button type="submit">
           {current === "Sign Up" ? "Create Account" : "Login"}
         </button>
+
+        {/* ✅ Google login button placed right below */}
+        <motion.button
+          type="button"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={googleLogin}
+          className="google-login-btn"
+        >
+          <FcGoogle size={22} />
+          <span>Continue with Google</span>
+        </motion.button>
 
         <div className="login-popup-condition">
           <input type="checkbox" required />
