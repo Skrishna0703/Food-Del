@@ -51,6 +51,8 @@ app.use("/api/carts", cartRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/newsletter", newsletterRoutes);
 
+app.use("/auth", userRouter);
+
 // Start server
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`✅ Server running on port ${PORT}`);

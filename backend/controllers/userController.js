@@ -3,6 +3,10 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import validator from "validator"; // fixed typo
 import dotenv from "dotenv";
+import axios from "axios";
+import crypto from "crypto";
+
+dotenv.config();
 
 // Create token
 const createToken = (id) => {
@@ -78,4 +82,84 @@ const registerUser = async (req, res) => {
     }
 };
 
-export default { loginuser, registerUser };
+// ---------------- OAuth Controllers ----------------
+
+// Google OAuth Redirect
+const googleAuth = (req, res) => {
+  const redirectUri = `${process.env.BASE_URL}/auth/google/callback`;
+const url = `https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email&redirect_uri=${redirectUri}&response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&access_type=offline&prompt=consent`;
+  res.redirect(url);
+};
+
+// Google OAuth Callback
+const googleAuthCallback = async (req, res) => {
+  try {
+    const { code } = req.query;
+
+    // Exchange code for tokens
+    const { data } = await axios.post("https://oauth2.googleapis.com/token", null, {
+      params: {
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        code,
+        grant_type: "authorization_code",
+        redirect_uri: `${process.env.BASE_URL}/auth/google/callback`,
+      },
+    });
+
+    const { access_token } = data;
+
+    // Get user info from Google
+    const { data: googleUser } = await axios.get(
+      "https://www.googleapis.com/oauth2/v2/userinfo",
+      {
+        headers: { Authorization: `Bearer ${access_token}` },
+      }
+    );
+
+    // Find or create user
+    let user = await userModel.findOne({ email: googleUser.email });
+    if (!user) {
+      user = new userModel({
+        name: googleUser.name,
+        email: googleUser.email,
+        password: crypto.randomBytes(16).toString("hex"),
+        photoURL: googleUser.picture,
+      });
+      await user.save();
+    }
+
+    const token = createToken(user._id);
+
+    // ✅ Redirect with token only
+    res.redirect(`${process.env.CLIENT_URL}/?token=${token}`);
+  } catch (err) {
+    console.error("Google Auth Error:", err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Get logged-in user profile
+const getMe = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.error("GetMe Error:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+
+// Export all controllers
+export default {
+  loginuser,
+  registerUser,
+  googleAuth,
+  googleAuthCallback,
+  getMe
+};
