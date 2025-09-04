@@ -93,15 +93,15 @@
 }
 
 .dark .testimonial-card p {
-  color: black !important;
+  color: var(--text-color) !important;
 }
 
 .dark .testimonial-card h3 {
-  color: black !important;
+  color: var(--text-color) !important;
 }
 
 .dark .testimonial-card .role {
-  color: black !important;
+  color: var(--muted-color) !important;
 }
 
 .dark .testimonial-card .stars span {
