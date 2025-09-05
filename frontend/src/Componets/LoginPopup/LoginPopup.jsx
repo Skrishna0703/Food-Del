@@ -1,9 +1,19 @@
+ feature-googleAuth
+import React, { useState, useContext } from 'react';
+import './LoginPopup.css';
+import { assets } from '../../assets/assets';
+import { StoreContext } from '../../Context/StoreContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { motion } from "framer-motion";
+import { FcGoogle } from "react-icons/fc";
 import React, { useState, useContext } from "react";
 import "./LoginPopup.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../Context/StoreContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+ main
 
 const LoginPopup = ({ setShowLogin }) => {
 	const { url, setToken } = useContext(StoreContext);
@@ -31,6 +41,17 @@ const LoginPopup = ({ setShowLogin }) => {
 	const onLogin = async (event) => {
 		event.preventDefault();
 
+ feature-googleAuth
+    let newUrl =
+      current === "Login"
+        ? `${url}/api/users/login`
+        : `${url}/api/users/register`;
+
+    const payload =
+      current === "Login"
+        ? { email: data.email, password: data.password }
+        : { name: data.name, email: data.email, password: data.password };
+
 		let newUrl =
 			current === "Login"
 				? `${url}/api/users/login`
@@ -40,6 +61,7 @@ const LoginPopup = ({ setShowLogin }) => {
 			current === "Login"
 				? { email: data.email, password: data.password }
 				: { name: data.name, email: data.email, password: data.password };
+ main
 
 		try {
 			const response = await axios.post(newUrl, payload);
@@ -58,6 +80,24 @@ const LoginPopup = ({ setShowLogin }) => {
 		}
 	};
 
+ feature-googleAuth
+  // ✅ fixed template literal
+  const googleLogin = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
+  };
+
+  return (
+    <div className='login-popup'>
+      <form onSubmit={onLogin} className="login-popup-container">
+        <div className="login-popup-title">
+          <h2>{current}</h2>
+          <img
+            onClick={() => setShowLogin(false)}
+            src={assets.cross_icon}
+            alt="Close"
+          />
+        </div>
+
 	return (
 		<div className="login-popup">
 			<form onSubmit={onLogin} className="login-popup-container">
@@ -69,6 +109,7 @@ const LoginPopup = ({ setShowLogin }) => {
 						alt="Close"
 					/>
 				</div>
+ main
 
 				<div className="login-popup-inputs">
 					{current === "Sign Up" && (
@@ -102,6 +143,29 @@ const LoginPopup = ({ setShowLogin }) => {
 						required
 					/>
 
+ feature-googleAuth
+        {/* Normal login button */}
+        <button type="submit">
+          {current === "Sign Up" ? "Create Account" : "Login"}
+        </button>
+
+        {/* ✅ Google login button placed right below */}
+        <motion.button
+          type="button"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={googleLogin}
+          className="google-login-btn"
+        >
+          <FcGoogle size={22} />
+          <span>Continue with Google</span>
+        </motion.button>
+
+        <div className="login-popup-condition">
+          <input type="checkbox" required />
+          <p>I agree to the Terms & Conditions and Privacy Policy</p>
+        </div>
+
 					{/* ✅ Password Checklist (only for Sign Up) */}
 					{current === "Sign Up" &&
 						showChecklist &&
@@ -129,6 +193,7 @@ const LoginPopup = ({ setShowLogin }) => {
 				<button type="submit">
 					{current === "Sign Up" ? "Create Account" : "Login"}
 				</button>
+ main
 
 				{current === "Sign Up" && (
 					<div className="login-popup-condition">
