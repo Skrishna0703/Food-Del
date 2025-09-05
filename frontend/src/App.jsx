@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,useEffect } from 'react';
 import Navbar from './Componets/Navbar/Navbar';
 import Footer from './Componets/Footer/Footer';
 import LoginPopup from './Componets/LoginPopup/LoginPopup';
@@ -50,6 +50,37 @@ const App = () => {
       setAtFooter(true);
     }
   };
+
+  useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+
+  if (token) {
+    localStorage.setItem("token", token);
+
+    // Clean the URL
+    window.history.replaceState({}, document.title, "/");
+
+    // Fetch user info
+    fetchUser(token);
+  }
+}, []);
+
+const fetchUser = async (token) => {
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    if (data.success) {
+      localStorage.setItem("user", JSON.stringify(data.user));
+    }
+  } catch (err) {
+    console.error("Failed to fetch user:", err);
+  }
+};
 
   return (
     <>
