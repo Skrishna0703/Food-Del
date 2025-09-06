@@ -73,19 +73,19 @@ const CustomerReviews = () => {
         }}
       >
         {reviews.map((review, index) => (
-          <SwiperSlide key={index}>
-            <div className="testimonial-card">
+          <SwiperSlide key={index} style={{width: '320px'}}>
+            <div className="review-card">
               <span className="quote-icon">❝</span>
 
               <img src={review.gender === "male" ? maleAvatar : femaleAvatar} alt={review.name} className="review-img" />
-              <p>{review.comment}</p>
-              <div className="stars">
+              <p className='review-comment'>{review.comment}</p>
+              <div className="review-rating">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <span key={i}>{i < review.rating ? "★" : "☆"}</span>
                 ))}
               </div>
               <h3>{review.name}</h3>
-              <p className="role">{review.role}</p>
+              <p className="review-role">{review.role}</p>
             </div>
           </SwiperSlide>
         ))}

@@ -1,6 +1,6 @@
-/* CustomerReviews.css */
+/* CustomerReviews.css*/
 
-.reviews-section {
+ .reviews-section {
   padding: 60px 20px;
   background-color: #f9f9f9;
   text-align: center;
@@ -23,17 +23,27 @@
   background: white;
   border-radius: 16px;
   padding: 20px;
-  width: 280px;
+  width: 100%;
+  max-width: 300px;
+  min-width: 300px; 
+  height: 420px;
+  box-sizing: border-box; 
+  margin: 0 auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .review-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.review-avatar {
+.review-avatar,
+.review-img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -43,8 +53,15 @@
 
 .review-card h3 {
   font-size: 1.2rem;
-  margin: 0;
+  margin: 10px 0 5px;
   color: #222;
+}
+
+.review-role,
+.role { /* support both class names */
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
 }
 
 .review-comment {
@@ -53,11 +70,15 @@
   margin: 10px 0;
   font-style: italic;
   line-height: 1.4;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
-.review-rating {
+.review-rating,
+.stars {
   font-size: 1.2rem;
-  color: #ffc107; /* Gold star color */
+  color: #ffc107;
+  margin-bottom: 10px; 
 }
 @media (max-width: 768px) {
   .reviews-section {
@@ -96,4 +117,51 @@
   .review-rating {
     font-size: 1rem;
   }
-}
+} 
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .reviews-section {
+    padding: 40px 15px;
+  }
+
+  .reviews-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+
+  .reviews-container {
+    gap: 20px;
+  }
+
+  .review-card {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .review-avatar {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .review-card h3 {
+    font-size: 1rem;
+  }
+
+  .review-comment {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .review-rating {
+    font-size: 1rem;
+  }
+} 
+

@@ -1,5 +1,5 @@
 .testimonial-section {
-  padding: 60px 20px;
+  padding: 80px 20px;
   text-align: center;
   background: #fff;
   position: relative;
@@ -83,7 +83,7 @@
 
 .testimonial-card {
   background: linear-gradient(135deg, #fff, #f8f9fa);
-  padding: 30px;
+  padding: 10px 20px;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   max-width: 350px;
@@ -120,39 +120,7 @@
 
 .testimonial-card:hover::before {
   opacity: 1;
-  transform: scale(1.2);
-}
-
-/* Mind-blowing card hover effects */
-.testimonial-card:hover {
-  opacity: 1;
-  transform: 
-    translateY(-20px) 
-    translateZ(40px) 
-    rotateX(-8deg) 
-    scale(1.08);
-  box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.15),
-    0 15px 30px rgba(52, 152, 219, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(52, 152, 219, 0.3);
-  animation: cardFloat 3s ease-in-out infinite;
-}
-
-.swiper-slide-active .testimonial-card {
-  opacity: 1;
-  transform: scale(1.05);
-  box-shadow: 
-    0 15px 35px rgba(0, 0, 0, 0.1),
-    0 8px 20px rgba(52, 152, 219, 0.2);
-}
-
-.swiper-slide-active .testimonial-card:hover {
-  transform: 
-    translateY(-25px) 
-    translateZ(50px) 
-    rotateX(-10deg) 
-    scale(1.12);
+  transform: scale(1);
 }
 
 .quote-icon {
