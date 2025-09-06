@@ -98,3 +98,21 @@
         font-size: 16px;
     }
 }
+
+/* Dark mode fixes */
+html.dark .cart-items-title,
+html.dark .cart-items-item p,
+html.dark .cart-total,
+html.dark .cart-total-details p,
+html.dark .cart-total h2 {
+  color: #fff !important;
+}
+
+html.dark .cart-items-item {
+  border-bottom: 1px solid #444; 
+}
+
+html.dark .cart-total hr {
+  border-color: #444;
+}
+
