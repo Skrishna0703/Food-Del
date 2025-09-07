@@ -1,40 +1,41 @@
-import React, { useState, useContext } from 'react';
-import './LoginPopup.css';
-import { assets } from '../../assets/assets';
-import { StoreContext } from '../../Context/StoreContext';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useState, useContext } from "react";
+import "./LoginPopup.css";
+import { assets } from "../../assets/assets";
+import { StoreContext } from "../../Context/StoreContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPopup = ({ setShowLogin }) => {
-	const { url, setToken } = useContext(StoreContext);
-	const [current, setCurrentState] = useState("Login");
-	const [data, setData] = useState({
-		name: "",
-		email: "",
-		password: "",
-	});
+  const { url, setToken } = useContext(StoreContext);
+  const [current, setCurrentState] = useState("Login");
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-	const onChangeHandler = (event) => {
-		const { name, value } = event.target;
-		setData((prevData) => ({ ...prevData, [name]: value }));
-	};
-	const [showChecklist, setShowChecklist] = useState(false);
-	// ✅ password rules
-	const rules = {
-		length: data.password.length >= 8,
-		lowercase: /[a-z]/.test(data.password),
-		uppercase: /[A-Z]/.test(data.password),
-		number: /\d/.test(data.password),
-		specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(data.password),
-	};
+  const [showChecklist, setShowChecklist] = useState(false);
 
-	const onLogin = async (event) => {
-		event.preventDefault();
+  // ✅ password rules
+  const rules = {
+    length: data.password.length >= 8,
+    lowercase: /[a-z]/.test(data.password),
+    uppercase: /[A-Z]/.test(data.password),
+    number: /\d/.test(data.password),
+    specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(data.password),
+  };
 
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
-    let newUrl =
+  const onLogin = async (event) => {
+    event.preventDefault();
+
+    const newUrl =
       current === "Login"
         ? `${url}/api/users/login`
         : `${url}/api/users/register`;
@@ -44,30 +45,30 @@ const LoginPopup = ({ setShowLogin }) => {
         ? { email: data.email, password: data.password }
         : { name: data.name, email: data.email, password: data.password };
 
-		try {
-			const response = await axios.post(newUrl, payload);
+    try {
+      const response = await axios.post(newUrl, payload);
 
-			if (response.data.success) {
-				setToken(response.data.token);
-				localStorage.setItem("token", response.data.token);
-				toast.success("Account created successfully!");
-				setShowLogin(false);
-			} else {
-				toast.error("Something went wrong");
-			}
-		} catch (err) {
-			console.error("❌ Login/Register failed:", err);
-			toast.error(err.response?.data?.message || "Server error");
-		}
-	};
+      if (response.data.success) {
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        toast.success("Account created successfully!");
+        setShowLogin(false);
+      } else {
+        toast.error("Something went wrong");
+      }
+    } catch (err) {
+      console.error("❌ Login/Register failed:", err);
+      toast.error(err.response?.data?.message || "Server error");
+    }
+  };
 
-  // ✅ fixed template literal
+  // ✅ Google login
   const googleLogin = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
   };
 
   return (
-    <div className='login-popup'>
+    <div className="login-popup">
       <form onSubmit={onLogin} className="login-popup-container">
         <div className="login-popup-title">
           <h2>{current}</h2>
@@ -77,6 +78,7 @@ const LoginPopup = ({ setShowLogin }) => {
             alt="Close"
           />
         </div>
+
 
 				<div className="login-popup-inputs">
 					{current === "Sign Up" && (
@@ -115,7 +117,7 @@ const LoginPopup = ({ setShowLogin }) => {
           {current === "Sign Up" ? "Create Account" : "Login"}
         </button>
 
-        {/* ✅ Google login button placed right below */}
+        {/* ✅ Google login button */}
         <motion.button
           type="button"
           whileHover={{ scale: 1.02 }}
