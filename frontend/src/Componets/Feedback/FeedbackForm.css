@@ -12,7 +12,11 @@
   overflow: hidden;
   transform-style: preserve-3d;
 }
-
+.dark .feedback-container {
+  background: linear-gradient(135deg, var(--bg-color) 30%, #505158 90%);
+  border-color: rgba(255, 99, 71, 0.7);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
 /* Epic background animation */
 .feedback-container::before {
   content: '';
@@ -70,7 +74,7 @@
   text-align: center;
   margin-bottom: 25px;
   font-size: 26px;
-  color: #333;
+  color: var(--text-color);
   font-weight: 600;
   position: relative;
   transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
@@ -125,14 +129,14 @@
 .feedback-form label {
   margin-bottom: 8px;
   font-weight: 500;
-  color: #555;
+  color: var(--text-color);
   transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
   position: relative;
   cursor: default;
 }
 
 .feedback-form-group:hover label {
-  color: #333;
+  color: var(--text-color);
   transform: translateY(-2px);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
