@@ -94,6 +94,41 @@ export const Navbar = ({ setShowLogin }) => {
       <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <FaTimes /> : <FaBars />}
       </div>
+
+      {/* Mobile menu dropdown */}
+      {menuOpen && (
+        <ul className="mobile-menu">
+          <li>
+            <Link to="/" onClick={() => { setMenu("Home"); setMenuOpen(false); }} className={Menu === "Home" ? "active" : ""}>Home</Link>
+          </li>
+          <li>
+            <button onClick={() => handleScroll("explore-menu", "Menu")} className={Menu === "Menu" ? "active" : ""}>Menu</button>
+          </li>
+          <li>
+            <button onClick={() => handleScroll("app-download", "Mobile-App")} className={Menu === "Mobile-App" ? "active" : ""}>Mobile-App</button>
+          </li>
+          <li>
+            <button onClick={() => handleScroll("customer-reviews", "Reviews")} className={Menu === "Reviews" ? "active" : ""}>Reviews</button>
+          </li>
+          <li>
+            <button onClick={() => handleScroll("footer", "Contact")} className={Menu === "Contact" ? "active" : ""}>Contact</button>
+          </li>
+
+          {/* Cart link */}
+          <li>
+            <Link to='/cart' onClick={() => setMenuOpen(false)} className="cart-link">Cart {totalCartItems > 0 && `(${totalCartItems})`}</Link>
+          </li>
+
+          {/* Sign in or account */}
+          <li>
+            {!token ? (
+              <button onClick={() => { setShowLogin(true); setMenuOpen(false); }}>Sign in</button>
+            ) : (
+              <AccountDropdown />
+            )}
+          </li>
+        </ul>
+      )}
     </div>
   );
 };
