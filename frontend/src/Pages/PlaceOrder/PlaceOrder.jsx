@@ -111,6 +111,15 @@ export const PlaceOrder = () => {
 
     } catch (err) {
       console.error("Order error", err?.response?.data || err.message);
+
+      // Handle expired / invalid token
+      if (err.response?.status === 401) {
+        toast.error(err.response?.data?.message || "Session expired, please log in.");
+        localStorage.removeItem("token"); 
+        navigate("/login"); 
+        return;
+      }
+
       toast.error("Something went wrong while placing the order.");
     }
   };
