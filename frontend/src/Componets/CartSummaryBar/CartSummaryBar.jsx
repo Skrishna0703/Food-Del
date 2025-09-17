@@ -14,7 +14,7 @@ const CartSummaryBar = () => {
   const totalAmount = getTotalCartAmount()? getTotalCartAmount() : 0;
 
   // Don't show if cart is empty or if you're already on the cart page
-  if (totalItems === 0 || location.pathname === '/cart') return null;
+  if (totalItems === 0 || location.pathname === '/cart'||location.pathname === '/order') return null;
 
   return (
     <div className="cart-summary-bar">

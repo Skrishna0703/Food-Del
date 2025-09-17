@@ -1,176 +1,129 @@
-# 🍅 Tomato – Full-Stack Food Delivery Web App
-
-🚀 Just Launched!  
-**Tomato** is a modern, full-stack food delivery platform built with the **MERN stack** (MongoDB, Express.js, React, Node.js). It provides a seamless experience for users to browse, filter, and order delicious meals – complete with secure payments, real-time feedback, and responsive design.
-
----
-
-## 📸 Preview
-
-> Live Demo → https://tomato-fda.netlify.app/
-> Admin Page - https://tomatofooddel-admin.netlify.app/
-> GitHub → https://github.com/Skrishna0703/Food-Del
-
----
-
-## ✨ Features
-
-- 🍴 **Dynamic Menu Listing** – Browse meals with category filters
-- 🔍 **Live Search & Filtering** – Quickly find your favorite dishes
-- 🛒 **Smart Cart System** – Add/remove/manage quantity with persistent local state
-- 🔐 **JWT Authentication** – Secure login/signup flow
-- 💳 **Payment Integration** – Seamless checkout using Razorpay (test mode)
-- 📩 **Real-time Contact Form** – Web3Forms-powered feedback system
-- 🌗 **Responsive UI** – Works perfectly on mobile, tablet, and desktop
-- 🔔 **Toast Alerts** – Notify users on key actions (add to cart, login, etc.)
-- 🧠 **State Management** – React Context API + Local Storage
-- 🌐 **Deployment Ready** – Frontend hosted on Netlify, backend on Render
-
----
-
-## 🛠️ Tech Stack
-
-| Layer        | Technology                         |
-|--------------|-------------------------------------|
-| Frontend     | React.js, Tailwind CSS, Toastify    |
-| Backend      | Node.js, Express.js                 |
-| Database     | MongoDB Atlas                       |
-| Auth         | JSON Web Tokens (JWT)               |
-| Payments     | Razorpay (test mode)                |
-| Forms/API    | Web3Forms                           |
-| Deployment   | Netlify (frontend), Render (backend)|
-
----
-
-## 📂 Project Structure
-
-```
 tomato-food-app/
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── pages/
-│   │   └── App.jsx
-│   └── tailwind.config.js
-├── server/                 # Express backend
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-├── .env                    # Environment variables
-├── README.md
-└── package.json
-```
-
----
-
-## 🧑‍💻 Local Development Setup
-
-### 1. Clone the Repo
-
-```bash
 git clone https://github.com/your-username/tomato-food-delivery.git
-cd tomato-food-delivery
+
+[![Food-Del Banner](frontend/public/header_img.png)](./)
+
+# Food-Del 🍔🍕🍜
+
+A full-stack food delivery platform with a modern user interface, robust backend, and an admin dashboard. Built with React, Node.js, Express, and MongoDB.
+
+---
+
+## Table of Contents
+- [Project Structure](#project-structure)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+	- [1. Clone the Repository](#1-clone-the-repository)
+	- [2. Environment Variables](#2-environment-variables)
+	- [3. Install Dependencies](#3-install-dependencies)
+	- [4. Running the Apps](#4-running-the-apps)
+- [Folder Overview](#folder-overview)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Project Structure
+
+```
+Food-Del/
+│
+├── admin/      # Admin dashboard (React + Vite)
+├── backend/    # Backend API (Node.js + Express + MongoDB)
+├── frontend/   # User-facing web app (React + Vite)
+└── README.md   # Project documentation
 ```
 
-### 2. Install Client Dependencies
+## Features
 
-```bash
-cd client
+- User authentication & authorization
+- Browse, search, and filter food items
+- Add to cart, place orders, and track order status
+- Newsletter subscription
+- Admin dashboard for managing food items, orders, and users
+- Responsive UI for web and mobile
+- Email notifications (order, newsletter)
+
+## Tech Stack
+
+- **Frontend & Admin:** React, Vite, CSS Modules
+- **Backend:** Node.js, Express, MongoDB, Mongoose
+- **Other:** JWT Auth, Nodemailer, REST API, dotenv
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/sagnik-create/Food-Del.git
+cd Food-Del
+```
+
+### 2. Environment Variables
+
+- Copy `.env.example` to `.env` in `backend/` and fill in your MongoDB URI, JWT secret, and email credentials.
+- (Optional) Add environment variables for frontend/admin if needed.
+
+### 3. Install Dependencies
+
+Open three terminals (or run sequentially):
+
+```sh
+# Backend
+cd backend
+npm install
+
+# Frontend
+cd ../frontend
+npm install
+
+# Admin
+cd ../admin
 npm install
 ```
 
-### 3. Install Server Dependencies
+### 4. Running the Apps
 
-```bash
-cd ../server
-npm install
+#### Backend (API Server)
+```sh
+cd backend
+npm start
 ```
+- Runs on [http://localhost:5000](http://localhost:5000) by default.
 
-### 4. Configure Environment Variables
-
-Create a `.env` file inside the `server/` directory:
-
-```
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_secret
-```
-
-> ⚠️ Never commit `.env` files to source control
-
-### 5. Start the Development Servers
-
-Open two terminals:
-
-#### Terminal 1 – Start Backend:
-
-```bash
-cd server
+#### Frontend (User App)
+```sh
+cd frontend
 npm run dev
 ```
+- Runs on [http://localhost:5173](http://localhost:5173) by default.
 
-#### Terminal 2 – Start Frontend:
-
-```bash
-cd client
+#### Admin Dashboard
+```sh
+cd admin
 npm run dev
 ```
-
-> App runs at: [http://localhost:5173](http://localhost:5173)
-
----
-
-## 🧪 Testing & QA
-
-Manual testing has been performed on:
-
-- ✅ Chrome, Firefox, Brave browsers
-- ✅ Mobile (Android Chrome, iOS Safari)
-- ✅ Multiple screen sizes via DevTools
-- ✅ Razorpay sandbox mode
-- ✅ Feedback submission via Web3Forms
-
-> Automated testing is not yet implemented.
+- Runs on [http://localhost:5174](http://localhost:5174) by default (or as configured).
 
 ---
 
-## 🙋‍♂️ Contribution Guidelines
+## Folder Overview
 
-Want to improve Tomato? Feel free to fork and contribute!
-
-### To Contribute:
-
-1. Fork the repo
-2. Create a new branch (`git checkout -b feature-name`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature-name`)
-5. Open a Pull Request
+- **admin/**: React-based admin dashboard for managing food items, orders, and users.
+- **backend/**: Express.js REST API, MongoDB models, authentication, and business logic.
+- **frontend/**: User-facing React app for browsing, ordering, and account management.
 
 ---
 
-## 📜 License
+## Contributing
 
-This project is licensed under the **MIT License**.  
-Feel free to use, modify, and distribute it with proper attribution.
-
----
-
-## 🤝 Acknowledgements
-
-- Inspired by Zomato, Swiggy
-- Razorpay & Web3Forms for dev-friendly APIs
-- React Community & Tailwind CSS contributors
+Contributions are welcome! Please read the [Contributor Covenant Code of Conduct](./%E2%9C%A8%20Contributor%20Covenant%20Code%20of%20Conduct%20%E2%80%94%20GSSoC%20%E2%9C%A8) and open issues or pull requests for improvements.
 
 ---
 
-## 🔗 Useful Links
+## License
 
-- 🖥 [Frontend (Netlify)](https://lnkd.in/gMfKhaTp)
-- ⚙️ [Backend (Render)](https://render.com/)
-- 📦 [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-- 📘 [Razorpay Docs](https://razorpay.com/docs/)
+This project is licensed under the [MIT License](./LICENSE).
