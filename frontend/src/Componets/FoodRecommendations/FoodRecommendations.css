@@ -3,13 +3,15 @@
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
+  margin-bottom: 80px; /* ✅ Added extra spacing below the section */
 }
 
 .recommendations-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* ✅ Centered the header */
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* ✅ Increased spacing */
+  position: relative;
 }
 
 .recommendations-header h2 {
@@ -18,17 +20,20 @@
   color: #333;
   position: relative;
   display: inline-block;
+  text-align: center; /* ✅ Ensures text is centered */
+  transition: all 0.3s ease; /* ✅ Added transition for hover effect */
+  cursor: pointer; /* ✅ Added cursor pointer for hover indication */
 }
 
+/* ✅ Added hover effect for the title */
+.recommendations-header h2:hover {
+  color: #ff7e5f;
+  transform: scale(1.05);
+}
+
+/* ✅ Removed the red line below the title */
 .recommendations-header h2::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 60%;
-  height: 3px;
-  background: linear-gradient(90deg, #ff7e5f, #feb47b);
-  border-radius: 2px;
+  display: none;
 }
 
 .refresh-button {
@@ -44,6 +49,8 @@
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(255, 126, 95, 0.3);
   transition: all 0.3s ease;
+  position: absolute; /* ✅ Positioned absolutely to not interfere with centering */
+  right: 0; /* ✅ Positioned to the right */
 }
 
 .refresh-button:hover {
@@ -81,6 +88,10 @@
   .recommendations-header h2 {
     font-size: 24px;
   }
+  
+  .recommendations-header {
+    justify-content: center; /* ✅ Ensure centering on mobile */
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -90,6 +101,10 @@
   
   .recommendations-header h2 {
     font-size: 20px;
+  }
+  
+  .recommendations-header {
+    justify-content: center; /* ✅ Ensure centering on small mobile */
   }
   
   .refresh-button {
