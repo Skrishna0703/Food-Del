@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { apiRateLimit, securityHeaders, sanitizeInput } from "./middleware/security.js";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoutes.js";
 import userRouter from "./routes/userRoutes.js";
@@ -23,6 +24,11 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",")
   : [];
 
+// Security middleware
+app.use(securityHeaders);
+app.use(sanitizeInput);
+app.use(apiRateLimit);
+
 // ✅ CORS middleware
 app.use(
   cors({
@@ -37,7 +43,7 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' })); // Add size limit for security
 
 // Connect to DB
 connectDB();

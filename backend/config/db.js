@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const DEFAULT_URI =
-  "mongodb+srv://tomatofood:food_delivery_app@tomatocluster.dsgwbdo.mongodb.net/food-del";
-
 export const connectDB = async () => {
+  if (!process.env.MONGO_URI) {
+    console.error("❌ MONGO_URI environment variable is required");
+    process.exit(1);
+  }
+
   try {
-    await mongoose.connect(process.env.MONGO_URI || DEFAULT_URI, {
+    await mongoose.connect(process.env.MONGO_URI, {
       dbName: process.env.DB_NAME || "food-del",
       retryWrites: true,
       w: "majority",
