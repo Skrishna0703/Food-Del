@@ -111,56 +111,26 @@ const LoginPopup = ({ setShowLogin }) => {
 						placeholder="Enter your password"
 						required
 					/>
-
-        {/* Normal login button */}
-        <button type="submit">
-          {current === "Sign Up" ? "Create Account" : "Login"}
-        </button>
-
-        {/* ✅ Google login button */}
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={googleLogin}
-          className="google-login-btn"
-        >
-          <FcGoogle size={22} />
-          <span>Continue with Google</span>
-        </motion.button>
-
-        <div className="login-popup-condition">
-          <input type="checkbox" required />
-          <p>I agree to the Terms & Conditions and Privacy Policy</p>
-        </div>
-
-					{/* ✅ Password Checklist (only for Sign Up) */}
-					{current === "Sign Up" &&
-						showChecklist &&
-						data.password.length > 0 && (
-							<ul className="password-checklist">
-								<li className={rules.uppercase ? "valid" : "invalid"}>
-									• Contains uppercase
-								</li>
-								<li className={rules.lowercase ? "valid" : "invalid"}>
-									• Contains lowercase
-								</li>
-								<li className={rules.number ? "valid" : "invalid"}>
-									• Contains number
-								</li>
-								<li className={rules.specialChar ? "valid" : "invalid"}>
-									• Contains special character
-								</li>
-								<li className={rules.length ? "valid" : "invalid"}>
-									• Minimum 8 characters
-								</li>
-							</ul>
-						)}
 				</div>
 
-				<button type="submit">
-					{current === "Sign Up" ? "Create Account" : "Login"}
-				</button>
+				<div className="login-buttons">
+					{/* Normal login button */}
+					<button type="submit">
+						{current === "Sign Up" ? "Create Account" : "Login"}
+					</button>
+
+					{/* ✅ Google login button */}
+					<motion.button
+						type="button"
+						whileHover={{ scale: 1.02 }}
+						whileTap={{ scale: 0.98 }}
+						onClick={googleLogin}
+						className="google-login-btn"
+					>
+						<FcGoogle size={22} />
+						<span>Continue with Google</span>
+					</motion.button>
+				</div>
 
 				{current === "Sign Up" && (
 					<div className="login-popup-condition">
@@ -168,6 +138,29 @@ const LoginPopup = ({ setShowLogin }) => {
 						<p>I agree to the Terms & Conditions and Privacy Policy</p>
 					</div>
 				)}
+
+				{/* ✅ Password Checklist (only for Sign Up) */}
+				{current === "Sign Up" &&
+					showChecklist &&
+					data.password.length > 0 && (
+						<ul className="password-checklist">
+							<li className={rules.uppercase ? "valid" : "invalid"}>
+								• Contains uppercase
+							</li>
+							<li className={rules.lowercase ? "valid" : "invalid"}>
+								• Contains lowercase
+							</li>
+							<li className={rules.number ? "valid" : "invalid"}>
+								• Contains number
+							</li>
+							<li className={rules.specialChar ? "valid" : "invalid"}>
+								• Contains special character
+							</li>
+							<li className={rules.length ? "valid" : "invalid"}>
+								• Minimum 8 characters
+							</li>
+						</ul>
+					)}
 
 				<p>
 					{current === "Login" ? (
