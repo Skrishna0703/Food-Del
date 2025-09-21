@@ -1,74 +1,82 @@
-import foodModel from "../models/foodModel.js"; // include `.js` extension if using ES Modules
+import foodModel from "../models/foodModel.js";
 import fs from "fs";
 
 // Add food item
-
 const addFood = async (req, res) => {
- let img_filename=`${req.file.filename}`;
+  try {
+    const img_filename = req.file?.filename;
 
- const food = new foodModel({
-   name: req.body.name,
-   description: req.body.description,
-  price: req.body.price,
-  category: req.body.category,
-  image: img_filename, // Store the filename image: img_filename, // Store the filename
-  
-  
-  
- });
-try {
-  await food.save();
-  res.status(201).json({
-    success: true,
-    message: "Food item added successfully",
-    food,
-  });
-} catch (error) {
-  console.error("Error saving food item:", error);
-  res.status(500).json({
-    success: false,
-    message: "Failed to add food item",
-    error: error.message,
-  });
-}
+    const food = new foodModel({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      category: req.body.category,
+      image: img_filename,
+    });
 
+    await food.save();
+
+    return res.status(201).json({
+      success: true,
+      message: "Food item added successfully",
+      food,
+    });
+  } catch (error) {
+    console.error("AddFood Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to add food item",
+      error: error.message,
+    });
+  }
 };
-//all food list
-const listFood =async (req, res) => {
+
+// Get all food items
+const listFood = async (req, res) => {
   try {
     const foods = await foodModel.find({});
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Food items retrieved successfully",
       foods,
     });
   } catch (error) {
-    console.error("Error retrieving food items:", error);
-    res.status(500).json({
+    console.error("ListFood Error:", error);
+    return res.status(500).json({
       success: false,
       message: "Failed to retrieve food items",
       error: error.message,
     });
   }
-}
+};
 
-//remove food item
+// Remove food item
 const removeFood = async (req, res) => {
-  
   try {
-    const food = await foodModel.findById(req.body.id);
+    const { id } = req.body;
+    const food = await foodModel.findById(id);
 
-    fs.unlink(`uploads/${food.image}`, () => {});
+    if (!food) {
+      return res.status(404).json({
+        success: false,
+        message: "Food item not found",
+      });
+    }
 
-    await foodModel.findByIdAndDelete(req.body.id);
+    // Remove file safely
+    fs.unlink(`uploads/${food.image}`, (err) => {
+      if (err) console.warn("File delete warning:", err.message);
+    });
 
-    res.status(200).json({
+    await foodModel.findByIdAndDelete(id);
+
+    return res.status(200).json({
       success: true,
       message: "Food item removed successfully",
     });
   } catch (error) {
-    console.error("Error removing food item:", error);
-    res.status(500).json({
+    console.error("RemoveFood Error:", error);
+    return res.status(500).json({
       success: false,
       message: "Failed to remove food item",
       error: error.message,
@@ -76,5 +84,4 @@ const removeFood = async (req, res) => {
   }
 };
 
-// Named export
-export { addFood, listFood , removeFood };
+export { addFood, listFood, removeFood };
