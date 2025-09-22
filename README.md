@@ -58,7 +58,7 @@ Food-Del/
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/sagnik-create/Food-Del.git
+git clone https://github.com/Skrishna0703/Food-Del.git
 cd Food-Del
 ```
 
