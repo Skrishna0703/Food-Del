@@ -68,8 +68,13 @@ const LoginPopup = ({ setShowLogin }) => {
   };
 
   return (
-    <div className='login-popup'>
-      <form onSubmit={onLogin} className="login-popup-container">
+    <div className='login-popup' onClick={() => setShowLogin(false)}>
+      <motion.div
+        className="login-popup-container"
+        onClick={e => e.stopPropagation()}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+      >
         <div className="login-popup-title">
           <h2>{current}</h2>
           <img
@@ -78,45 +83,60 @@ const LoginPopup = ({ setShowLogin }) => {
             alt="Close"
           />
         </div>
-
-				<div className="login-popup-inputs">
-					{current === "Sign Up" && (
-						<input
-							type="text"
-							name="name"
-							value={data.name}
-							onChange={onChangeHandler}
-							placeholder="Enter your name"
-							required
-						/>
-					)}
-					<input
-						type="email"
-						name="email"
-						value={data.email}
-						onChange={onChangeHandler}
-						placeholder="Enter your email"
-						required
-					/>
-					<input
-						type="password"
-						name="password"
-						value={data.password}
-						onChange={(e) => {
-							onChangeHandler(e);
-							setShowChecklist(true); // show while typing
-						}}
-						onBlur={() => setShowChecklist(false)} // hide when finished
-						placeholder="Enter your password"
-						required
-					/>
-
-        {/* Normal login button */}
-        <button type="submit">
-          {current === "Sign Up" ? "Create Account" : "Login"}
-        </button>
-
-        {/* ✅ Google login button placed right below */}
+        <form onSubmit={onLogin}>
+          <div className="login-popup-inputs">
+            {current === "Sign Up" && (
+              <input
+                type="text"
+                name="name"
+                value={data.name}
+                onChange={onChangeHandler}
+                placeholder="Enter your name"
+                required
+              />
+            )}
+            <input
+              type="email"
+              name="email"
+              value={data.email}
+              onChange={onChangeHandler}
+              placeholder="Enter your email"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              value={data.password}
+              onChange={e => {
+                onChangeHandler(e);
+                setShowChecklist(true);
+              }}
+              onBlur={() => setShowChecklist(false)}
+              placeholder="Enter your password"
+              required
+            />
+            {/* Password Checklist (only for Sign Up) */}
+            {current === "Sign Up" && showChecklist && data.password.length > 0 && (
+              <ul className="password-checklist">
+                <li className={rules.uppercase ? "valid" : "invalid"}>• Contains uppercase</li>
+                <li className={rules.lowercase ? "valid" : "invalid"}>• Contains lowercase</li>
+                <li className={rules.number ? "valid" : "invalid"}>• Contains number</li>
+                <li className={rules.specialChar ? "valid" : "invalid"}>• Contains special character</li>
+                <li className={rules.length ? "valid" : "invalid"}>• Minimum 8 characters</li>
+              </ul>
+            )}
+          </div>
+          {current === "Sign Up" && (
+            <div className="login-popup-condition">
+              <input type="checkbox" required />
+              <p>I agree to the Terms & Conditions and Privacy Policy</p>
+            </div>
+          )}
+          <button type="submit">
+            {current === "Sign Up" ? "Create Account" : "Login"}
+          </button>
+        </form>
+        {/* Google login button */}
         <motion.button
           type="button"
           whileHover={{ scale: 1.02 }}
@@ -127,76 +147,22 @@ const LoginPopup = ({ setShowLogin }) => {
           <FcGoogle size={22} />
           <span>Continue with Google</span>
         </motion.button>
-
-        <div className="login-popup-condition">
-          <input type="checkbox" required />
-          <p>I agree to the Terms & Conditions and Privacy Policy</p>
-        </div>
-
-					{/* ✅ Password Checklist (only for Sign Up) */}
-					{current === "Sign Up" &&
-						showChecklist &&
-						data.password.length > 0 && (
-							<ul className="password-checklist">
-								<li className={rules.uppercase ? "valid" : "invalid"}>
-									• Contains uppercase
-								</li>
-								<li className={rules.lowercase ? "valid" : "invalid"}>
-									• Contains lowercase
-								</li>
-								<li className={rules.number ? "valid" : "invalid"}>
-									• Contains number
-								</li>
-								<li className={rules.specialChar ? "valid" : "invalid"}>
-									• Contains special character
-								</li>
-								<li className={rules.length ? "valid" : "invalid"}>
-									• Minimum 8 characters
-								</li>
-							</ul>
-						)}
-				</div>
-
-                {/* Normal login button */}
-                <button type="submit">
-                    {current === "Sign Up" ? "Create Account" : "Login"}
-                </button>
-
-                {/* Google login button */}
-                <motion.button
-                    type="button"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={googleLogin}
-                    className="google-login-btn"
-                >
-                    <FcGoogle size={22} />
-                    <span>Continue with Google</span>
-                </motion.button>
-
-                {current === "Sign Up" && (
-                    <div className="login-popup-condition">
-                        <input type="checkbox" required />
-                        <p>I agree to the Terms & Conditions and Privacy Policy</p>
-                    </div>
-                )}
-
-                <p>
-                    {current === "Login" ? (
-                        <>
-                            Create New Account?{" "}
-                            <span onClick={() => setCurrentState("Sign Up")}>Click here</span>
-                        </>
-                    ) : (
-                        <>
-                            Already have an account?{" "}
-                            <span onClick={() => setCurrentState("Login")}>Click here</span>
-                        </>
-                    )}
-                </p>
-            </motion.div>
-        </div>
-    );
+        <p>
+          {current === "Login" ? (
+            <>
+              Create New Account?{" "}
+              <span onClick={() => setCurrentState("Sign Up")}>Click here</span>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <span onClick={() => setCurrentState("Login")}>Click here</span>
+            </>
+          )}
+        </p>
+      </motion.div>
+    </div>
+  );
 };
 
 export default LoginPopup;
