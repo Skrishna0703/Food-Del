@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
 import { apiRateLimit, securityHeaders, sanitizeInput } from "./middleware/security.js";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoutes.js";
@@ -8,8 +11,6 @@ import userRouter from "./routes/userRoutes.js";
 import cartRouter from "./routes/cartRoutes.js";
 import orderRouter from "./routes/orderRoute.js";
 import newsletterRoutes from "./routes/newsletter.js";
-import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -24,18 +25,17 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",")
   : [];
 
-// Security middleware
+// Middleware
 app.use(securityHeaders);
 app.use(sanitizeInput);
 app.use(apiRateLimit);
 
-// ✅ CORS middleware
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow Postman, curl
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); // Allow Postman, curl
       if (allowedOrigins.includes(origin)) return callback(null, true);
-      console.log("Blocked CORS request from:", origin);
+      console.warn("Blocked CORS request from:", origin);
       return callback(new Error("Not allowed by CORS"));
     },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -43,24 +43,39 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: '10mb' })); // Add size limit for security
-
-// Connect to DB
-connectDB();
+app.use(express.json({ limit: "10mb" }));
+app.use("/images", express.static("uploads"));
 
 // Routes
 app.get("/", (req, res) => res.send("Backend is running!"));
 app.use("/api/foods", foodRouter);
-app.use("/images", express.static("uploads"));
 app.use("/api/users", userRouter);
 app.use("/api/carts", cartRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/newsletter", newsletterRoutes);
-
 app.use("/auth", userRouter);
 
-// Start server
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ Server running on port ${PORT}`);
-  console.log("✅ Allowed origins:", allowedOrigins);
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error("❌ Global Error:", err.message || err);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
 });
+
+// Connect to DB and start server
+const startServer = async () => {
+  try {
+    await connectDB(); // Wait for DB connection
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`✅ Server running on port ${PORT}`);
+      console.log("✅ Allowed origins:", allowedOrigins);
+    });
+  } catch (err) {
+    console.error("❌ Failed to start server:", err);
+    process.exit(1);
+  }
+};
+
+startServer();

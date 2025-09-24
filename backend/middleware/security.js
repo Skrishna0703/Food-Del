@@ -1,9 +1,11 @@
 import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import xss from 'xss';
 
 // Rate limiting for authentication routes
 export const authRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 requests per windowMs
+  max: 5, // Limit each IP
   message: {
     success: false,
     message: 'Too many authentication attempts. Please try again after 15 minutes.',
@@ -12,10 +14,10 @@ export const authRateLimit = rateLimit({
   legacyHeaders: false,
 });
 
-// General rate limiting for API routes
+// General API rate limiting
 export const apiRateLimit = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   message: {
     success: false,
     message: 'Too many requests. Please try again after 15 minutes.',
@@ -24,46 +26,41 @@ export const apiRateLimit = rateLimit({
   legacyHeaders: false,
 });
 
-// Security headers middleware
-export const securityHeaders = (req, res, next) => {
-  // Remove X-Powered-By header
-  res.removeHeader('X-Powered-By');
-  
-  // Set security headers
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  
-  // Only set HSTS in production
-  if (process.env.NODE_ENV === 'production') {
-    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  }
-  
-  next();
-};
+// Security headers middleware using helmet
+export const securityHeaders = helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  },
+  frameguard: { action: 'deny' },
+  hsts: process.env.NODE_ENV === 'production' ? { maxAge: 31536000, includeSubDomains: true } : undefined,
+  noSniff: true,
+  xssFilter: true,
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  permissionsPolicy: { features: { camera: [], microphone: [], geolocation: [] } },
+});
 
 // Input sanitization middleware
 export const sanitizeInput = (req, res, next) => {
-  // Remove potential XSS characters from request body
   const sanitize = (obj) => {
-    if (typeof obj === 'object' && obj !== null) {
+    if (obj && typeof obj === 'object') {
       for (const key in obj) {
         if (typeof obj[key] === 'string') {
-          obj[key] = obj[key].replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-          obj[key] = obj[key].replace(/javascript:/gi, '');
-          obj[key] = obj[key].replace(/on\w+\s*=/gi, '');
+          obj[key] = xss(obj[key]); // Sanitize string to remove XSS
         } else if (typeof obj[key] === 'object') {
           sanitize(obj[key]);
         }
       }
     }
   };
-  
-  if (req.body) {
-    sanitize(req.body);
-  }
-  
+
+  sanitize(req.body);
+  sanitize(req.query);
+  sanitize(req.params);
+
   next();
 };
