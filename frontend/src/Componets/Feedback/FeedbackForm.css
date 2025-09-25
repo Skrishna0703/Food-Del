@@ -253,6 +253,11 @@
   color: #ffd700;
 }
 
+#avatar{
+  padding: 10px;
+  font-size: 15px;
+}
+
 .feedback-button {
   padding: 16px;
   background: linear-gradient(135deg, #ff6347, #e74c3c);
