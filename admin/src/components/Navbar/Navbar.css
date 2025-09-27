@@ -1,15 +1,59 @@
-.navbar{
+/* Navbar Container */
+.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 4%;
-   
-    color: white;
+    padding: 12px 5%;
+    background-color: #111; /* Dark background */
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
-.navbar .logo{
-    width: max(10%,80px);
+
+/* Logo Styling */
+.navbar .logo {
+    width: max(10%, 80px);
+    max-height: 50px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
-.navbar .profile
-{
+
+.navbar .logo:hover {
+    transform: scale(1.05);
+}
+
+/* Profile Image / Icon */
+.navbar .profile {
     width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navbar .profile:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 3%;
+    }
+
+    .navbar .logo {
+        width: 70px;
+    }
+
+    .navbar .profile {
+        width: 35px;
+        height: 35px;
+    }
 }
