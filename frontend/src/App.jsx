@@ -12,6 +12,7 @@ import { Routes, Route } from 'react-router-dom';
 import ScrollToTop from './Componets/ScrollToTop';
 
 import { ToastContainer } from 'react-toastify';
+import Chatbot from './Componets/Chatbot';
 import 'react-toastify/dist/ReactToastify.css';
 
 import ThemeToggle from "./Componets/ThemeToggle";
@@ -108,7 +109,7 @@ const fetchUser = async (token) => {
         <CartSummaryBar />
         <ToastContainer position="top-right" autoClose={3000} />
       </div >
-
+      <Chatbot/>
       {/* ✅ Footer with ref */}
       < div ref={footerRef} id='footer' >
         <Footer />
