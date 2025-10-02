@@ -17,9 +17,9 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    padding: 25px 30px;
-    border-radius: 8px;
+    gap: 25px; /* ✅ Reduced for better mobile experience */
+    padding: 30px 35px; /* ✅ Increased padding for better breathing room */
+    border-radius: 12px; /* ✅ Slightly more rounded corners */
     font-size: 14px;
     animation: fadeIn 0.5s ease-in-out;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -28,7 +28,6 @@
 .login-popup-title {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     color: black;
     font-size: 18px;
 }
@@ -71,12 +70,18 @@
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    margin-top: -10px;
+    margin-top: 15px; /* ✅ Proper spacing instead of negative margin */
     font-size: 13px;
 }
 
 .login-popup-condition input {
     margin-top: 4px;
+}
+
+.login-popup p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
 }
 
 .login-popup p span {
@@ -105,7 +110,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 10px;
+    margin-top: 20px; /* ✅ Increased for better separation from inputs */
 }
 
 .login-buttons button {
@@ -117,7 +122,7 @@
 @media (max-width: 500px) {
     .login-popup-container {
         width: 90%;
-        padding: 20px;
+        padding: 25px 20px; /* ✅ Adjusted for mobile */
         font-size: 13px;
         gap: 20px;
     }
@@ -133,16 +138,30 @@
     .login-popup-inputs input {
         font-size: 14px;
     }
+
+    .login-buttons {
+        margin-top: 15px; /* ✅ Slightly less on mobile */
+    }
+
+    .login-popup p {
+        margin-top: 15px; /* ✅ Adjusted for mobile */
+        font-size: 13px;
+    }
 }
 .password-checklist {
-  margin-top: 8px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #007bff;
   font-size: 12px;
   list-style: none;
-  padding: 0;
 }
 
 .password-checklist li {
-  margin: 2px 0;
+  margin: 4px 0;
+  padding-left: 8px;
 }
 
 .password-checklist .valid {
