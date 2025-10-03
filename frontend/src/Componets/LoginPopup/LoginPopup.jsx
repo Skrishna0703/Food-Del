@@ -142,21 +142,23 @@ const LoginPopup = ({ setShowLogin }) => {
           </div>
 
           {/* Submit button */}
-          <button type="submit">
-            {current === "Sign Up" ? "Create Account" : "Login"}
-          </button>
+          <div className="login-buttons">
+            <button type="submit">
+              {current === "Sign Up" ? "Create Account" : "Login"}
+            </button>
 
-          {/* ✅ Google login button */}
-          <motion.button
-            type="button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={googleLogin}
-            className="google-login-btn"
-          >
-            <FcGoogle size={22} />
-            <span>Continue with Google</span>
-          </motion.button>
+            {/* ✅ Google login button */}
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={googleLogin}
+              className="google-login-btn"
+            >
+              <FcGoogle size={22} />
+              <span>Continue with Google</span>
+            </motion.button>
+          </div>
 
           {current === "Sign Up" && (
             <div className="login-popup-condition">
