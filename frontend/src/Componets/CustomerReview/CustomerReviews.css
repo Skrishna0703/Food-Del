@@ -1,492 +1,185 @@
+:root{
+  --bg-color: #0f1113;
+  --card-bg: #16181b;
+  --muted: #9a9a9a;
+  --text-color: #e8e8e8;
+  --accent: #EA6208;
+  --accent-2: #EA6208;
+;
+}
+
+/* Section */
 .testimonial-section {
-  padding: 80px 20px;
+  padding: 70px 20px;
   text-align: center;
   background: var(--bg-color);
+  color: var(--text-color);
   position: relative;
-  overflow: hidden;
-}
-.dark .testimonial-section {
-  background: var(--bg-color);
-}
-/* Add subtle background animation */
-.testimonial-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.05), transparent);
-  transition: left 1.5s ease;
-  pointer-events: none;
 }
 
-.testimonial-section:hover::before {
-  left: 100%;
-}
-
-/* Floating particles background */
-.testimonial-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(52, 152, 219, 0.1) 2px, transparent 2px),
-    radial-gradient(circle at 80% 70%, rgba(52, 152, 219, 0.08) 1px, transparent 1px),
-    radial-gradient(circle at 60% 20%, rgba(52, 152, 219, 0.12) 1.5px, transparent 1.5px);
-  background-size: 120px 120px, 80px 80px, 150px 150px;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  animation: testimonialFloat 10s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.testimonial-section:hover::after {
-  opacity: 1;
-}
-
+/* Title */
 .testimonial-section h2 {
   font-size: 2rem;
   margin-bottom: 40px;
-  font-weight: bold;
-  position: relative;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  cursor: default;
-  overflow: hidden;
-  z-index: 1;
-}
-
-/* Epic title hover effects */
-.testimonial-section h2::before {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  width: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12);
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
-  border-radius: 2px;
-  transform: translateX(-50%);
-}
-
-.testimonial-section h2:hover::before {
-  width: 60%;
-}
-
-.testimonial-section h2:hover {
-  transform: translateY(-5px) scale(1.05);
-  color: #2c3e50;
-  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.testimonial-card {
-  background: linear-gradient(135deg, #fff, #f8f9fa);
-  padding: 10px 20px;
+  font-weight: 700;
   color: var(--text-color);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  max-width: 350px;
-  margin: auto;
-  text-align: center;
-  position: relative;
-  opacity: 0.6;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  transform-style: preserve-3d;
-  overflow: hidden;
-  border: 1px solid rgba(52, 152, 219, 0.1);
-  height: 450px;
+}
+
+/* Swiper fix */
+.swiper {
+  padding-bottom: 60px; /* space for dots */
+}
+
+/* Review Card */
+.review-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 24px 20px;
+  max-width: 320px;
+  margin: 0 auto;
+  height: 460px; /* shorter so content fits */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-}
-.dark .testimonial-card {
-  background: linear-gradient(135deg, var(--bg-color) 30%, #505158 90%);
-}
-
-/* Epic background glow for testimonial cards */
-.testimonial-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at center, rgba(52, 152, 219, 0.05), transparent);
-  border-radius: 20px;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  z-index: -1;
+  justify-content: flex-start;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.testimonial-card:hover::before {
-  opacity: 1;
-  transform: scale(1);
+.review-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.6);
 }
 
+/* Quote */
 .quote-icon {
-  font-size: 3rem;
-  color: #3498db;
-  display: block;
+  font-size: 2rem;
+  color: var(--accent);
   margin-bottom: 10px;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  position: relative;
-  z-index: 2;
 }
 
-/* Epic quote icon hover effects */
-.testimonial-card:hover .quote-icon {
-  transform: 
-    scale(1.3) 
-    rotateY(180deg) 
-    translateZ(20px);
-  color: #e74c3c;
-  text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
-  animation: quoteGlow 2s ease-in-out infinite alternate;
-}
-
+/* Avatar */
 .review-img {
-  width: 70px;
-  height: 70px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 20px;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  position: relative;
-  border: 3px solid transparent;
-  z-index: 2;
+  margin-bottom: 16px;
+  border: 4px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
 
-/* Epic image hover effects */
-.testimonial-card:hover .review-img {
-  transform: 
-    scale(1.25) 
-    rotateZ(0deg) 
-    translateZ(30px);
-  border: 3px solid #3498db;
-  box-shadow: 
-    0 15px 30px rgba(0, 0, 0, 0.3),
-    0 0 25px rgba(52, 152, 219, 0.6),
-    inset 0 0 20px rgba(255, 255, 255, 0.2);
-  filter: brightness(1.1) contrast(1.1) saturate(1.3);
-}
-
-.testimonial-card p {
+/* Comment */
+.review-comment {
   font-size: 0.95rem;
-  color:var(--text-color);
-  margin: 10px 0 15px;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  position: relative;
-  z-index: 2;
-  line-height: 1.6;
-}
-
-.testimonial-card:hover p {
-  color: var(--text-color);
-  transform: translateY(-5px) translateZ(15px);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.stars {
-  margin: 10px 0;
-  transition: all 0.6s ease;
-}
-
-.stars span {
-  color: #f1c40f;
-  font-size: 1.2rem;
-  margin: 0 2px;
-  display: inline-block;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-  position: relative;
-}
-
-/* Epic star hover effects */
-.testimonial-card:hover .stars span {
-  transform: scale(1.4) rotateZ(360deg) translateZ(10px);
-  text-shadow: 
-    0 0 10px rgba(241, 196, 15, 0.8),
-    2px 2px 4px rgba(0, 0, 0, 0.3);
-  animation: starTwinkle 1s ease-in-out infinite alternate;
-}
-
-.stars span:nth-child(1) { animation-delay: 0s; }
-.stars span:nth-child(2) { animation-delay: 0.2s; }
-.stars span:nth-child(3) { animation-delay: 0.4s; }
-.stars span:nth-child(4) { animation-delay: 0.6s; }
-.stars span:nth-child(5) { animation-delay: 0.8s; }
-
-.testimonial-card h3 {
-  color: var(--text-color);
-  font-size: 1.1rem;
-  margin: 10px 0 5px;
-  font-weight: bold;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  position: relative;
-  z-index: 2;
-}
-
-.testimonial-card:hover h3 {
-  color: var(--text-color);
-  transform: translateY(-3px) translateZ(15px);
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.testimonial-card .role {
-  font-size: 0.9rem;
-  color: var(--muted-color);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  position: relative;
-  z-index: 2;
-}
-
-.testimonial-card:hover .role {
-  color: var(--muted-color);
-  transform: translateY(-2px) translateZ(10px);
-}
-
-/* Enhanced Navigation arrows */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #3498db;
-  font-weight: bold;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  color: #e74c3c;
-  transform: scale(1.2) translateZ(20px);
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.2),
-    0 0 20px rgba(52, 152, 219, 0.4);
-  animation: buttonPulse 2s ease-in-out infinite;
-}
-
-/* Enhanced Pagination dots */
-.swiper-pagination-bullet {
-  background: #ccc;
-  opacity: 1;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-  width: 12px;
-  height: 12px;
-  margin: 0 6px;
-}
-
-.swiper-pagination-bullet:hover {
-  transform: scale(1.5);
-  background: #3498db;
-}
-
-.swiper-pagination-bullet-active {
-  background: #3498db;
-  transform: scale(1.3);
-  box-shadow: 0 0 10px rgba(52, 152, 219, 0.6);
-}
-
-.more-reviews-btn-container {
+  color: rgba(230,230,230,0.9);
+  line-height: 1.5;
+  margin: 10px 0 16px;
   text-align: center;
-  margin-top: 30px;
-  position: relative;
-  z-index: 1;
+  flex-grow: 1;
+  font-style: italic;
 }
 
+/* Rating */
+.review-rating {
+  margin: 8px 0;
+}
+.review-rating span {
+  color: #f1c40f;
+  font-size: 1rem;
+  margin: 0 2px;
+}
+
+/* Name + Role */
+.review-card h3 {
+  margin: 4px 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.review-role {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Pagination Dots */
+.swiper-pagination {
+  bottom: 10px !important; /* keep clear of cards */
+}
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.3);
+  opacity: 1;
+}
+.swiper-pagination-bullet-active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+/* Arrows */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background: rgba(255,255,255,0.18);
+  transform: scale(1.1);
+}
+
+/* Arrow icon fix */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-card {
+    height: auto;
+    padding: 20px;
+  }
+  .review-img {
+    width: 100px;
+    height: 100px;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 420px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none; /* use swipe on very small phones */
+  }
+}
+
+/* More Reviews Button */
+.more-reviews-btn-container {
+  margin-top: 20px;
+}
 .more-reviews-btn {
-  padding: 12px 30px;
-  background: linear-gradient(135deg, #f97316, #ea580c);
+  padding: 10px 22px;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
   color: #fff;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 30px;
   font-weight: 600;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
-  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
 }
-
-/* Epic button hover effects */
-.more-reviews-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s ease;
-}
-
-.more-reviews-btn::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  transform: translate(-50%, -50%);
-}
-
 .more-reviews-btn:hover {
-  background: linear-gradient(135deg, #ea580c, #f97316);
-  color: #fff;
-  transform: translateY(-5px) translateZ(10px) rotateX(-3deg) scale(1.05);
-  box-shadow: 
-    0 12px 30px rgba(249, 115, 22, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-
-.more-reviews-btn:active {
-  transform: 
-    translateY(-5px) 
-    translateZ(15px) 
-    rotateX(-3deg) 
-    scale(1.05);
-  transition: all 0.1s ease;
-}
-
-/* EPIC KEYFRAME ANIMATIONS */
-@keyframes testimonialFloat {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg); 
-    opacity: 0.3;
-  }
-  33% { 
-    transform: translateY(-8px) rotate(1deg); 
-    opacity: 0.6;
-  }
-  66% { 
-    transform: translateY(-4px) rotate(-1deg); 
-    opacity: 0.4;
-  }
-}
-
-@keyframes cardFloat {
-  0%, 100% { 
-    transform: translateY(-20px) translateZ(40px) rotateX(-8deg) scale(1.08); 
-  }
-  50% { 
-    transform: translateY(-25px) translateZ(45px) rotateX(-10deg) scale(1.1); 
-  }
-}
-
-@keyframes quoteGlow {
-  0% { 
-    text-shadow: 0 0 20px rgba(231, 76, 60, 0.5); 
-  }
-  100% { 
-    text-shadow: 0 0 30px rgba(231, 76, 60, 0.8), 0 0 40px rgba(231, 76, 60, 0.4); 
-  }
-}
-
-@keyframes starTwinkle {
-  0% { 
-    text-shadow: 0 0 10px rgba(241, 196, 15, 0.8); 
-    transform: scale(1.4) rotateZ(360deg) translateZ(10px);
-  }
-  100% { 
-    text-shadow: 0 0 20px rgba(241, 196, 15, 1), 0 0 30px rgba(241, 196, 15, 0.6); 
-    transform: scale(1.5) rotateZ(360deg) translateZ(15px);
-  }
-}
-
-@keyframes buttonPulse {
-  0%, 100% { 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(52, 152, 219, 0.4); 
-  }
-  50% { 
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 30px rgba(52, 152, 219, 0.6); 
-  }
-}
-
-@keyframes btnMagnetic {
-  0%, 100% { 
-    transform: translateY(-8px) translateZ(20px) rotateX(-5deg) scale(1.08); 
-  }
-  50% { 
-    transform: translateY(-12px) translateZ(25px) rotateX(-7deg) scale(1.1); 
-  }
-}
-
-/* Tablet View */
-@media (max-width: 768px) {
-  .testimonial-section h2 {
-    font-size: 1.6rem;
-  }
-
-  .testimonial-card {
-    padding: 25px;
-    max-width: 320px;
-  }
-
-  .testimonial-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    animation: none;
-  }
-
-  .testimonial-card:hover .quote-icon {
-    transform: scale(1.2) rotateY(90deg);
-  }
-
-  .testimonial-card:hover .review-img {
-    transform: scale(1.15) rotateZ(5deg);
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* Mobile View */
-@media (max-width: 480px) {
-  .testimonial-section {
-    padding: 40px 15px;
-  }
-
-  .testimonial-section h2 {
-    font-size: 1.4rem;
-  }
-
-  .testimonial-card {
-    padding: 20px;
-    max-width: 280px;
-  }
-
-  .testimonial-card:hover {
-    transform: translateY(-5px) scale(1.02);
-  }
-
-  .testimonial-card:hover .quote-icon,
-  .testimonial-card:hover .review-img,
-  .testimonial-card:hover .stars span {
-    animation: none;
-  }
-
-  .more-reviews-btn:hover {
-    transform: translateY(-4px) scale(1.05);
-    animation: none;
-  }
-
-  .testimonial-section::after {
-    display: none;
-  }
+  transform: translateY(-3px);
 }

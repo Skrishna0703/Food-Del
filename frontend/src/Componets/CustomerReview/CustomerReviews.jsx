@@ -8,8 +8,8 @@ import 'swiper/css/pagination';
 import { Link } from 'react-router-dom';
 
 // Cartoon avatar URLs
-const femaleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png';   // Cartoon boy
-const maleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png'; // Cartoon girl
+const femaleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png';   // Cartoon girl
+const maleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png'; // Cartoon boy
 
 const reviews = [
   {
@@ -18,7 +18,6 @@ const reviews = [
     gender: "female",
     comment: "The site looks awesome Login, creating account, seeing options and adding to cart, payment and all the processes are easy to use",
     rating: 5,
-
   },
   {
     name: "Ansh Mahajan",
@@ -26,7 +25,6 @@ const reviews = [
     gender: "male",
     comment: " Great App ! Smooth performance and Works Perfectly. Well Done",
     rating: 4,
- 
   },
   {
     name: "Arti Giram",
@@ -34,7 +32,6 @@ const reviews = [
     gender: "female",
     comment: "The UI of Tomato is responsive and visually appealing. I love how clean the design is, and the food listing feels smooth and interactive.",
     rating: 4,
-   
   },
   {
     name: "Paranv Nalawade",
@@ -42,7 +39,6 @@ const reviews = [
     gender: "male",
     comment: "Highly impressive UI UX & Responsive Design . Recommended!",
     rating: 5,
-   
   },
   {
     name: "Pranav Patil",
@@ -50,7 +46,6 @@ const reviews = [
     gender: "male",
     comment: "The site feels smooth and perfectly optimized for mobile. Everything works great on my phone!",
     rating: 3,
-  
   }
 ];
 
