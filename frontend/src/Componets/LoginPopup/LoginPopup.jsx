@@ -40,10 +40,9 @@ const LoginPopup = ({ setShowLogin }) => {
         ? `${url}/api/users/login`
         : `${url}/api/users/register`;
 
-    const payload =
-      current === "Login"
-        ? { email: data.email, password: data.password }
-        : { name: data.name, email: data.email, password: data.password };
+    const payload = current === "Login"
+      ? { email: data.email, password: data.password }
+      : { name: data.name, email: data.email, password: data.password };
 
     try {
       const response = await axios.post(newUrl, payload);
@@ -66,7 +65,6 @@ const LoginPopup = ({ setShowLogin }) => {
   const googleLogin = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
   };
-
   return (
     <div className="login-popup" onClick={() => setShowLogin(false)}>
       <motion.div
@@ -184,6 +182,6 @@ const LoginPopup = ({ setShowLogin }) => {
       </motion.div>
     </div>
   );
-};
+}
 
 export default LoginPopup;
