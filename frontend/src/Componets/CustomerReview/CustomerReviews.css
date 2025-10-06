@@ -10,7 +10,7 @@
 
 /* Section */
 .testimonial-section {
-  padding: 70px 20px;
+  padding: 48px 0;
   text-align: center;
   background: var(--bg-color);
   color: var(--text-color);
@@ -60,13 +60,14 @@
 
 /* Avatar */
 .review-img {
-  width: 120px;
-  height: 120px;
+  width: 85px;
+  height: 85px;
   border-radius: 50%;
   object-fit: cover;
+  margin: 12px auto 10px;
   margin-bottom: 16px;
   border: 4px solid rgba(255,255,255,0.1);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  /*box-shadow: 0 4px 16px rgba(0,0,0,0.4);*/
 }
 
 /* Comment */
@@ -74,7 +75,7 @@
   font-size: 0.95rem;
   color: rgba(230,230,230,0.9);
   line-height: 1.5;
-  margin: 10px 0 16px;
+  margin: 8px 0 16px;
   text-align: center;
   flex-grow: 1;
   font-style: italic;
@@ -86,8 +87,8 @@
 }
 .review-rating span {
   color: #f1c40f;
-  font-size: 1rem;
-  margin: 0 2px;
+  font-size: 1.1rem;
+  margin: 0 1px;
 }
 
 /* Name + Role */
@@ -97,57 +98,74 @@
   font-weight: 600;
 }
 .review-role {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--muted);
 }
 
-/* Pagination Dots */
-.swiper-pagination {
-  bottom: 10px !important; /* keep clear of cards */
+/* Sleek pagination */
+.reviews-swiper-wrap .swiper-pagination {
+  bottom: 0;
 }
+.reviews-swiper-wrap
 .swiper-pagination-bullet {
   width: 8px;
   height: 8px;
   background: rgba(255,255,255,0.3);
   opacity: 1;
+  border-radius: 999px;
+  transition: width 220ms ease, background-color 220ms ease;
 }
-.swiper-pagination-bullet-active {
-  background: var(--accent);
+
+/* Light mode pagination bullets */
+html.light .reviews-swiper-wrap .swiper-pagination-bullet {
+  background: rgba(0,0,0,0.3);
+}
+
+.reviews-swiper-wrap .swiper-pagination-bullet-active {
+  width: 20px;
+  background: #ff4d4f;
   transform: scale(1.2);
 }
 
-/* Arrows */
-.swiper-button-prev,
-.swiper-button-next {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  transition: background 0.3s ease, transform 0.2s ease;
+/* Modern navigation buttons */
+.reviews-swiper-wrap .swiper-button-prev,
+.reviews-swiper-wrap .swiper-button-next {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.75);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+  top: calc(50% - 20px);
+  transition: transform 180ms ease, background-color 180ms ease, opacity 180ms ease;
+}
+.reviews-swiper-wrap .swiper-button-prev { left: 6px; }
+.reviews-swiper-wrap .swiper-button-next { right: 6px; }
+
+.reviews-swiper-wrap .swiper-button-prev::after,
+.reviews-swiper-wrap .swiper-button-next::after {
+  font-size: 16px;         /* tidier than the default huge arrows */
+  font-weight: 700;
 }
 
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background: rgba(255,255,255,0.18);
-  transform: scale(1.1);
+.reviews-swiper-wrap .swiper-button-prev:hover,
+.reviews-swiper-wrap .swiper-button-next:hover {
+  transform: translateY(-1px) scale(1.05);
+  background: rgba(17, 24, 39, 0.9);
 }
 
-/* Arrow icon fix */
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  font-size: 14px;
-  font-weight: bold;
+.reviews-swiper-wrap .swiper-button-disabled {
+  opacity: 0.4;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .review-card {
     height: auto;
-    padding: 20px;
+    max-width: 300px;
+    padding: 16px;
   }
   .review-img {
     width: 100px;
@@ -182,4 +200,40 @@
 }
 .more-reviews-btn:hover {
   transform: translateY(-3px);
+}
+
+
+/* New wrapper to keep slides inside bounds */
+.reviews-swiper-wrap {
+  position: relative;
+  max-width: 1200px;     /* adjust to your layout */
+  margin: 0 auto;
+  padding: 0 16px;       /* gutter */
+  overflow: hidden;      /* prevents card overflow */
+  /* Swiper color variables */
+  --swiper-navigation-color: #ffffff;
+  --swiper-pagination-color: #ff4d4f; /* brand accent */
+}
+
+/* Give Swiper a bit of internal padding so bullets don’t overlap */
+.reviews-swiper-wrap .swiper {
+  padding-bottom: 36px;
+}
+
+/* Make slides height fit content and cards span full width */
+.reviews-swiper-wrap .swiper-slide {
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.review-card {
+  width: 100%;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #eef1f4;
+  box-shadow: 0 6px 20px rgba(20, 20, 43, 0.06);
+  max-width: 300px;
+  padding: 16px;
+  text-align: center;
+  position: relative;
 }
