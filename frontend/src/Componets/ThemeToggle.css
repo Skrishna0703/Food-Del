@@ -1,3 +1,50 @@
+/* =======================================
+   Theme tokens (class-based theming)
+   ======================================= */
+:root,
+html.light {
+  color-scheme: light;
+  --bg-color: #f7f8fa;
+  --surface-1: #ffffff;
+  --text-color: #111827;
+  --muted: #6b7280;
+  --muted-color: #6b7280; /* compat with your usage */
+  --accent: #EA6208;
+
+  --nav-bg: rgba(255,255,255,0.9);
+  --nav-bg-hover: #ffffff;
+  --nav-icon: #111827;
+  --nav-border: rgba(0,0,0,0.08);
+  --nav-shadow: 0 10px 20px rgba(20, 20, 43, 0.08);
+}
+
+html.dark {
+  color-scheme: dark;
+  --bg-color: #0f1113;
+  --surface-1: #1a1a1a;
+  --text-color: #e8e8e8;
+  --muted: #9a9a9a;
+  --muted-color: #9a9a9a; /* compat with your usage */
+  --accent: #EA6208;
+
+  --nav-bg: rgba(17,24,39,0.75);
+  --nav-bg-hover: rgba(17,24,39,0.9);
+  --nav-icon: #ffffff;
+  --nav-border: rgba(255,255,255,0.18);
+  --nav-shadow: 0 10px 20px rgba(0,0,0,0.18);
+}
+
+/* Make the page actually flip background/text */
+html, body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100%;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+/* =======================================
+   Toggle button (keeps your glow)
+   ======================================= */
 .theme-toggle-btn {
   display: flex;
   align-items: center;
@@ -5,174 +52,110 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  border: none;
+  border: 1px solid var(--nav-border);
+  background: var(--nav-bg);
+  color: var(--nav-icon);
   cursor: pointer;
   font-size: 1.3rem;
   transition: all 0.3s ease;
+  box-shadow: var(--nav-shadow);
+}
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  background: var(--nav-bg-hover);
 }
 
 /* Light mode button (orange glow) */
-.light .theme-toggle-btn {
-  background: #ffffff; 
-  color: #000000; 
+html.light .theme-toggle-btn {
   animation: pulseOrange 2s infinite ease-in-out;
 }
 
 /* Dark mode button (blue glow) */
-.dark .theme-toggle-btn {
-  background: #1e1e1e;
-  color: #facc15;
+html.dark .theme-toggle-btn {
   animation: pulseBlue 2s infinite ease-in-out;
 }
 
-/* Hover scale */
-.theme-toggle-btn:hover {
-  transform: scale(1.1);
-}
+/* Icon colors */
+.theme-toggle-btn svg { font-size: 1.4rem; }
+html.light .theme-toggle-btn svg { color: #000; }
+html.dark .theme-toggle-btn svg  { color: #facc15; }
 
 /* Pulsing animations */
 @keyframes pulseOrange {
-  0% {
-    box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(255, 165, 0, 1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
-  }
+  0% { box-shadow: 0 0 20px rgba(255,165,0,0.7); }
+  50% { box-shadow: 0 0 35px rgba(255,165,0,1); }
+  100% { box-shadow: 0 0 20px rgba(255,165,0,0.7); }
 }
-
 @keyframes pulseBlue {
-  0% {
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(0, 191, 255, 1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.7);
-  }
-}
-/* Responsive adjustments */
-
-.dark .navbar-menu a,
-.dark .navbar-menu p,
-.dark .navbar-menu span {
-  color: #ffffff !important ;
+  0% { box-shadow: 0 0 20px rgba(0,191,255,0.7); }
+  50% { box-shadow: 0 0 35px rgba(0,191,255,1); }
+  100% { box-shadow: 0 0 20px rgba(0,191,255,0.7); }
 }
 
-.dark .cart-wrapper .cart-text {
-  color: #ffffff!important ;
-}
+/* =======================================
+   Dark mode component tweaks (use tokens)
+   ======================================= */
 
-.dark .navbar-right button {
-  color: #ffffff !important;
- 
-}
-
-.dark .food-display h2 {
-  color: #ffffff !important;
-}
-
-.dark .explore-menu h1,
-.dark .explore-menu p {
-  color: #ffffff !important;
-}
-
-.dark .testimonial-section h2 {
-  color: #000000 !important;
-}
-
-.dark .food-item-name-rating p {
-  color:black !important; 
-}
-/* heading */
-.dark .testimonial-section h2 {
-  color: white !important;       
-}
-
-.dark .testimonial-card p {
+/* General nav/text overrides (keep !important only if needed) */
+html.dark .navbar-menu a,
+html.dark .navbar-menu p,
+html.dark .navbar-menu span,
+html.dark .navbar-right button,
+html.dark .cart-wrapper .cart-text,
+html.dark .explore-menu h1,
+html.dark .explore-menu p,
+html.dark .food-display h2 {
   color: var(--text-color) !important;
 }
 
-.dark .testimonial-card h3 {
+/* Testimonial section background + heading */
+html.dark .testimonial-section {
+  background-color: #111111 !important; /* or var(--bg-color) if you prefer */
+}
+/* Remove the conflicting black h2. Keep this one. */
+html.dark .testimonial-section h2 {
+  color: #ffffff !important;
+}
+
+/* Testimonial card text */
+html.dark .testimonial-card p,
+html.dark .testimonial-card h3 {
   color: var(--text-color) !important;
 }
-
-.dark .testimonial-card .role {
-  color: var(--muted-color) !important;
+html.dark .testimonial-card .role {
+  color: var(--muted) !important; /* fixed var name */
+}
+html.dark .testimonial-card .stars span {
+  color: #ffd700 !important;
+}
+html.dark .quote-icon {
+  color: #4da3ff !important;
 }
 
-.dark .testimonial-card .stars span {
-  color: #ffd700 !important; 
+/* Food display container */
+html.dark .food-display {
+  background-color: var(--surface-1);
+  color: var(--text-color);
+  margin-top: 40px;
+  padding: 30px 20px;
+  border-radius: 20px;
 }
 
-.dark .quote-icon {
-  color: #4da3ff !important; 
+/* Sort controls */
+html.dark .food-display .sort-container label {
+  color: var(--muted);
 }
-
-.dark .testimonial-section {
-  background-color: #111111 !important;
+html.dark .food-display .sort-container select {
+  background-color: #333333;
+  color: #f0f0f0;
+  border: 1px solid #555555;
+  transition: all 0.3s ease;
 }
-
-.theme-toggle-btn svg {
-  color: white;
-  font-size: 1.4rem; 
+html.dark .food-display .sort-container select:hover {
+  border-color: #1e90ff;
 }
-
-
-.light .theme-toggle-btn svg {
-  color: #000000 !important;
+html.dark .food-display .sort-container select:focus {
+  outline: none;
+  border-color: #1e90ff;
+  box-shadow: 0 0 5px #1e90ff;
 }
-
-
-.dark .theme-toggle-btn svg {
-  color: #facc15 !important;
-}
-
-
-
-
-
-/* ===============================
-    FoodDisplay Container - Dark Mode
-=============================== */
-.dark .food-display {
-    background-color: #1a1a1a; /* dark background */
-    color: #f0f0f0;            /* light text */
-    margin-top: 40px;
-    padding: 30px 20px;
-    border-radius: 20px;
-}
-
-/* Heading */
-.dark .food-display h2 {
-    color: #ffffff;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-}
-
-/* ===============================
-    Sort Container - Dark Mode
-=============================== */
-.dark .food-display .sort-container label {
-    color: #cccccc;
-}
-
-.dark .food-display .sort-container select {
-    background-color: #333333;
-    color: #f0f0f0;
-    border: 1px solid #555555;
-    transition: all 0.3s ease;
-}
-
-.dark .food-display .sort-container select:hover {
-    border-color: #1e90ff; /* subtle hover highlight */
-}
-
-.dark .food-display .sort-container select:focus {
-    outline: none;
-    border-color: #1e90ff;
-    box-shadow: 0 0 5px #1e90ff;
-}
-
