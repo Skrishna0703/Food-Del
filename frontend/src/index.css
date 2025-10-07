@@ -49,3 +49,62 @@ body {
   color: var(--text-color);
   transition: background-color 0.25s ease, color 0.25s ease;
 }
+.scrollToggle {
+  position: fixed;
+  right: calc(20px + env(safe-area-inset-right, 0px));
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 9999px; /* perfect circle */
+  background: linear-gradient(180deg, #ff7a1a 0%, #ea6208 100%);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+
+  /* UI polish */
+  box-shadow:
+    0 10px 20px rgba(234, 98, 8, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease,
+    bottom 0.3s ease; /* smooth lift above footer */
+}
+
+.scrollToggle:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 24px rgba(234, 98, 8, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.scrollToggle:active {
+  transform: translateY(0);
+  box-shadow:
+    0 6px 12px rgba(234, 98, 8, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.scrollToggle:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(234, 98, 8, 0.3),
+    0 10px 20px rgba(234, 98, 8, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.scrollToggle svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollToggle {
+    transition: none;
+  }
+}

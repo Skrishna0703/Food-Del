@@ -45,34 +45,54 @@ const ScrollToTop = () => {
   }, []);
 
       return (
-        <button
-          onClick={() => {
-          if (isAtTop) {
-      // scroll down to bottom if at top
-      window.scrollTo({ 
-        top: document.documentElement.scrollHeight, 
-        behavior: "smooth" 
+       <button
+  type="button"
+  className="scrollToggle"
+  onClick={() => {
+    if (isAtTop) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
       });
     } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      }}
-      style={{
-        position: "fixed",
-        bottom: `${buttonBottom}px`, // dynamically adjusted
-        right: "20px",
-        padding: "10px",
-        borderRadius: "50%",
-        background: "#ea6208ff",
-        color: "#fff",
-        fontSize: "20px",
-        cursor: "pointer",
-        transition: "bottom 0.3s ease", // smooth lift above footer
-        zIndex: 1000,
-      }}
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }}
+  aria-label={isAtTop ? "Scroll to bottom" : "Scroll to top"}
+  title={isAtTop ? "Scroll to bottom" : "Scroll to top"}
+  style={{
+    // keep your dynamic lift above footer + safe-area padding
+    bottom: `calc(${buttonBottom}px + env(safe-area-inset-bottom, 0px))`,
+  }}
+>
+  {isAtTop ? (
+    // Down chevron
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
     >
-      {isAtTop ? "↓" : "↑"}
-    </button>
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  ) : (
+    // Up chevron
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  )}
+</button>
   );
 };
 

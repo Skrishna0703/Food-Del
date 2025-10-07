@@ -8,8 +8,8 @@ import 'swiper/css/pagination';
 import { Link } from 'react-router-dom';
 
 // Cartoon avatar URLs
-const femaleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png';   // Cartoon girl
-const maleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png'; // Cartoon boy
+const femaleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png';
+const maleAvatar = 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png';
 
 const reviews = [
   {
@@ -54,37 +54,52 @@ const CustomerReviews = () => {
     <div className="testimonial-section" id="customer-reviews">
       <h2>What Our Customers Say</h2>
 
-      <Swiper
-        modules={[Navigation, Pagination, A11y, Autoplay]}
-        spaceBetween={30}
-        slidesPerView={1}
-        loop
-        centeredSlides
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        navigation
-        pagination={{ clickable: true }}
-        breakpoints={{
-          768: { slidesPerView: 3 },
-        }}
-      >
-        {reviews.map((review, index) => (
-          <SwiperSlide key={index} style={{width: '320px'}}>
-            <div className="review-card">
-              <span className="quote-icon">❝</span>
+      {/* New wrapper to constrain Swiper and hide overflow */}
+      <div className="reviews-swiper-wrap">
+        <Swiper
+          modules={[Navigation, Pagination, A11y, Autoplay]}
+          spaceBetween={24}
+          slidesPerView={1}
+          loop
+          centeredSlides
+          centeredSlidesBounds
+          watchOverflow
+          grabCursor
+          speed={600}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          navigation
+          pagination={{ clickable: true }}
+          breakpoints={{
+            0: { slidesPerView: 1, centeredSlides: true },
+            640: { slidesPerView: 1.2, centeredSlides: true },
+            768: { slidesPerView: 2, centeredSlides: false },
+            1024: { slidesPerView: 3, centeredSlides: false },
+          }}
+        >
+          {reviews.map((review, index) => (
+            // Removed fixed width to prevent overflow
+            <SwiperSlide key={index}>
+              <div className="review-card">
+                <span className="quote-icon">❝</span>
 
-              <img src={review.gender === "male" ? maleAvatar : femaleAvatar} alt={review.name} className="review-img" />
-              <p className='review-comment'>{review.comment}</p>
-              <div className="review-rating">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span key={i}>{i < review.rating ? "★" : "☆"}</span>
-                ))}
+                <img
+                  src={review.gender === "male" ? maleAvatar : femaleAvatar}
+                  alt={review.name}
+                  className="review-img"
+                />
+                <p className="review-comment">{review.comment}</p>
+                <div className="review-rating">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span key={i}>{i < review.rating ? "★" : "☆"}</span>
+                  ))}
+                </div>
+                <h3>{review.name}</h3>
+                <p className="review-role">{review.role}</p>
               </div>
-              <h3>{review.name}</h3>
-              <p className="review-role">{review.role}</p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
       <div className="more-reviews-btn-container">
         <Link to="/review" className="more-reviews-btn">More Reviews</Link>
