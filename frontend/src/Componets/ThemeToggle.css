@@ -175,4 +175,23 @@
     border-color: #1e90ff;
     box-shadow: 0 0 5px #1e90ff;
 }
+/* ===============================
+   Global Light/Dark Background
+=============================== */
+
+/* Light mode (default) */
+.light body,
+.light .Home {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Dark mode */
+.dark body,
+.dark .Home {
+  background-color: #0d0d0d !important;  /* or #121212 for a softer dark */
+  color: #f0f0f0 !important;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
 
