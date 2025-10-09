@@ -19,20 +19,21 @@ export const Home = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      axios.get(`${import.meta.env.VITE_API_URL}/users/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(res => {
-        setUser(res.data.user);
-        localStorage.setItem("user", JSON.stringify(res.data.user)); // ✅ Keep in sync
-      })
-      .catch(err => console.error("Error fetching user:", err));
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/users/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setUser(res.data.user);
+          localStorage.setItem("user", JSON.stringify(res.data.user)); // ✅ Keep in sync
+        })
+        .catch((err) => console.error("Error fetching user:", err));
     }
   }, []);
 
   return (
-    <div>
-      <div id="top"></div> {/* Add this line */}
+    <div className="Home">
+      <div id="top"></div>
       <Header />
 
       {/* ✅ Show user info if logged in */}
