@@ -78,7 +78,18 @@ const LoginPopup = ({ setShowLogin }) => {
             alt="Close"
           />
         </div>
-
+         
+         {/* ✅ Google login button */}
+        <motion.button
+          type="button"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={googleLogin}
+          className="google-login-btn"
+        >
+          <FcGoogle size={22} />
+          <span>Continue with Google</span>
+        </motion.button>
 
 				<div className="login-popup-inputs">
 					{current === "Sign Up" && (
@@ -112,27 +123,16 @@ const LoginPopup = ({ setShowLogin }) => {
 						required
 					/>
 
+          <div className="login-popup-condition">
+          <input type="checkbox" required />
+          <p>I agree to the Terms & Conditions and Privacy Policy</p>
+        </div>
+
         {/* Normal login button */}
         <button type="submit">
           {current === "Sign Up" ? "Create Account" : "Login"}
         </button>
 
-        {/* ✅ Google login button */}
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={googleLogin}
-          className="google-login-btn"
-        >
-          <FcGoogle size={22} />
-          <span>Continue with Google</span>
-        </motion.button>
-
-        <div className="login-popup-condition">
-          <input type="checkbox" required />
-          <p>I agree to the Terms & Conditions and Privacy Policy</p>
-        </div>
 
 					{/* ✅ Password Checklist (only for Sign Up) */}
 					{current === "Sign Up" &&
@@ -157,17 +157,6 @@ const LoginPopup = ({ setShowLogin }) => {
 							</ul>
 						)}
 				</div>
-
-				<button type="submit">
-					{current === "Sign Up" ? "Create Account" : "Login"}
-				</button>
-
-				{current === "Sign Up" && (
-					<div className="login-popup-condition">
-						<input type="checkbox" required />
-						<p>I agree to the Terms & Conditions and Privacy Policy</p>
-					</div>
-				)}
 
 				<p>
 					{current === "Login" ? (

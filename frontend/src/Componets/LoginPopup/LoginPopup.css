@@ -13,12 +13,12 @@
 .login-popup-container {
     place-self: center;
     width: max(23vw, 330px);
-    max-width: 90vw; /* ✅ Ensures it doesn’t overflow on small screens */
+    max-width: 80vw; /* ✅ Ensures it doesn’t overflow on small screens */
     color: #808080;
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     padding: 25px 30px;
     border-radius: 8px;
     font-size: 14px;
@@ -89,7 +89,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px; /* space between logo and text */
+    gap: 2px; /* space between logo and text */
     background-color: white;
     color: #444;
     border: 1px solid #c9c9c9;
